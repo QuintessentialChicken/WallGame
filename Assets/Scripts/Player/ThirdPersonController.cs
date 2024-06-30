@@ -442,14 +442,10 @@ namespace Player
         {
             amount = Mathf.Min(woodCapacity, wood + amount);
             wood = amount;
-            
+
             for (int i = 0; i < woodCapacity; i++)
             {
-                backpackWood.GetChild(i).gameObject.SetActive(false);
-            }
-            for (int i = 0; i < wood; i++)
-            {
-                backpackWood.GetChild(i).gameObject.SetActive(true);
+                backpackWood.GetChild(i).gameObject.SetActive(i < wood);
             }
         }
 
@@ -459,11 +455,7 @@ namespace Player
             stone = amount;
             for (int i = 0; i < stoneCapacity; i++)
             {
-                backpackStone.GetChild(i).gameObject.SetActive(false);
-            }
-            for (int i = 0; i < stone; i++)
-            {
-                backpackStone.GetChild(i).gameObject.SetActive(true);
+                backpackStone.GetChild(i).gameObject.SetActive(i < stone);
             }
             /* Leon's Implementation
             while (stoneReplenisher.childCount > 0 && amount > 0)
@@ -483,12 +475,9 @@ namespace Player
             wood--;
             for (int i = 0; i < woodCapacity; i++)
             {
-                backpackWood.GetChild(i).gameObject.SetActive(false);
+                backpackWood.GetChild(i).gameObject.SetActive(i < wood);
             }
-            for (int i = 0; i < wood; i++)
-            {
-                backpackWood.GetChild(i).gameObject.SetActive(true);
-            }
+            
             /*
             var toRemove = backpackWood.GetChild(0);
             toRemove.SetParent(woodReplenisher, false);
@@ -504,11 +493,7 @@ namespace Player
             stone--;
             for (int i = 0; i < stoneCapacity; i++)
             {
-                backpackWood.GetChild(i).gameObject.SetActive(false);
-            }
-            for (int i = 0; i < stone; i++)
-            {
-                backpackWood.GetChild(i).gameObject.SetActive(true);
+                backpackStone.GetChild(i).gameObject.SetActive(i < stone);
             }
             /*var toRemove = backpackStone.GetChild(0);
             toRemove.SetParent(stoneReplenisher, false);
