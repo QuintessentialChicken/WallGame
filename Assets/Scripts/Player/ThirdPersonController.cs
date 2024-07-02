@@ -296,7 +296,7 @@ namespace Player
                         // _animator.SetBool(_animIDFreeFall, false);
                         _animController.SetFalling(false);
                         _animController.SetAirTime(_airTime);
-                        PauseMovement(_airTime < 1.2 ? 0.0f : 1f);
+                        // PauseMovement(_airTime < 1.2 ? 0.0f : 1f);
                     }
 
                     // stop our velocity dropping infinitely when grounded

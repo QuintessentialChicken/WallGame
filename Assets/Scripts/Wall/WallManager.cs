@@ -69,7 +69,6 @@ namespace Wall
 
         private void Start()
         {
-            Inputs.Select += SetSelection;
             Inputs.RepairWood += RepairScaffoldingSegment;
             Inputs.RepairStone += RepairWallSegment;
             EventManager.OnWallPieceHit += DamageWallSegment;
@@ -116,7 +115,6 @@ namespace Wall
 
         private void OnDestroy()
         {
-            Inputs.Select -= SetSelection;
             Inputs.RepairWood -= RepairScaffoldingSegment;
             Inputs.RepairStone -= RepairWallSegment;
             EventManager.OnWallPieceHit -= DamageWallSegment;
@@ -148,16 +146,16 @@ namespace Wall
             return wallSegments;
         }
 
-        private void SetSelection(Vector2 value)
-        {
-            selection = (value.x, value.y) switch
-            {
-                (-1, 0) => Selection.Left,
-                (1, 0) => Selection.Right,
-                (0, 1) => Selection.Up,
-                _ => Selection.None
-            };
-        }
+        // private void SetSelection(Vector2 value)
+        // {
+        //     selection = (value.x, value.y) switch
+        //     {
+        //         (-1, 0) => Selection.Left,
+        //         (1, 0) => Selection.Right,
+        //         (0, 1) => Selection.Up,
+        //         _ => Selection.None
+        //     };
+        // }
 
         private void InitializeWallSegments()
         {

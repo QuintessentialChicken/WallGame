@@ -140,8 +140,8 @@ namespace Wall
             _wallMeshFilter.mesh = state switch
             {
                 0 => destroyedWall,
-                1 => damagedWall,
-                2 => chippedWall,
+                1 => chippedWall,
+                2 => normalWall,
                 3 => normalWall,
                 _ => _wallMeshFilter.mesh
             };
@@ -152,8 +152,8 @@ namespace Wall
             _scafMeshFilter.mesh = state switch
             {
                 0 => brokenScaffolding,
-                1 => damagedScaffolding,
-                2 => chippedScaffolding,
+                1 => chippedScaffolding,
+                2 => intactScaffolding,
                 3 => intactScaffolding,
                 _ => _scafMeshFilter.mesh
             };
