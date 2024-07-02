@@ -55,6 +55,9 @@ namespace Enemies
         public List<bool> columnsHit;
         private Transform _bowmenParent;
 
+        [SerializeField]
+        private int lastWallIndexHit = -1;
+
         private Transform _footsoldierParent;
         private Transform _graveyardParent;
         private Transform _trebuchetParent;
@@ -121,6 +124,232 @@ namespace Enemies
                 KillTrebuchet();
                 debugKillTrebuchet = false;
             }
+        }
+
+        
+
+        private bool SomethingChanged()
+        {
+            return _lastCount != _trebuchetCount || _lastLowerLeft != trebuchetSettings.spawnAreaLowerLeft ||
+                   _lastUpperRight != trebuchetSettings.spawnAreaUpperRight;
+        }
+
+        private void CreateEmptyParents()
+        {
+            _footsoldierParent = new GameObject("Footsoldier Parent").transform;
+            _footsoldierParent.parent = transform;
+            _trebuchetParent = new GameObject("Trebuchet Parent").transform;
+            _trebuchetParent.parent = transform;
+            _bowmenParent = new GameObject("Bowmen Parent").transform;
+            _bowmenParent.parent = transform;
+
+            _graveyardParent = new GameObject("Graveyard").transform;
+            _graveyardParent.parent = transform;
+        }
+        
+
+        private void LaunchTrebuchet()
+        {
+            if (targetingScheme == TargetingScheme.HoldFire)
+            {
+                Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
+                return;
+            }
+
+            int chosenWallIndex = -1;
+            List<WallSegment> segments = WallManager.instance.GetWallSegments();
+
+            if (targetingScheme == TargetingScheme.Succession)
+            {
+                chosenWallIndex = (lastWallIndexHit + 1) % segments.Count; 
+            }
+            else
+            {   // Picking a random Wall segment with varying probabilities
+                float sum = segments.Sum(x => x.probabilityModifier);
+                if (targetingScheme == TargetingScheme.Random_NoWallTwice && lastWallIndexHit != -1) sum -= segments.ElementAt(lastWallIndexHit).probabilityModifier;
+                List<float> normalizedProbabilities = segments.ConvertAll<float>(x => x.probabilityModifier / sum);
+                if (targetingScheme == TargetingScheme.Random_NoWallTwice && lastWallIndexHit != -1) normalizedProbabilities[lastWallIndexHit] = 0;
+
+                Debug.Log("Normalized Probabilities: " + string.Join(")  (", normalizedProbabilities));
+
+                float choice = Random.Range(0.0f, 1.0f);
+
+                float walkingSum = 0;
+
+                for (int i = 0; i < normalizedProbabilities.Count; i++)
+                {
+                    walkingSum += normalizedProbabilities.ElementAt(i);
+                    if (walkingSum >= choice)
+                    {
+                        chosenWallIndex = i;
+                        break;
+                    }
+                }
+            }
+            Debug.Log("Chosen Wall Piece: " + chosenWallIndex);
+            lastWallIndexHit = chosenWallIndex;
+
+            // Picking correct trebuchet
+            int trebuchetIndex = chosenWallIndex % WallManager.instance.wallColumns;
+
+            _trebuchets[trebuchetIndex].SetSelection(segments[chosenWallIndex].transform.position, chosenWallIndex);
+            _trebuchets[trebuchetIndex].Launch();
+
+            // Restart cooldown
+            Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
+        }
+
+        public void LaunchFireArrows()
+        {
+            if (targetingScheme == TargetingScheme.HoldFire)
+            {
+                Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
+                return;
+            }
+            var parts = bowmen.count / _columns;
+            var remainder = bowmen.count % _columns;
+            var horizSpacing = (bowmen.spawnAreaUpperRight.x - bowmen.spawnAreaLowerLeft.x) / bowmen.count;
+            for (var i = 0; i < _columns; i++)
+            {
+                
+                if (i == _columns - 1) parts += remainder;
+                if (Random.Range(0f, 1f) > fireArrowsDestruction) continue;
+                for (var j = 0; j < parts; j++)
+                {
+                    var worldStart = transform.position
+                                     //+ new Vector3(_bowmen.spawnAreaLowerLeft.x + i * horizSpacing, 0, _bowmen.spawnAreaUpperRight.y)
+                                     + new Vector3(
+                                         Random.Range(bowmen.spawnAreaLowerLeft.x, bowmen.spawnAreaUpperRight.x), 0,
+                                         Random.Range(-0.5f, 0.5f));
+                    var fireArrow = Instantiate(bowmen.fireArrowPrefab, worldStart
+                        , Quaternion.identity, _bowmenParent);
+                    fireArrow.SetDestination(_wallManager.GetWallSegmentPosition(i) +
+                                             new Vector3(Random.Range(-0.6f, 0.6f), 0.7f, Random.Range(-0.3f, 0.3f)));
+                    var flightTime = 2 + Random.Range(-0.5f, 0.5f);
+                    fireArrow.SetFlightTime(flightTime);
+                }
+
+                StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
+            }
+
+            Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
+        }
+
+        public void SetTargetingScheme(TargetingScheme scheme)
+        {
+            targetingScheme = scheme;
+        }
+
+        private static IEnumerator InvokeAfterDelay<T>(float delay, Action<T> method, T parameter)
+        {
+            yield return new WaitForSeconds(delay);
+            method(parameter);
+        }
+
+        public Vector3 GetFootsoldierPosition()
+        {
+            if (_footsoldiersForefeit < _footsoldierParent.childCount)
+                return _footsoldierParent.GetChild(_footsoldiersForefeit++).transform.position + new Vector3(0, 0.6f, 0);
+            Debug.LogWarning(
+                "More footsoldiers forefeit than left. returning dummy value. If this was close to winning the game you can ignore this warning.");
+            return new Vector3(0, 0, 50);
+
+        }
+
+        public void BoltArrives()
+        {
+            Kill(1);
+        }
+
+        public void BombArrives()
+        {
+            Kill(5);
+        }
+
+        private void SpawnArmy()
+        {
+            float vertDistance = (footsoldiers.spawnAreaUpperRight.y - footsoldiers.spawnAreaLowerLeft.y) / enemyCount;
+            for (var i = 0; i < enemyCount; i++)
+            {
+                var soldier =
+                    Instantiate(footsoldiers.prefab,
+                        transform.position + new Vector3(
+                            Random.Range(footsoldiers.spawnAreaLowerLeft.x, footsoldiers.spawnAreaUpperRight.x),
+                            0,
+                            footsoldiers.spawnAreaLowerLeft.y + i*vertDistance),
+                        Quaternion.identity,
+                        _footsoldierParent);
+                soldier.SetUp(footsoldiers.vibing, footsoldiers.ecstasy, footsoldiers.hatred);
+
+                if (i % 10 == 0)
+                {
+                    GameObject fahne = Instantiate(footsoldiers.flagge, soldier.transform.position, Quaternion.Euler(0, 64, 0), soldier.transform);
+                }
+            }
+        }
+
+        private void SpawnTrebuchets()
+        {
+            AssignNewTrebuchetPositions();
+            _trebuchets = new List<Trebuchet>();
+            var horizSpacing = (trebuchetSettings.spawnAreaUpperRight.x - trebuchetSettings.spawnAreaLowerLeft.x) /
+                               Mathf.Max(1, _trebuchetCount - 1);
+            var vertSpace = trebuchetSettings.spawnAreaUpperRight.y - trebuchetSettings.spawnAreaLowerLeft.y;
+            for (var i = 0; i < _trebuchetCount; i++)
+            {
+                var trebuchet = Instantiate(trebuchetSettings.prefab, transform.position
+                                                                + new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0,
+                                                                    trebuchetSettings.spawnAreaLowerLeft.y)
+                                                                + new Vector3(i * horizSpacing, 0,
+                                                                    _trebuchetPositions[i] * vertSpace),
+                    Quaternion.identity, _trebuchetParent);
+                trebuchet.SetUp(trebuchetSettings.projectile, trebuchetSettings.reloadSpeed);
+                _trebuchets.Add(trebuchet);
+            }
+        }
+
+        private void SpawnBowmen()
+        {
+            for (var i = 0; i < bowmen.count; i++)
+            {
+                var bowman = Instantiate(bowmen.prefab,
+                    transform.position +
+                    new Vector3(Random.Range(bowmen.spawnAreaLowerLeft.x, bowmen.spawnAreaUpperRight.x), 0,
+                        Random.Range(bowmen.spawnAreaLowerLeft.y, bowmen.spawnAreaUpperRight.y)), Quaternion.identity,
+                    _bowmenParent);
+            }
+        }
+
+        private void AssignNewTrebuchetPositions()
+        {
+            _trebuchetCount = WallManager.instance.wallColumns;
+            _trebuchetPositions = new List<float>();
+            for (var i = 0; i < _trebuchetCount; i++)
+                _trebuchetPositions.Add(Random.Range(0.0f, 1.0f));
+        }
+
+        private void Kill(int count)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                var victim = _footsoldierParent.GetChild(0);
+                victim.SetParent(_graveyardParent);
+                victim.GetComponent<Footsoldier>().StartCoroutine(nameof(Footsoldier.Die));
+                enemyCount--;
+                _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
+                if (enemyCount <= 0) SceneManager.LoadScene("Win");
+            }
+        }
+
+        private void KillTrebuchet()
+        {
+            _trebuchets[_trebuchetCount - 1].Kill();
+            _trebuchets[_trebuchetCount - 1].transform.SetParent(_graveyardParent);
+            _trebuchets.RemoveAt(_trebuchetCount - 1);
+            _trebuchetCount--;
+            var newRowsHit = new List<bool>();
+            for (var i = 0; i < _trebuchetCount; i++) newRowsHit.Add(columnsHit[i]);
+            columnsHit = newRowsHit;
         }
 
         public void OnDrawGizmosSelected()
@@ -237,262 +466,6 @@ namespace Enemies
                 Gizmos.DrawLine(parabolaPeak, new Vector3((i - trebuchetCount/2)*1.5f, 0, 0));
             }*/
         }
-
-        private bool SomethingChanged()
-        {
-            return _lastCount != _trebuchetCount || _lastLowerLeft != trebuchetSettings.spawnAreaLowerLeft ||
-                   _lastUpperRight != trebuchetSettings.spawnAreaUpperRight;
-        }
-
-        private void CreateEmptyParents()
-        {
-            _footsoldierParent = new GameObject("Footsoldier Parent").transform;
-            _footsoldierParent.parent = transform;
-            _trebuchetParent = new GameObject("Trebuchet Parent").transform;
-            _trebuchetParent.parent = transform;
-            _bowmenParent = new GameObject("Bowmen Parent").transform;
-            _bowmenParent.parent = transform;
-
-            _graveyardParent = new GameObject("Graveyard").transform;
-            _graveyardParent.parent = transform;
-        }
-
-
-        private void LaunchTrebuchet()
-        {
-            var wallPieceIndex = -1;
-            var trebuchetIndex = -1;
-
-            if (!columnsHit.Contains(false))
-            {
-                columnsHit = new List<bool>();
-                for (var i = 0; i < _trebuchetCount; i++) columnsHit.Add(false);
-            }
-
-            var output = "TrebuchetChoice:\n";
-            var infrage = new List<int>();
-            switch (targetingScheme)
-            {
-                case TargetingScheme.Random:
-                    trebuchetIndex = Random.Range(0, _trebuchets.Count);
-                    break;
-                case TargetingScheme.Succession:
-                    trebuchetIndex = ++_lastTrebuchet % _trebuchetCount;
-                    break;
-                case TargetingScheme.Randomequal:
-                    trebuchetIndex = Random.Range(0, _trebuchetCount);
-
-                    if (columnsHit[trebuchetIndex])
-                        trebuchetIndex = columnsHit.FindIndex(t => !t);
-
-                    break;
-                case TargetingScheme.RandomequalSwitch:
-
-                    for (var i = 0; i < _trebuchetCount; i++)
-                        if (!columnsHit[i] && i != _lastTrebuchet)
-                            infrage.Add(i);
-                    output += "Infrage kommen: " + string.Join(" ", infrage) + "\n";
-
-                    trebuchetIndex = infrage.Count == 1 ? infrage[0] : infrage[Random.Range(0, infrage.Count)];
-
-                    break;
-
-                case TargetingScheme.RandomequalAnim:
-                    for (var i = 0; i < _trebuchetCount; i++)
-                        if (!columnsHit[i])
-                            infrage.Add(i);
-                    output += "Infrage kommen: " + string.Join(" ", infrage) + "\n";
-                    var preferred = infrage.Where(t => _trebuchets[t].ready).ToList();
-
-                    output += "Preferrable sind: " + string.Join(" ", preferred) + "\n";
-                    if (preferred.Count == 0)
-                        // No possible Trebuchet is ready, we're choosing a non-ready one.
-                        trebuchetIndex = infrage.Count == 1 ? infrage[0] : infrage[Random.Range(0, infrage.Count)];
-                    else
-                        trebuchetIndex = preferred.Count == 1
-                            ? preferred[0]
-                            : preferred[Random.Range(0, preferred.Count)];
-                    output += "Gewählt wurde: " + trebuchetIndex;
-
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            columnsHit[trebuchetIndex] = true;
-
-            if (consoleOutput) Debug.Log(output);
-
-            if (!_trebuchets[trebuchetIndex].ready)
-                if (consoleOutput)
-                    Debug.LogWarning(
-                        "The selected trebuchet had not yet finished his reload animation. Consider increasing reload speed.");
-            _lastTrebuchet = trebuchetIndex;
-
-            var selectedRow = Random.Range(0, WallManager.instance.wallRows);
-
-            wallPieceIndex = selectedRow * WallManager.instance.wallColumns + trebuchetIndex;
-
-            //Debug.Log("Launching at (" + trebuchetIndex + ", " + selectedRow + ") index " + wallPieceIndex);
-
-            _trebuchets[trebuchetIndex].SetSelection(_wallManager.GetWallSegmentPosition(wallPieceIndex), wallPieceIndex);
-            if (trebuchetRandomness != 0)
-                _trebuchets[trebuchetIndex]
-                    .SetFlightTime(trebuchetSettings.projectile.flightTime + Random.Range(0, trebuchetRandomness));
-            _trebuchets[trebuchetIndex].Launch();
-
-            Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
-        }
-
-        private void LaunchFireArrows()
-        {
-            var parts = bowmen.count / _columns;
-            var remainder = bowmen.count % _columns;
-            var horizSpacing = (bowmen.spawnAreaUpperRight.x - bowmen.spawnAreaLowerLeft.x) / bowmen.count;
-            for (var i = 0; i < _columns; i++)
-            {
-                
-                if (i == _columns - 1) parts += remainder;
-                if (Random.Range(0f, 1f) > fireArrowsDestruction) continue;
-                for (var j = 0; j < parts; j++)
-                {
-                    var worldStart = transform.position
-                                     //+ new Vector3(_bowmen.spawnAreaLowerLeft.x + i * horizSpacing, 0, _bowmen.spawnAreaUpperRight.y)
-                                     + new Vector3(
-                                         Random.Range(bowmen.spawnAreaLowerLeft.x, bowmen.spawnAreaUpperRight.x), 0,
-                                         Random.Range(-0.5f, 0.5f));
-                    var fireArrow = Instantiate(bowmen.fireArrowPrefab, worldStart
-                        , Quaternion.identity, _bowmenParent);
-                    fireArrow.SetDestination(_wallManager.GetWallSegmentPosition(i) +
-                                             new Vector3(Random.Range(-0.6f, 0.6f), 0.7f, Random.Range(-0.3f, 0.3f)));
-                    var flightTime = 2 + Random.Range(-0.5f, 0.5f);
-                    fireArrow.SetFlightTime(flightTime);
-                }
-
-                StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
-            }
-
-            Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
-        }
-
-        private static IEnumerator InvokeAfterDelay<T>(float delay, Action<T> method, T parameter)
-        {
-            yield return new WaitForSeconds(delay);
-            method(parameter);
-        }
-
-        public Vector3 GetFootsoldierPosition()
-        {
-            if (_footsoldiersForefeit < _footsoldierParent.childCount)
-                return _footsoldierParent.GetChild(_footsoldiersForefeit++).transform.position + new Vector3(0, 0.6f, 0);
-            Debug.LogWarning(
-                "More footsoldiers forefeit than left. returning dummy value. If this was close to winning the game you can ignore this warning.");
-            return new Vector3(0, 0, 50);
-
-        }
-
-        public void BoltArrives()
-        {
-            Kill(1);
-        }
-
-        public void BombArrives()
-        {
-            Kill(5);
-        }
-
-        private void SpawnArmy()
-        {
-            float vertDistance = (footsoldiers.spawnAreaUpperRight.y - footsoldiers.spawnAreaLowerLeft.y) / enemyCount;
-            for (var i = 0; i < enemyCount; i++)
-            {
-                var soldier =
-                    Instantiate(footsoldiers.prefab,
-                        transform.position + new Vector3(
-                            Random.Range(footsoldiers.spawnAreaLowerLeft.x, footsoldiers.spawnAreaUpperRight.x),
-                            0,
-                            footsoldiers.spawnAreaLowerLeft.y + i*vertDistance),
-                        Quaternion.identity,
-                        _footsoldierParent);
-                soldier.SetUp(footsoldiers.vibing, footsoldiers.ecstasy, footsoldiers.hatred);
-
-                if (i % 10 == 0)
-                {
-                    GameObject fahne = Instantiate(footsoldiers.flagge, soldier.transform.position, Quaternion.Euler(0, 64, 0), soldier.transform);
-                }
-            }
-        }
-
-        private void SpawnTrebuchets()
-        {
-            AssignNewTrebuchetPositions();
-            _trebuchets = new List<Trebuchet>();
-            var horizSpacing = (trebuchetSettings.spawnAreaUpperRight.x - trebuchetSettings.spawnAreaLowerLeft.x) /
-                               Mathf.Max(1, _trebuchetCount - 1);
-            var vertSpace = trebuchetSettings.spawnAreaUpperRight.y - trebuchetSettings.spawnAreaLowerLeft.y;
-            for (var i = 0; i < _trebuchetCount; i++)
-            {
-                var trebuchet = Instantiate(trebuchetSettings.prefab, transform.position
-                                                                + new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0,
-                                                                    trebuchetSettings.spawnAreaLowerLeft.y)
-                                                                + new Vector3(i * horizSpacing, 0,
-                                                                    _trebuchetPositions[i] * vertSpace),
-                    Quaternion.identity, _trebuchetParent);
-                trebuchet.SetUp(trebuchetSettings.projectile, trebuchetSettings.reloadSpeed);
-                _trebuchets.Add(trebuchet);
-            }
-        }
-
-        private void SpawnBowmen()
-        {
-            for (var i = 0; i < bowmen.count; i++)
-            {
-                var bowman = Instantiate(bowmen.prefab,
-                    transform.position +
-                    new Vector3(Random.Range(bowmen.spawnAreaLowerLeft.x, bowmen.spawnAreaUpperRight.x), 0,
-                        Random.Range(bowmen.spawnAreaLowerLeft.y, bowmen.spawnAreaUpperRight.y)), Quaternion.identity,
-                    _bowmenParent);
-            }
-        }
-
-        private void AssignNewTrebuchetPositions()
-        {
-            _trebuchetCount = WallManager.instance.wallColumns;
-            _trebuchetPositions = new List<float>();
-            for (var i = 0; i < _trebuchetCount; i++)
-                _trebuchetPositions.Add(Random.Range(0.0f, 1.0f));
-        }
-
-        private void Kill(int count)
-        {
-            for (var i = 0; i < count; i++)
-            {
-                var victim = _footsoldierParent.GetChild(0);
-                victim.SetParent(_graveyardParent);
-                victim.GetComponent<Footsoldier>().StartCoroutine(nameof(Footsoldier.Die));
-                enemyCount--;
-                _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
-                if (enemyCount <= 0) SceneManager.LoadScene("Win");
-            }
-        }
-
-        private void KillTrebuchet()
-        {
-            _trebuchets[_trebuchetCount - 1].Kill();
-            _trebuchets[_trebuchetCount - 1].transform.SetParent(_graveyardParent);
-            _trebuchets.RemoveAt(_trebuchetCount - 1);
-            _trebuchetCount--;
-            var newRowsHit = new List<bool>();
-            for (var i = 0; i < _trebuchetCount; i++) newRowsHit.Add(columnsHit[i]);
-            columnsHit = newRowsHit;
-        }
-    }
-
-    public enum Formation
-    {
-        Scattered,
-        InRows,
-        InLegions
     }
 
     [Serializable]
@@ -545,23 +518,18 @@ namespace Enemies
         public float hatred;
     }
 
-
-    internal enum TargetingScheme
+    
+    public enum TargetingScheme
     {
         Random,
-        /* The Columns get picket randomly */
+        /* The target wall gets picket randomly */
 
         Succession,
-        /* The Columns get picket left to right */
+        /* The target wall gets picket left to right */
 
-        Randomequal,
-        /* The Columns get picket randomly, but no trebuchet fires twice in a row and all wall columns are hit equally often */
+        Random_NoWallTwice,
+        /* The target wall gets picket randomly, but no wall piece is targetet twice in a row. */
 
-        RandomequalAnim,
-        /* The Columns are picket randomly and all wall columns are hit equally often. Trebuchets that have finished
-         * their reload animation are preferred in selection. */
-
-        RandomequalSwitch
-        /* The Columns are picket randomly and all wall columns are hit equally often. No Trebuchet fires twice in a row. */
+        HoldFire
     }
 }
