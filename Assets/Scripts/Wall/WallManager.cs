@@ -311,7 +311,12 @@ namespace Wall
 
         private bool RepairWallSegment(WallSegment segment)
         {
-            if (segment == null || !player.CanRepairStone()) return false;
+            if (segment == null) return false;
+            if (!player.CanRepairStone())
+            {
+                FloatingTextManager.instance.DoFloatingText("No Stones!");
+                return false;
+            }
             if (!segment.RepairWall()) return false;
             EventManager.RaiseOnRepairedStone();
             UpdateWallHealth(1);
@@ -347,7 +352,12 @@ namespace Wall
 
         private bool RepairScaffoldingSegment(WallSegment segment)
         {
-            if (segment == null || !player.CanRepairWood()) return false;
+            if (segment == null) return false;
+            if (!player.CanRepairWood())
+            {
+                FloatingTextManager.instance.DoFloatingText("No Wood!");
+                return false;
+            }
             if (!segment.RepairScaffolding()) return false;
             EventManager.RaiseOnRepairedWood();
             return true;
