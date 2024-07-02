@@ -18,6 +18,9 @@ namespace Enemies
         public int enemyCount = 100;
 
         [Space] [SerializeField] private float trebuchetCooldown = 5;
+
+        [Tooltip("Leave at 0 to disable Tar Barrels")]
+        [SerializeField] private float tarBarrelCooldown = 20;
         
         [SerializeField]
         [Tooltip("RANDOM\nThe Columns are picket randomly\n\n" +
@@ -37,12 +40,30 @@ namespace Enemies
 
         [SerializeField] [Range(0f, 1f)] private float fireArrowsDestruction = 0.8f;
 
-        [Header("_______________ Look & Spawn Areas _______________")] [SerializeField] [Tooltip("(Yellow)")]
+        [Header("_______________ Projectiles _______________")]
+        [Header("     Trebuchet Stones")]
+        public TargetProjectile trebuchetStonePrefab;
+        public ProjectileSettings trebuchetStoneSettings;
+        [Header("     Trebuchet Tar Barrels")]
+        public TargetProjectile tarBarrelPrefab;
+        public ProjectileSettings tarBarrelSettings;
+        public Vector3 tarArea;
+        [Header("     Fire Arrows")]
+        public TargetProjectile fireArrowPrefab;
+        public ProjectileSettings fireArrowSettings;
+
+        [Space]
+        [Header("_______________ Look & Spawn Areas _______________")]
+
+        [SerializeField]
+        private TrebuchetSettings trebuchets;
+        [SerializeField]
+        private FootsoldierSettings footsoldiers;
+
+        [Space]
+
+        [SerializeField]
         private BowmenSettings bowmen;
-
-          [SerializeField] [Tooltip("(Blue)")] private TrebuchetSettings trebuchetSettings;
-
-        [SerializeField] [Tooltip("Green")] private FootsoldierSettings footsoldiers;
 
         [Header("_______________ Debug Area _______________")]
         public bool consoleOutput = true;
@@ -51,6 +72,7 @@ namespace Enemies
 
          public bool debugTrebuchetLaunch;
          public bool debugKillTrebuchet;
+         public bool debugLaunchTarBarrel;
 
         public List<bool> columnsHit;
         private Transform _bowmenParent;
@@ -97,8 +119,11 @@ namespace Enemies
             SpawnArmy();
             SpawnTrebuchets();
             SpawnBowmen();
+
             Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
             Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
+            if (tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), tarBarrelCooldown);
+
             _wallManager = FindObjectOfType<WallManager>();
             columnsHit = new List<bool>();
             _columns = WallManager.instance.wallColumns;
@@ -124,14 +149,20 @@ namespace Enemies
                 KillTrebuchet();
                 debugKillTrebuchet = false;
             }
+
+            if (debugLaunchTarBarrel)
+            {
+                LaunchTarBarrel();
+                debugLaunchTarBarrel = false;
+            }
         }
 
         
 
         private bool SomethingChanged()
         {
-            return _lastCount != _trebuchetCount || _lastLowerLeft != trebuchetSettings.spawnAreaLowerLeft ||
-                   _lastUpperRight != trebuchetSettings.spawnAreaUpperRight;
+            return _lastCount != _trebuchetCount || _lastLowerLeft != trebuchets.spawnAreaLowerLeft ||
+                   _lastUpperRight != trebuchets.spawnAreaUpperRight;
         }
 
         private void CreateEmptyParents()
@@ -147,6 +178,19 @@ namespace Enemies
             _graveyardParent.parent = transform;
         }
         
+        private void LaunchTarBarrel()
+        {
+            float worldX = Random.Range(-tarArea.x/2, tarArea.x/2);
+
+            // Select Trebuchet
+            int trebuchetIndex = Mathf.FloorToInt(((worldX + tarArea.x) / (tarArea.x*2)) * WallManager.instance.wallColumns);
+
+            // Launch
+            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, new Vector3(worldX, 0, tarArea.z));
+
+            // Restart cooldown
+            Invoke(nameof(LaunchTarBarrel), tarBarrelCooldown);
+        }
 
         private void LaunchTrebuchet()
         {
@@ -192,8 +236,7 @@ namespace Enemies
             // Picking correct trebuchet
             int trebuchetIndex = chosenWallIndex % WallManager.instance.wallColumns;
 
-            _trebuchets[trebuchetIndex].SetSelection(segments[chosenWallIndex].transform.position, chosenWallIndex);
-            _trebuchets[trebuchetIndex].Launch();
+            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.Stone, segments[chosenWallIndex].transform.position, chosenWallIndex);
 
             // Restart cooldown
             Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
@@ -221,12 +264,12 @@ namespace Enemies
                                      + new Vector3(
                                          Random.Range(bowmen.spawnAreaLowerLeft.x, bowmen.spawnAreaUpperRight.x), 0,
                                          Random.Range(-0.5f, 0.5f));
-                    var fireArrow = Instantiate(bowmen.fireArrowPrefab, worldStart
-                        , Quaternion.identity, _bowmenParent);
+                    var fireArrow = Instantiate(fireArrowPrefab, worldStart, Quaternion.identity, _bowmenParent);
                     fireArrow.SetDestination(_wallManager.GetWallSegmentPosition(i) +
                                              new Vector3(Random.Range(-0.6f, 0.6f), 0.7f, Random.Range(-0.3f, 0.3f)));
-                    var flightTime = 2 + Random.Range(-0.5f, 0.5f);
-                    fireArrow.SetFlightTime(flightTime);
+                    
+                    fireArrow.SetUp(fireArrowSettings);
+                    fireArrow.AddDelay(Random.Range(0, 0.5f));
                 }
 
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
@@ -292,18 +335,20 @@ namespace Enemies
         {
             AssignNewTrebuchetPositions();
             _trebuchets = new List<Trebuchet>();
-            var horizSpacing = (trebuchetSettings.spawnAreaUpperRight.x - trebuchetSettings.spawnAreaLowerLeft.x) /
+            var horizSpacing = (trebuchets.spawnAreaUpperRight.x - trebuchets.spawnAreaLowerLeft.x) /
                                Mathf.Max(1, _trebuchetCount - 1);
-            var vertSpace = trebuchetSettings.spawnAreaUpperRight.y - trebuchetSettings.spawnAreaLowerLeft.y;
+            var vertSpace = trebuchets.spawnAreaUpperRight.y - trebuchets.spawnAreaLowerLeft.y;
             for (var i = 0; i < _trebuchetCount; i++)
             {
-                var trebuchet = Instantiate(trebuchetSettings.prefab, transform.position
-                                                                + new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0,
-                                                                    trebuchetSettings.spawnAreaLowerLeft.y)
+                var trebuchet = Instantiate(trebuchets.prefab, transform.position
+                                                                + new Vector3(trebuchets.spawnAreaLowerLeft.x, 0,
+                                                                    trebuchets.spawnAreaLowerLeft.y)
                                                                 + new Vector3(i * horizSpacing, 0,
                                                                     _trebuchetPositions[i] * vertSpace),
                     Quaternion.identity, _trebuchetParent);
-                trebuchet.SetUp(trebuchetSettings.projectile, trebuchetSettings.reloadSpeed);
+                trebuchet.transform.LookAt(Vector3.zero);
+                trebuchet.transform.Rotate(0,180,0);
+                trebuchet.SetReloadSpeed(trebuchets.reloadSpeed);
                 _trebuchets.Add(trebuchet);
             }
         }
@@ -322,7 +367,7 @@ namespace Enemies
 
         private void AssignNewTrebuchetPositions()
         {
-            _trebuchetCount = WallManager.instance.wallColumns;
+            _trebuchetCount = FindObjectOfType<WallManager>().wallColumns;
             _trebuchetPositions = new List<float>();
             for (var i = 0; i < _trebuchetCount; i++)
                 _trebuchetPositions.Add(Random.Range(0.0f, 1.0f));
@@ -352,101 +397,57 @@ namespace Enemies
             columnsHit = newRowsHit;
         }
 
+        private void GizmoDrawTargetArea(Color color, Vector2 lowerLeft, Vector2 upperRight, bool localPos = true)
+        {
+            Gizmos.color = color;
+            Gizmos.DrawLine((localPos ? transform.position : Vector3.zero) +
+                new Vector3(lowerLeft.x, 0, lowerLeft.y),
+                (localPos ? transform.position : Vector3.zero) + new Vector3(lowerLeft.x, 0, upperRight.y));
+            Gizmos.DrawLine((localPos ? transform.position : Vector3.zero) +
+                new Vector3(lowerLeft.x, 0, lowerLeft.y),
+                (localPos ? transform.position : Vector3.zero) + new Vector3(upperRight.x, 0,lowerLeft.y));
+            Gizmos.DrawLine((localPos ? transform.position : Vector3.zero) +
+                new Vector3(upperRight.x, 0, upperRight.y),
+                (localPos ? transform.position : Vector3.zero) + new Vector3(lowerLeft.x, 0, upperRight.y));
+            Gizmos.DrawLine((localPos ? transform.position : Vector3.zero) +
+                new Vector3(upperRight.x, 0, upperRight.y),
+                (localPos ? transform.position : Vector3.zero) + new Vector3(upperRight.x, 0, lowerLeft.y));
+            Gizmos.DrawCube((localPos ? transform.position : Vector3.zero) +
+                new Vector3(lowerLeft.x, 0, lowerLeft.y),
+                new Vector3(1, 1, 1));
+            Gizmos.DrawCube((localPos ? transform.position : Vector3.zero) +
+                new Vector3(upperRight.x, 0, upperRight.y), 
+                new Vector3(1, 1, 1));
+        }
+
         public void OnDrawGizmosSelected()
         {
             // Drawing Footsodier Spawn Area
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(
-                transform.position +
-                new Vector3(footsoldiers.spawnAreaLowerLeft.x, 0, footsoldiers.spawnAreaLowerLeft.y),
-                transform.position + new Vector3(footsoldiers.spawnAreaLowerLeft.x, 0,
-                    footsoldiers.spawnAreaUpperRight.y));
-            Gizmos.DrawLine(
-                transform.position +
-                new Vector3(footsoldiers.spawnAreaLowerLeft.x, 0, footsoldiers.spawnAreaLowerLeft.y),
-                transform.position + new Vector3(footsoldiers.spawnAreaUpperRight.x, 0,
-                    footsoldiers.spawnAreaLowerLeft.y));
-            Gizmos.DrawLine(
-                transform.position + new Vector3(footsoldiers.spawnAreaUpperRight.x, 0,
-                    footsoldiers.spawnAreaUpperRight.y),
-                transform.position + new Vector3(footsoldiers.spawnAreaLowerLeft.x, 0,
-                    footsoldiers.spawnAreaUpperRight.y));
-            Gizmos.DrawLine(
-                transform.position + new Vector3(footsoldiers.spawnAreaUpperRight.x, 0,
-                    footsoldiers.spawnAreaUpperRight.y),
-                transform.position + new Vector3(footsoldiers.spawnAreaUpperRight.x, 0,
-                    footsoldiers.spawnAreaLowerLeft.y));
-            Gizmos.DrawCube(
-                transform.position +
-                new Vector3(footsoldiers.spawnAreaLowerLeft.x, 0, footsoldiers.spawnAreaLowerLeft.y),
-                new Vector3(1, 1, 1));
-            Gizmos.DrawCube(
-                transform.position + new Vector3(footsoldiers.spawnAreaUpperRight.x, 0,
-                    footsoldiers.spawnAreaUpperRight.y), new Vector3(1, 1, 1));
+            GizmoDrawTargetArea(Color.green, footsoldiers.spawnAreaLowerLeft, footsoldiers.spawnAreaUpperRight);
+
+            // Drawing Tar Target Area
+            Gizmos.color = new Color(0, 0, 0, 0.5f);
+            Gizmos.DrawCube(new Vector3(0, 0, tarArea.z), new Vector3(tarArea.x, 1, tarArea.y));
 
             // Drawing Bowmen Spawn Area
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(
-                transform.position + new Vector3(bowmen.spawnAreaLowerLeft.x, 0, bowmen.spawnAreaLowerLeft.y),
-                transform.position + new Vector3(bowmen.spawnAreaLowerLeft.x, 0, bowmen.spawnAreaUpperRight.y));
-            Gizmos.DrawLine(
-                transform.position + new Vector3(bowmen.spawnAreaLowerLeft.x, 0, bowmen.spawnAreaLowerLeft.y),
-                transform.position + new Vector3(bowmen.spawnAreaUpperRight.x, 0, bowmen.spawnAreaLowerLeft.y));
-            Gizmos.DrawLine(
-                transform.position + new Vector3(bowmen.spawnAreaUpperRight.x, 0, bowmen.spawnAreaUpperRight.y),
-                transform.position + new Vector3(bowmen.spawnAreaLowerLeft.x, 0, bowmen.spawnAreaUpperRight.y));
-            Gizmos.DrawLine(
-                transform.position + new Vector3(bowmen.spawnAreaUpperRight.x, 0, bowmen.spawnAreaUpperRight.y),
-                transform.position + new Vector3(bowmen.spawnAreaUpperRight.x, 0, bowmen.spawnAreaLowerLeft.y));
-            Gizmos.DrawCube(
-                transform.position + new Vector3(bowmen.spawnAreaLowerLeft.x, 0, bowmen.spawnAreaLowerLeft.y),
-                new Vector3(1, 1, 1));
-            Gizmos.DrawCube(
-                transform.position + new Vector3(bowmen.spawnAreaUpperRight.x, 0, bowmen.spawnAreaUpperRight.y),
-                new Vector3(1, 1, 1));
+            GizmoDrawTargetArea(Color.yellow, bowmen.spawnAreaLowerLeft, bowmen.spawnAreaUpperRight);
 
             // Drawing Trebuchet Spawn Area
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(
-                transform.position + new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0, trebuchetSettings.spawnAreaLowerLeft.y),
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0, trebuchetSettings.spawnAreaUpperRight.y));
-            Gizmos.DrawLine(
-                transform.position + new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0, trebuchetSettings.spawnAreaLowerLeft.y),
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaUpperRight.x, 0, trebuchetSettings.spawnAreaLowerLeft.y));
-
-            Gizmos.DrawLine(
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaUpperRight.x, 0, trebuchetSettings.spawnAreaUpperRight.y),
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0, trebuchetSettings.spawnAreaUpperRight.y));
-            Gizmos.DrawLine(
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaUpperRight.x, 0, trebuchetSettings.spawnAreaUpperRight.y),
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaUpperRight.x, 0, trebuchetSettings.spawnAreaLowerLeft.y));
-            Gizmos.DrawCube(
-                transform.position + new Vector3(trebuchetSettings.spawnAreaLowerLeft.x, 0, trebuchetSettings.spawnAreaLowerLeft.y),
-                new Vector3(1, 1, 1));
-            Gizmos.DrawCube(
-                transform.position +
-                new Vector3(trebuchetSettings.spawnAreaUpperRight.x, 0, trebuchetSettings.spawnAreaUpperRight.y),
-                new Vector3(1, 1, 1));
+            GizmoDrawTargetArea(Color.blue, trebuchets.spawnAreaLowerLeft, trebuchets.spawnAreaUpperRight);
 
             // Drawing Trebuchet Cubes
             var updatePositions = SomethingChanged();
             if (updatePositions)
             {
                 _lastCount = _trebuchetCount;
-                _lastLowerLeft = trebuchetSettings.spawnAreaLowerLeft;
-                _lastUpperRight = trebuchetSettings.spawnAreaUpperRight;
+                _lastLowerLeft = trebuchets.spawnAreaLowerLeft;
+                _lastUpperRight = trebuchets.spawnAreaUpperRight;
                 AssignNewTrebuchetPositions();
             }
 
-            var horizSpacing = (trebuchetSettings.spawnAreaUpperRight.x - trebuchetSettings.spawnAreaLowerLeft.x) /
+            var horizSpacing = (trebuchets.spawnAreaUpperRight.x - trebuchets.spawnAreaLowerLeft.x) /
                                Mathf.Max(1, _trebuchetCount - 1);
-            var vertSpace = trebuchetSettings.spawnAreaUpperRight.y - trebuchetSettings.spawnAreaLowerLeft.y;
+            var vertSpace = trebuchets.spawnAreaUpperRight.y - trebuchets.spawnAreaLowerLeft.y;
 
             //if (!Application.IsPlaying(this))
             /*
@@ -479,7 +480,6 @@ namespace Enemies
     internal class BowmenSettings : EnemyTroop
     {
         public GameObject prefab;
-        public TargetProjectile fireArrowPrefab;
         public int count = 20;
     }
 
@@ -488,16 +488,9 @@ namespace Enemies
     {
         public Trebuchet prefab;
         public float reloadSpeed;
-        public ProjectileSettings projectile;
     }
 
-    [Serializable]
-    public class ProjectileSettings
-    {
-        public TargetProjectile prefab;
-        public float flightTime;
-        public float parabolaHeight;
-    }
+ 
 
     [Serializable]
     internal class FootsoldierSettings : EnemyTroop

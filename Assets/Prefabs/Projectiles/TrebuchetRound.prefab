@@ -97,8 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a39dd904f3131419b2e573825c9713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _parabolaHeight: 50
+  circleEnabled: 0
+  warningSpritePrefab: {fileID: 0}
   meshRenderer: {fileID: 4711685871705653713}
+  damageWallPieceOnHit: 1
+  wallPieceToHit: -1
   spawnParticlesOnHit: 1
   onHitParticles: {fileID: 2913155782981411458, guid: 8cfbfb3ab5b594d5c937499c4af7e9dd,
     type: 3}

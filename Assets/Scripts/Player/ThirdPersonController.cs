@@ -65,6 +65,20 @@ namespace Player
         public int stone = 1;
 
         public int stoneCapacity;
+
+        [Header("_____ Tar Pit stuff _____")]
+        [Range(0.0f,1.0f)]
+        public float tarpitSlowPercentage;
+        [Tooltip("0 Means normal jumping, at 1, jumping is completely disabled")][Range(0.0f, 1.0f)]
+        public float tarpitJumpHindrance;
+        public float tarpitSlowTime = 3.0f;
+        public Material blackFeetMaterial;
+        public Material cleanFeetMaterial;
+        public SkinnedMeshRenderer bodyRenderer;
+        [Header("Readonly")]
+        public float tarpitSpeedMod = 1.0f;
+        public float tarpitJumpMod = 1.0f;
+
         //public List<GameObject> diegeticStones;
 
         public int wood = 1;
@@ -268,14 +282,14 @@ namespace Player
             var targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            _controller.Move(tarpitSpeedMod * targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimController)
                 // animator.SetFloat(_animIDSpeed, _animationBlend);
                 // animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-                _animController.SetSpeed(math.remap(0, 4, 0, 1, _speed));
+                _animController.SetSpeed(tarpitSpeedMod * math.remap(0, 4, 0, 1, _speed));
         }
 
         private void Falling()
@@ -334,10 +348,12 @@ namespace Player
 
         private void Jump()
         {
+            if (tarpitJumpMod == 0) return;
+
             if (_currentState == PlayerState.Normal && _jumpTimeoutDelta <= 0.0f)
             {
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
-                _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                _verticalVelocity = tarpitJumpMod * Mathf.Sqrt(jumpHeight * -2f * gravity);
 
                 // update animator if using character
                 if (_hasAnimController) _animController.SetJump();
@@ -511,6 +527,28 @@ namespace Player
         {
             return stone > 0;
         }
+
+
+        public void GetStickyFeet()
+        {
+            bodyRenderer.material = blackFeetMaterial;
+            tarpitSpeedMod = 1 - tarpitSlowPercentage;
+            tarpitJumpMod = 1 - tarpitJumpHindrance;    
+        }
+
+        public void LeavingTarpit()
+        {
+            Invoke(nameof(CleanFeetAgain), tarpitSlowTime);
+        }
+
+        private void CleanFeetAgain()
+        {
+            bodyRenderer.material = cleanFeetMaterial;
+            tarpitSpeedMod = 1;
+            tarpitJumpMod = 1;
+        }
+
+
 
         private enum PlayerState
         {

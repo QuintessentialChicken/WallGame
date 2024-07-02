@@ -45,41 +45,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCount: 100
-  trebuchetCooldown: 5
-  targetingScheme: 0
-  trebuchetRandomness: 0
-  fireArrowsCooldown: 19
-  fireArrowsDestruction: 0.5
-  bowmen:
-    spawnAreaLowerLeft: {x: 0, y: 0}
-    spawnAreaUpperRight: {x: 0, y: 0}
-    prefab: {fileID: 8574338274363194620, guid: 5c6e32c0581ab554a9b663daefa469dc,
-      type: 3}
-    fireArrowPrefab: {fileID: -7798448794434159932, guid: 54999c6870a373d4b9a0c739b517a19c,
-      type: 3}
-    count: 20
-  trebuchetSettings:
-    spawnAreaLowerLeft: {x: -20.66, y: 0}
-    spawnAreaUpperRight: {x: 38.02, y: 15.32}
+  trebuchetCooldown: 3
+  tarBarrelCooldown: 15
+  targetingScheme: 2
+  trebuchetRandomness: 0.277
+  fireArrowsCooldown: 8
+  fireArrowsDestruction: 0.4
+  trebuchetStonePrefab: {fileID: -6403147066047381681, guid: c3ae024c823c9884fa88310c92374b80,
+    type: 3}
+  trebuchetStoneSettings:
+    type: 0
+    flightTime: 2
+    parabolaHeight: 5
+    rotationSpeed: 0
+  tarBarrelPrefab: {fileID: 5755972706538795219, guid: d04657cb94fbca64fa8330be1257559a,
+    type: 3}
+  tarBarrelSettings:
+    type: 1
+    flightTime: 2
+    parabolaHeight: 35
+    rotationSpeed: 100
+  tarArea: {x: 12.74, y: 3.72, z: -5.05}
+  fireArrowPrefab: {fileID: -7798448794434159932, guid: 54999c6870a373d4b9a0c739b517a19c,
+    type: 3}
+  fireArrowSettings:
+    type: 10
+    flightTime: 2
+    parabolaHeight: 20
+    rotationSpeed: 0
+  trebuchets:
+    spawnAreaLowerLeft: {x: -30.53, y: -26.27}
+    spawnAreaUpperRight: {x: 30, y: -13.62}
     prefab: {fileID: 1694601126, guid: e695a6378d5f57449acbff51b1519928, type: 3}
     reloadSpeed: 3
-    projectile:
-      prefab: {fileID: -6403147066047381681, guid: c3ae024c823c9884fa88310c92374b80,
-        type: 3}
-      flightTime: 0
-      parabolaHeight: 10
   footsoldiers:
-    spawnAreaLowerLeft: {x: -23.9, y: -17.26}
-    spawnAreaUpperRight: {x: 43.38, y: -1.11}
+    spawnAreaLowerLeft: {x: -28.7, y: -103.2}
+    spawnAreaUpperRight: {x: 28.2, y: -51.8}
     prefab: {fileID: 2529088511995973569, guid: 235057aedc7268647abc97ceb6972cac,
       type: 3}
     flagge: {fileID: 235923014655756741, guid: 3df7a8b478f30ab42a2db1c3b085abfb, type: 3}
-    vibing: 1
+    vibing: 0.1
     ecstasy: 1
-    hatred: 0
+    hatred: 0.05
+  bowmen:
+    spawnAreaLowerLeft: {x: -32.3, y: -33.3}
+    spawnAreaUpperRight: {x: 32.7, y: -40.2}
+    prefab: {fileID: 8574338274363194620, guid: 5c6e32c0581ab554a9b663daefa469dc,
+      type: 3}
+    count: 20
   consoleOutput: 0
   debugFireArrows: 0
   debugTrebuchetLaunch: 0
   debugKillTrebuchet: 0
+  debugLaunchTarBarrel: 0
   columnsHit: 
   lastWallIndexHit: -1
