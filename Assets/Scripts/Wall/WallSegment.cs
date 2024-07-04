@@ -6,26 +6,47 @@ namespace Wall
 {
     public class WallSegment : MonoBehaviour
     {
-        public GameObject wallPiece;
-        public GameObject scaffoldingPiece;
-        public FriendlySoldier soldier;
+        [Header("__________ Upgrades __________")]
+        [Tooltip(">1 --> increased chance to be hit\n=1 --> normal chance to be hit\n<1 --> decreased chance to be hit")]
+        public float probabilityModifier = 1.0f;
 
+        [Header("__________ Wall __________")]
         public int wallMaxHealth = 3;
+        [Space]
         public int wallHealth;
-        public int scaffoldingMaxHealth = 2;
-        public int scaffoldingHealth;
-        public bool isScaffoldingIntact = true;
-        public bool soldierRequested;
-        public bool isSoldierPresent;
+        [Space]
+        public GameObject wallPiece;
+        [SerializeField]
+        private MeshFilter _wallMeshFilter;
         public Mesh normalWall;
         public Mesh chippedWall;
         public Mesh damagedWall;
         public Mesh destroyedWall;
+
+        [Header("__________ Scaffolding __________")]
+        public int scaffoldingMaxHealth = 3;
+        [Space]
+        public int scaffoldingHealth;
+        public bool isScaffoldingIntact = true;
+        [Space]
+        public GameObject scaffoldingPiece;
+        [SerializeField]
+        private MeshFilter _scafMeshFilter;
+        public Mesh intactScaffolding;
+        public Mesh chippedScaffolding;
+        public Mesh damagedScaffolding;
+        public Mesh brokenScaffolding;
+
+        [Header("__________ Soldier Boy __________")]
+        public FriendlySoldier soldier;
+        public bool soldierRequested;
+        public bool isSoldierPresent;
+
         public int level; //To be used to request soldier at the correct level
         public bool chosenOne;
         public Material translucent;
 
-        private MeshFilter _meshFilter;
+        
         private MeshRenderer _meshRenderer;
 
         private readonly GUIStyle _style = new();
@@ -39,10 +60,10 @@ namespace Wall
 
         private void Start()
         {
-            _meshFilter = GetComponentInChildren<MeshFilter>();
+            _wallMeshFilter = GetComponentInChildren<MeshFilter>();
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
             _wallMaterial = _meshRenderer.material;
-            normalWall = _meshFilter.mesh;
+            normalWall = _wallMeshFilter.mesh;
             scaffoldingHealth = scaffoldingMaxHealth;
             wallHealth = wallMaxHealth;
             // UpdateSoldierState();
@@ -117,27 +138,40 @@ namespace Wall
 
         private void ChangeWallState(int state)
         {
-            _meshFilter.mesh = state switch
+            _wallMeshFilter.mesh = state switch
             {
                 0 => destroyedWall,
-                1 => damagedWall,
-                2 => chippedWall,
+                1 => chippedWall,
+                2 => normalWall,
                 3 => normalWall,
-                _ => _meshFilter.mesh
+                _ => _wallMeshFilter.mesh
+            };
+        }
+
+        private void ChangeScaffoldingState(int state)
+        {
+            _scafMeshFilter.mesh = state switch
+            {
+                0 => brokenScaffolding,
+                1 => chippedScaffolding,
+                2 => intactScaffolding,
+                3 => intactScaffolding,
+                _ => _scafMeshFilter.mesh
             };
         }
 
         public void DamageScaffolding()
         {
             if (!scaffoldingPiece) return;
-            print("DAmaged me" + scaffoldingHealth);
-            scaffoldingHealth -= 1;
-            if (scaffoldingHealth <= 0) scaffoldingPiece.SetActive(false);
+            //print("DAmaged me" + scaffoldingHealth);
+            scaffoldingHealth = Mathf.Max(0, scaffoldingHealth-1);
+            if (scaffoldingHealth == 0) scaffoldingPiece.GetComponent<BoxCollider>().enabled = false;
             if (isSoldierPresent)
             {
                 soldier.DieByArrows();
                 isSoldierPresent = false;
             }
+            ChangeScaffoldingState(scaffoldingHealth);
         }
 
         public bool RepairScaffolding()
@@ -153,20 +187,17 @@ namespace Wall
                 return false;
             }
             scaffoldingHealth = Mathf.Min(scaffoldingMaxHealth, scaffoldingHealth + 1);
-            scaffoldingPiece.SetActive(true);
+            if (scaffoldingHealth == 0) scaffoldingPiece.GetComponent<BoxCollider>().enabled = false;
             RequestSoldier();
             StartCoroutine(nameof(JuicyRepair));
+            ChangeScaffoldingState(scaffoldingHealth);
             return true;
         }
 
         public void DamageWall()
         {
             wallHealth -= 1;
-            if (wallHealth < 0)
-            {
-                EventManager.RaiseGameOver();
-                return;
-            }
+            if (wallHealth < 0) return;
 
             ChangeWallState(wallHealth);
             if (isSoldierPresent)

@@ -27,8 +27,9 @@ namespace Wall
         }
 
         public static WallManager instance;
-
+        public PostProcessing postProcessing;
         public HighlightingMode highlightingMode;
+        public float loseThreshold = 0.2f;
 
         public int wallRows;
         public int wallColumns;
@@ -43,6 +44,8 @@ namespace Wall
         public ThirdPersonController player;
         public int width = 5;
         [SerializeField] private List<WallSegment> wallSegments; // Only Serializable for debug purposes!!!
+        public int _wallHealth;
+        public int _maxWallHealth;
         private Queue<FriendlySoldier> _availableSoldiers;
         private Vector3 _closestGizmo;
         private WallSegment _closestSegment;
@@ -51,9 +54,7 @@ namespace Wall
         private Transform _playerTransform;
         private WallSegment _previousClosestSegment;
         private Queue<WallSegment> _requestedSoldierPositions;
-
         private float _spawnTimer;
-
 
         private void Awake()
         {
@@ -68,7 +69,6 @@ namespace Wall
 
         private void Start()
         {
-            Inputs.Select += SetSelection;
             Inputs.RepairWood += RepairScaffoldingSegment;
             Inputs.RepairStone += RepairWallSegment;
             EventManager.OnWallPieceHit += DamageWallSegment;
@@ -82,9 +82,12 @@ namespace Wall
             for (var i = 0; i < soldierBuffer; i++)
             {
                 var soldier = Instantiate(soldierPrefab, soldiersParent);
+                soldier.gameObject.transform.localScale = Vector3.one;
                 soldier.gameObject.SetActive(false);
                 _availableSoldiers.Enqueue(soldier);
             }
+
+            postProcessing.maxDestruction = loseThreshold;
             // InvokeRepeating(nameof(DamageRandomSegment), 0f, 2f);
         }
 
@@ -112,7 +115,6 @@ namespace Wall
 
         private void OnDestroy()
         {
-            Inputs.Select -= SetSelection;
             Inputs.RepairWood -= RepairScaffoldingSegment;
             Inputs.RepairStone -= RepairWallSegment;
             EventManager.OnWallPieceHit -= DamageWallSegment;
@@ -144,16 +146,16 @@ namespace Wall
             return wallSegments;
         }
 
-        private void SetSelection(Vector2 value)
-        {
-            selection = (value.x, value.y) switch
-            {
-                (-1, 0) => Selection.Left,
-                (1, 0) => Selection.Right,
-                (0, 1) => Selection.Up,
-                _ => Selection.None
-            };
-        }
+        // private void SetSelection(Vector2 value)
+        // {
+        //     selection = (value.x, value.y) switch
+        //     {
+        //         (-1, 0) => Selection.Left,
+        //         (1, 0) => Selection.Right,
+        //         (0, 1) => Selection.Up,
+        //         _ => Selection.None
+        //     };
+        // }
 
         private void InitializeWallSegments()
         {
@@ -164,8 +166,11 @@ namespace Wall
             foreach (Transform child in segmentsParent)
             {
                 var segment = child.GetComponent<WallSegment>();
+                _wallHealth += segment.wallMaxHealth;
                 if (segment != null) wallSegments.Add(segment);
             }
+
+            _maxWallHealth = _wallHealth;
         }
 
         private void InitializeDoorControllers()
@@ -263,6 +268,7 @@ namespace Wall
             var door = GetClosestDoor(segment.transform.position);
             var soldier = _availableSoldiers.Dequeue();
             soldier.transform.position = _doorControllers[door].spawnpoint.transform.position;
+            soldier.transform.localScale = Vector3.one;
             soldier.gameObject.SetActive(true);
             _doorControllers[door].Open();
             soldier.MoveTo(segment);
@@ -311,19 +317,21 @@ namespace Wall
             }
             if (!segment.RepairWall()) return false;
             EventManager.RaiseOnRepairedStone();
+            UpdateWallHealth(1);
             return true;
         }
 
-        private static void DamageWallSegment(WallSegment segment)
+        private void DamageWallSegment(WallSegment segment)
         {
-            if (segment != null && segment.wallPiece.activeSelf) segment.DamageWall();
+            if (segment == null || !segment.wallPiece.activeSelf) return;
+            segment.DamageWall();
+            UpdateWallHealth(-1);
         }
 
         private void DamageWallSegment(int index)
         {
             if (wallSegments.Count > index)
             {
-                Debug.Log("Index was " + index);
                 DamageWallSegment(wallSegments[index]);
             }
         }
@@ -355,12 +363,23 @@ namespace Wall
 
         private static void DamageScaffoldingSegment(WallSegment segment)
         {
-            if (segment != null) segment.DamageScaffolding();
+            if (segment) segment.DamageScaffolding();
         }
 
         private void DamageScaffoldingSegment(int index)
         {
             if (wallSegments.Count > index) DamageScaffoldingSegment(wallSegments[index]);
+        }
+
+        private void UpdateWallHealth(int value)
+        {
+            _wallHealth += value;
+            var percentage = (float)_wallHealth / _maxWallHealth;
+            if (percentage <= loseThreshold)
+            {
+                EventManager.RaiseGameOver();
+            }
+            postProcessing.UpdateVignetteIntensity(percentage);
         }
     }
 }

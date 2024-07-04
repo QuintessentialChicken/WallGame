@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,11 +23,12 @@ namespace Enemies
         private int _animIDLaunch;
 
         private Animator _anim;
-        private int _lastSelectedID;
-
-        private Vector3 _lastTarget;
-
+        
         private TargetProjectile _projectile;
+
+        public Queue<TargetWallSegmentTuple> targetedWallSegments;
+
+        public Queue<int> indicesLaunchedAt;
 
         private void Start()
         {
@@ -37,6 +39,8 @@ namespace Enemies
             _animIDDeath = Animator.StringToHash("Death");
             _animIDLaunch= Animator.StringToHash("Launch");
             
+            targetedWallSegments = new Queue<TargetWallSegmentTuple>();
+            indicesLaunchedAt = new Queue<int>();   
 
             _anim.SetFloat(_animIDReadyWait, Random.Range(0.5f, 1.5f));
         }
@@ -70,8 +74,7 @@ namespace Enemies
 
         public void SetSelection(Vector3 target, int index)
         {
-            _lastTarget = target;
-            _lastSelectedID = index;
+            targetedWallSegments.Enqueue(new TargetWallSegmentTuple(index, target));
         }
 
         public void AnimEvent_DoneReloading()
@@ -81,13 +84,6 @@ namespace Enemies
 
         public bool Launch()
         {
-            if (_lastSelectedID == -1 || _lastTarget == Vector3.zero)
-            {
-                Debug.LogWarning(
-                    "A Trebuchet was instructed to launch without a call to SetSelection first! This should not happen! Check Behaviour in ArmyController.cs!");
-                return false;
-            }
-
             _anim.SetTrigger(_animIDLaunch);
             ready = false;
             return true;
@@ -97,18 +93,29 @@ namespace Enemies
         {
             var projectile = Instantiate(projectileSettings.prefab, releasePoint.position, Quaternion.identity);
 
-            projectile.SetDestination(_lastTarget);
-
+            projectile.SetDestination(targetedWallSegments.Peek()._worldPos);
             projectile.SetSettings(projectileSettings);
+
+
+            indicesLaunchedAt.Enqueue(targetedWallSegments.Dequeue()._index);
             Invoke(nameof(WallPieceHit), projectileSettings.flightTime);
         }
 
         private void WallPieceHit()
         {
             //Debug.Log("Wall piece " + lastSelected + " hit!");
-            EventManager.RaiseOnWallPieceHit(_lastSelectedID);
-            _lastTarget = Vector3.zero;
-            _lastSelectedID = -1;
+            EventManager.RaiseOnWallPieceHit(indicesLaunchedAt.Dequeue());
         }
+    }
+
+    public class TargetWallSegmentTuple
+    {
+        public TargetWallSegmentTuple(int index, Vector3 worldPos)
+        {
+            _index = index;
+            _worldPos = worldPos;
+        }
+        public int _index;
+        public Vector3 _worldPos;
     }
 }
