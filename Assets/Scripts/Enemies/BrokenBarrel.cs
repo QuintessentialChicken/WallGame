@@ -1,12 +1,9 @@
-using Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TarPit : MonoBehaviour
+public class BrokenBarrel : MonoBehaviour
 {
-    public GameObject Tar;
-
     public float despawnAfter = 5.0f;
 
     public float lifetime = 0.0f;
@@ -15,30 +12,14 @@ public class TarPit : MonoBehaviour
 
     private bool despawning = false;
 
-    public float tarpitScale = 0.8f;
-
-    // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        Tar.transform.localScale = new Vector3(0.5f, 2, 0.5f);
-        spawnTime = Time.time;  
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        other.gameObject.GetComponent<ThirdPersonController>()?.GetStickyFeet();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        other.gameObject.GetComponent<ThirdPersonController>()?.LeavingTarpit();
+        spawnTime = Time.time;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-        if (despawning) return;
-        Tar.transform.localScale = Vector3.Lerp(Tar.transform.localScale, tarpitScale * Vector3.one, Time.deltaTime);
         lifetime = Time.time - spawnTime;
         if (lifetime >= despawnAfter)
         {

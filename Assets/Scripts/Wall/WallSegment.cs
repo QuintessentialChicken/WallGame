@@ -36,6 +36,7 @@ namespace Wall
         public Mesh chippedScaffolding;
         public Mesh damagedScaffolding;
         public Mesh brokenScaffolding;
+        public GameObject colliderVolume;
 
         [Header("__________ Soldier Boy __________")]
         public FriendlySoldier soldier;
@@ -120,6 +121,7 @@ namespace Wall
                 transform.localScale = Vector3.one * (1 + (1 - Mathf.Cos(x * 3.14f * 2)) / 2.5f);
                 yield return null;
             }
+            transform.localScale = Vector3.one;
         }
 
         public bool SetPreview(bool enabled)
@@ -165,7 +167,7 @@ namespace Wall
             if (!scaffoldingPiece) return;
             //print("DAmaged me" + scaffoldingHealth);
             scaffoldingHealth = Mathf.Max(0, scaffoldingHealth-1);
-            if (scaffoldingHealth == 0) scaffoldingPiece.GetComponent<BoxCollider>().enabled = false;
+            if (scaffoldingHealth == 0) colliderVolume.SetActive(false);
             if (isSoldierPresent)
             {
                 soldier.DieByArrows();
@@ -187,7 +189,7 @@ namespace Wall
                 return false;
             }
             scaffoldingHealth = Mathf.Min(scaffoldingMaxHealth, scaffoldingHealth + 1);
-            if (scaffoldingHealth == 0) scaffoldingPiece.GetComponent<BoxCollider>().enabled = false;
+            colliderVolume.SetActive(true);
             RequestSoldier();
             StartCoroutine(nameof(JuicyRepair));
             ChangeScaffoldingState(scaffoldingHealth);

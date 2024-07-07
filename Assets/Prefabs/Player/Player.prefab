@@ -1354,6 +1354,14 @@ MonoBehaviour:
   stoneReplenisher: {fileID: 0}
   stone: 1
   stoneCapacity: 3
+  tarpitSlowPercentage: 0.4
+  tarpitJumpHindrance: 0.88
+  tarpitSlowTime: 3
+  blackFeetMaterial: {fileID: 2100000, guid: 81f24e6b0e02cf64987bb514f22a091f, type: 2}
+  cleanFeetMaterial: {fileID: 2100000, guid: 23c6cfedc960baf42a561d9f86f48f0d, type: 2}
+  bodyRenderer: {fileID: 8752970828935316739}
+  tarpitSpeedMod: 1
+  tarpitJumpMod: 1
   wood: 1
   woodCapacity: 3
   launchDuration: 0.75

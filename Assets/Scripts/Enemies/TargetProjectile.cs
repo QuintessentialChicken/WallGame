@@ -1,3 +1,5 @@
+using Input;
+using Player;
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -7,11 +9,7 @@ namespace Enemies
 {
     public class TargetProjectile : MonoBehaviour
     {
-        ProjectileSettings settings;
-        [Header("Warning Circle")]
-        public bool circleEnabled = false;
-        public SpriteRenderer warningSpritePrefab;
-        private SpriteRenderer warningSprite;
+        public ProjectileSettings settings;
 
         [Header("Refernces")]
 
@@ -23,45 +21,44 @@ namespace Enemies
         [Header("On Impact")]
         public bool damageWallPieceOnHit = false;
         [SerializeField]
-        private int wallPieceToHit = -1;
+        protected int wallPieceToHit = -1;
 
-        public bool spawnParticlesOnHit;
+        public bool spawnSomethingOnHit;
 
-        [SerializeField] private GameObject onHitParticles;
+        [SerializeField] private GameObject onHitPrefab;
 
-        public bool particlesSpawned;
-        private float _arrivalTime;
+        private bool particlesSpawned;
+        protected float _arrivalTime;
 
-        private Vector3 _destination;
-        private Vector3 _lastPosition;
-        private Vector3 _releasePoint;
+        protected Vector3 _destination;
+        protected Vector3 _lastPosition;
+        protected Vector3 _releasePoint;
 
-        private float _startOfLife = -1;
+        protected float _startOfLife = -1;
+
+        protected float t = 0;
+
+        
 
         public void Start()
         {
             _releasePoint = transform.position;
             _lastPosition = transform.position - transform.forward;
-            if (circleEnabled)
-            {
-                warningSprite = Instantiate(warningSpritePrefab);
-                warningSprite.transform.position = _destination + new Vector3(0, 0.2f, 0);
-                warningSprite.color = new Color(warningSprite.color.r, warningSprite.color.g, warningSprite.color.b, 0);
-            }
+            
         }
 
         public void Update()
         {
             if (Mathf.Approximately(_startOfLife, -1)) return;
 
-            var t = (Time.time - _startOfLife) / (_arrivalTime - _startOfLife);
+            t = (Time.time - _startOfLife) / (_arrivalTime - _startOfLife);
             if (t >= 1)
             {
                 meshRenderer.enabled = false;
-                if (spawnParticlesOnHit && !particlesSpawned)
+                if (spawnSomethingOnHit && !particlesSpawned)
                 {
                     if (damageWallPieceOnHit) EventManager.RaiseOnWallPieceHit(wallPieceToHit);
-                    GameObject particles = Instantiate(onHitParticles, _destination, Quaternion.identity);
+                    GameObject particles = Instantiate(onHitPrefab, _destination, Quaternion.identity);
                     particlesSpawned = true;
                 }
                 Destroy(gameObject);
@@ -72,15 +69,7 @@ namespace Enemies
                                      new Vector3(0, settings.parabolaHeight * (-Mathf.Pow(2 * t - 1, 2) + 1), 0);
                 if (settings.rotationSpeed != 0) transform.LookAt(transform.position + (transform.position - _lastPosition));
             }
-            if (circleEnabled)
-            {
-                if (t < 1) { 
-                    warningSprite.color = new Color(warningSprite.color.r, warningSprite.color.g, warningSprite.color.b, t);
-                } else
-                {
-                    warningSprite.color = new Color(warningSprite.color.r, warningSprite.color.g, warningSprite.color.b, 0);
-                }
-            }
+            
 
             transform.Rotate(settings.rotationSpeed * Time.deltaTime, 0, 0);
 
@@ -130,6 +119,7 @@ namespace Enemies
     {
         Stone = 0,
         TarBarrel = 1,
+        FlourBarrel = 2,
 
         FireArrow = 10,
 

@@ -97,13 +97,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a39dd904f3131419b2e573825c9713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleEnabled: 0
-  warningSpritePrefab: {fileID: 0}
+  settings:
+    type: 0
+    flightTime: 0
+    parabolaHeight: 0
+    rotationSpeed: 0
   meshRenderer: {fileID: 4711685871705653713}
   damageWallPieceOnHit: 1
   wallPieceToHit: -1
-  spawnParticlesOnHit: 1
-  onHitParticles: {fileID: 2913155782981411458, guid: 8cfbfb3ab5b594d5c937499c4af7e9dd,
+  spawnSomethingOnHit: 1
+  onHitPrefab: {fileID: 2913155782981411458, guid: 8cfbfb3ab5b594d5c937499c4af7e9dd,
     type: 3}
   particlesSpawned: 0
 --- !u!1 &6608426624904858782

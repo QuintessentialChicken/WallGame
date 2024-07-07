@@ -88,8 +88,13 @@ namespace Enemies
                 case ProjectileType.TarBarrel:
                     projectile = Instantiate(ArmyController.instance.tarBarrelPrefab, releasePoint.position, Quaternion.identity);
                     projectile.SetDestination(nextUp._targetWorldPos);
-                    projectile.SetUp(ArmyController.instance.tarBarrelSettings);
-                    break;   
+                    projectile.SetUp(ArmyController.instance.barrelSettings);
+                    break;
+                case ProjectileType.FlourBarrel:
+                    projectile = Instantiate(ArmyController.instance.flourBarrelPrefab, releasePoint.position, Quaternion.identity);
+                    projectile.SetDestination(nextUp._targetWorldPos);
+                    projectile.SetUp(ArmyController.instance.barrelSettings);
+                    break;
             }
 
             ready = true;

@@ -115,13 +115,13 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 88c3e54fd75707e47b398d697e9f1c8f,
         type: 3}
       propertyPath: m_Name
-      value: TarBarrel
+      value: FlourBarrel
       objectReference: {fileID: 0}
     - target: {fileID: 1070884762577119467, guid: 88c3e54fd75707e47b398d697e9f1c8f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1663fec44b7210640b23466706724042, type: 2}
+      objectReference: {fileID: 2100000, guid: b012782085f24754e9841d50510a2278, type: 2}
     - target: {fileID: 3761933194095562026, guid: 88c3e54fd75707e47b398d697e9f1c8f,
         type: 3}
       propertyPath: m_IsActive
@@ -141,7 +141,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4219059071956482683}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3211721105639975034
+--- !u!114 &4494966143446929447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,11 +162,11 @@ MonoBehaviour:
   damageWallPieceOnHit: 0
   wallPieceToHit: -1
   spawnSomethingOnHit: 1
-  onHitPrefab: {fileID: 6348507760005571386, guid: e07890efec6a99543bb452bcfe78550a,
+  onHitPrefab: {fileID: 6348507760005571386, guid: 3f3fea811cd296448a66a6dc6a4a05f1,
     type: 3}
   circleEnabled: 1
   rebounceSweetSpot: 1
-  warningSpritePrefab: {fileID: 4331086017680452919, guid: e3604827d00358b42ad6931ae6481794,
+  warningSpritePrefab: {fileID: 4331086017680452919, guid: 0bf4945af41b1a5418425a5765a3af59,
     type: 3}
   goldenCirclePrefab: {fileID: 4331086017680452919, guid: a484275d011624b419fa549f271d6afb,
     type: 3}

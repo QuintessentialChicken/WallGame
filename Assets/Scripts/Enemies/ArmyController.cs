@@ -17,11 +17,10 @@ namespace Enemies
         [Header("_______________ Gameplay Relevant _______________")] [SerializeField]
         public int enemyCount = 100;
 
-        [Space] [SerializeField] private float trebuchetCooldown = 5;
-
-        [Tooltip("Leave at 0 to disable Tar Barrels")]
-        [SerializeField] private float tarBarrelCooldown = 20;
-        
+        [Space] 
+        [SerializeField] private float trebuchetCooldown = 5;
+        [Tooltip("Time before first trebuchet shot gets launched")]
+        [SerializeField] private float trebuchetCooldownOffset = 0;
         [SerializeField]
         [Tooltip("RANDOM\nThe Columns are picket randomly\n\n" +
                  "SUCCESSION\nThe Columns are picket left to right\n\n" +
@@ -29,26 +28,43 @@ namespace Enemies
                  "RANDOMEQUAL_ANIM\nThe Columns are picket randomly and all wall columns are hit equally often. Trebuchets that have finished their reload animation are preferred in selection.\n\n" +
                  "RANDOMEQUAL_SWITCH\nThe Columns are picket randomly and all wall columns are hit equally often. No Trebuchet fires twice in a row.")]
         private TargetingScheme targetingScheme = TargetingScheme.Random;
-
         [SerializeField]
         [Tooltip("0.0 - Shots arrive exactly <trebuchet cooldown> seconds apart.\n" +
                  "1.0 - Shots arrive with a random delay of up to 1 second")]
         [Range(0.0f, 1.0f)]
         private float trebuchetRandomness;
 
-        [Space] [SerializeField] private float fireArrowsCooldown = 20;
+        [Space]
+        [Tooltip("Leave at 0 to disable tar Barrels")]
+        [SerializeField] private float tarBarrelCooldown = 20;
+        [Tooltip("Time before first tar barrel gets launched")]
+        [SerializeField] private float tarBarrelCooldownOffset = 20;
+
+        [Space]
+        [Tooltip("Leave at 0 to disable flour Barrels")]
+        [SerializeField] private float flourBarrelCooldown = 20;
+        [Tooltip("Time before first flour barrel gets launched")]
+        [SerializeField] private float flourBarrelCooldownOffset = 20;
+
+        [Space]
+        [Tooltip("Leave at 0 to disable fire arrows")]
+        [SerializeField] private float fireArrowsCooldown = 20;
+        [Tooltip("Time before first fire arrows get launched")]
+        [SerializeField] private float fireArrowsCooldownOffset = 20;
 
         [SerializeField] [Range(0f, 1f)] private float fireArrowsDestruction = 0.8f;
 
         [Header("_______________ Projectiles _______________")]
-        [Header("     Trebuchet Stones")]
+        [Header(" ___ Trebuchet Stones ___")]
         public TargetProjectile trebuchetStonePrefab;
         public ProjectileSettings trebuchetStoneSettings;
-        [Header("     Trebuchet Tar Barrels")]
+        [Header(" ___ Barrels ___ ")]
         public TargetProjectile tarBarrelPrefab;
-        public ProjectileSettings tarBarrelSettings;
-        public Vector3 tarArea;
-        [Header("     Fire Arrows")]
+        public TargetProjectile flourBarrelPrefab;
+        public ProjectileSettings barrelSettings;
+        
+        public Vector3 barrelArea;
+        [Header(" ___ Fire Arrows ___ ")]
         public TargetProjectile fireArrowPrefab;
         public ProjectileSettings fireArrowSettings;
 
@@ -120,10 +136,11 @@ namespace Enemies
             SpawnTrebuchets();
             SpawnBowmen();
 
-            Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
-            Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
-            if (tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), tarBarrelCooldown);
-
+            Invoke(nameof(LaunchTrebuchet), trebuchetCooldownOffset);
+            if (fireArrowsCooldown != 0) Invoke(nameof(LaunchFireArrows), fireArrowsCooldownOffset);
+            if (flourBarrelCooldown != 0) Invoke(nameof(LaunchFlourBarrel), flourBarrelCooldownOffset);
+            if (tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), tarBarrelCooldownOffset);
+            
             _wallManager = FindObjectOfType<WallManager>();
             columnsHit = new List<bool>();
             _columns = WallManager.instance.wallColumns;
@@ -180,16 +197,30 @@ namespace Enemies
         
         private void LaunchTarBarrel()
         {
-            float worldX = Random.Range(-tarArea.x/2, tarArea.x/2);
+            float worldX = Random.Range(-barrelArea.x/2, barrelArea.x/2);
 
             // Select Trebuchet
-            int trebuchetIndex = Mathf.FloorToInt(((worldX + tarArea.x) / (tarArea.x*2)) * WallManager.instance.wallColumns);
+            int trebuchetIndex = Mathf.FloorToInt(((worldX + barrelArea.x) / (barrelArea.x*2)) * WallManager.instance.wallColumns);
 
             // Launch
-            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, new Vector3(worldX, 0, tarArea.z));
+            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, new Vector3(worldX, 0, barrelArea.z));
 
             // Restart cooldown
             Invoke(nameof(LaunchTarBarrel), tarBarrelCooldown);
+        }
+
+        private void LaunchFlourBarrel()
+        {
+            float worldX = Random.Range(-barrelArea.x / 2, barrelArea.x / 2);
+
+            // Select Trebuchet
+            int trebuchetIndex = Mathf.FloorToInt(((worldX + barrelArea.x) / (barrelArea.x * 2)) * WallManager.instance.wallColumns);
+
+            // Launch
+            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.FlourBarrel, new Vector3(worldX, 0, barrelArea.z));
+
+            // Restart cooldown
+            Invoke(nameof(LaunchFlourBarrel), flourBarrelCooldown);
         }
 
         private void LaunchTrebuchet()
@@ -427,7 +458,7 @@ namespace Enemies
 
             // Drawing Tar Target Area
             Gizmos.color = new Color(0, 0, 0, 0.5f);
-            Gizmos.DrawCube(new Vector3(0, 0, tarArea.z), new Vector3(tarArea.x, 1, tarArea.y));
+            Gizmos.DrawCube(new Vector3(0, 0, barrelArea.z), new Vector3(barrelArea.x, 1, barrelArea.y));
 
             // Drawing Bowmen Spawn Area
             GizmoDrawTargetArea(Color.yellow, bowmen.spawnAreaLowerLeft, bowmen.spawnAreaUpperRight);
