@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Input;
 using Player;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Interaction
     internal interface IInteractable
     {
         public void Interact(ThirdPersonController player);
+        Vector3 GetPosition();
     }
 
     internal delegate void Interaction(ThirdPersonController player);
@@ -16,10 +18,11 @@ namespace Interaction
     {
         private ThirdPersonController _controller;
 
-        private Interaction _interact;
+        private List<IInteractable> _interactables;
 
         private void Awake()
         {
+            _interactables = new List<IInteractable>();
             _controller = GetComponent<ThirdPersonController>();
 
             Inputs.Interact += Interact;
@@ -35,21 +38,44 @@ namespace Interaction
         {
             var interactable = other.gameObject.GetComponent<IInteractable>();
 
-            if (interactable != null) _interact = interactable.Interact;
+            if (interactable != null) _interactables.Add(interactable);
 
             /*
              * Possibly call to UI class to display Tooltip (Press E to Interact)
              */
+            for (var i = 0; i < _interactables.Count; i++)
+            {
+                var test = _interactables[i];
+                print("entered " + i + " " + test);
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            _interact = _ => { print("No interactable nearby"); };
+            _interactables.Remove(other.gameObject.GetComponent<IInteractable>());
+            for (var i = 0; i < _interactables.Count; i++)
+            {
+                var interactable = _interactables[i];
+                print("exited " + i + " " + interactable);
+            }
         }
 
         private void Interact()
         {
-            _interact?.Invoke(_controller);
+            if (_interactables.Count == 0) return;
+
+            IInteractable closestInteractable = default;
+            var closestDistance = float.MaxValue;
+
+            foreach (var interactable in _interactables)
+            {
+                var distance = Vector3.Distance(transform.position, interactable.GetPosition());
+                if (!(distance < closestDistance)) continue;
+                closestDistance = distance;
+                closestInteractable = interactable;
+            }
+
+            closestInteractable?.Interact(_controller);
         }
     }
 }
