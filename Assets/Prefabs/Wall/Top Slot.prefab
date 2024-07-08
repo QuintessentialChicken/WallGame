@@ -129,7 +129,7 @@ MonoBehaviour:
     type: 3}
   brokenScaffolding: {fileID: 7924080633632558381, guid: 74082345ee1c97e4a8a4de0bf79fba43,
     type: 3}
-  colliderVolume: {fileID: 0}
+  colliderVolume: {fileID: 1684479449162229889}
   soldier: {fileID: 9161873365068109913}
   soldierRequested: 0
   isSoldierPresent: 1
