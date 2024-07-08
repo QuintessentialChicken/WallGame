@@ -1886,8 +1886,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d5df3b2bfa857478e9f0d3d5ddd82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  falling: 0
+  DEBUG_Falling: 0
+  DEBUG_Speed: 0
+  DEBUG_Grab: 0
+  DEBUG_Repair: 0
+  hammer: {fileID: 0}
+  hipHolster: {fileID: 0}
+  hand: {fileID: 0}
+  leftHandIK: {fileID: 0}
+  ikConstraint: {fileID: 0}
+  grabRadius: 0.25
+  grabSpeed: 2
+  grabForward: 2
+  repairRadius: 0.25
+  repairSpeed: 2
+  repairForward: 2
 --- !u!1 &5686328724151643912
 GameObject:
   m_ObjectHideFlags: 0
