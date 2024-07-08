@@ -25,6 +25,9 @@ namespace Input
         public static event OnInputNoParams Interact;
         public static event OnInputNoParams RepairWood;
         public static event OnInputNoParams RepairStone;
+        public static event OnInputNoParams UpgradeWood;
+        public static event OnInputNoParams UpgradeStone;
+
         public static event OnInputNoParams YPressed;
         public static event OnInputVector2 Select;
 
@@ -83,6 +86,16 @@ namespace Input
         public void OnRepairStone(InputAction.CallbackContext context)
         {
             if (context.started) RepairStone?.Invoke();
+        }
+
+        public void OnUpgradeWood(InputAction.CallbackContext context)
+        {
+            if (context.started) UpgradeWood?.Invoke();
+        }
+        
+        public void OnUpgradeStone(InputAction.CallbackContext context)
+        {
+            if (context.started) UpgradeStone?.Invoke();
         }
 
         public void OnAim(InputAction.CallbackContext context)

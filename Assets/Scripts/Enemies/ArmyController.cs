@@ -170,7 +170,6 @@ namespace Enemies
                 List<float> normalizedProbabilities = segments.ConvertAll<float>(x => x.probabilityModifier / sum);
                 if (targetingScheme == TargetingScheme.Random_NoWallTwice && lastWallIndexHit != -1) normalizedProbabilities[lastWallIndexHit] = 0;
 
-                Debug.Log("Normalized Probabilities: " + string.Join(")  (", normalizedProbabilities));
 
                 float choice = Random.Range(0.0f, 1.0f);
 
@@ -186,7 +185,6 @@ namespace Enemies
                     }
                 }
             }
-            Debug.Log("Chosen Wall Piece: " + chosenWallIndex);
             lastWallIndexHit = chosenWallIndex;
 
             // Picking correct trebuchet

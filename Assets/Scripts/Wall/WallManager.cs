@@ -5,6 +5,7 @@ using Input;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Upgrades;
 using Random = UnityEngine.Random;
 
 namespace Wall
@@ -71,6 +72,8 @@ namespace Wall
         {
             Inputs.RepairWood += RepairScaffoldingSegment;
             Inputs.RepairStone += RepairWallSegment;
+            Inputs.UpgradeWood += UpgradeWoodSegment;
+            Inputs.UpgradeStone += UpgradeStoneSegment;
             EventManager.OnWallPieceHit += DamageWallSegment;
             EventManager.OnScaffoldingHit += DamageScaffoldingSegment;
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
@@ -117,6 +120,8 @@ namespace Wall
         {
             Inputs.RepairWood -= RepairScaffoldingSegment;
             Inputs.RepairStone -= RepairWallSegment;
+            Inputs.UpgradeWood -= UpgradeWoodSegment;
+            Inputs.UpgradeStone -= UpgradeStoneSegment;
             EventManager.OnWallPieceHit -= DamageWallSegment;
             EventManager.OnScaffoldingHit -= DamageScaffoldingSegment;
         }
@@ -380,6 +385,58 @@ namespace Wall
                 EventManager.RaiseGameOver();
             }
             postProcessing.UpdateVignetteIntensity(percentage);
+        }
+
+        private void UpgradeWoodSegment()
+        {
+            if (player.SelectedUpgrade)
+            {
+                var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
+                if (!parent.scaffoldingPiece)
+                {
+                    EventManager.RaiseOnUpgradeFailed("Segment doesn't have scaffolding");
+                    return;
+                }
+                if (parent.freeSlots <= 0)
+                {
+                    EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
+                    return;
+                }
+                var upgrade = Instantiate(player.SelectedUpgrade, parent.transform);
+                upgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
+                if (parent.freeSlots == 1)
+                {
+                    var newScale = upgrade.transform.localScale;
+                    newScale.x *= -1;
+                    upgrade.transform.localScale = newScale;
+                }
+                parent.freeSlots -= 1;
+                player.SelectedUpgrade = null;
+            }
+        }
+        
+        private void UpgradeStoneSegment()
+        {
+            if (player.SelectedUpgrade)
+            {
+                var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
+                if (parent.freeSlots <= 0)
+                {
+                    EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
+                    return;
+                }
+                var upgrade = Instantiate(player.SelectedUpgrade, parent.transform);
+                upgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
+                if (parent.freeSlots == 1)
+                {
+                    var newScale = upgrade.transform.localScale;
+                    newScale.x *= -1;
+                    upgrade.transform.localScale = newScale;
+                }
+
+                parent.freeSlots -= 1;
+                // player.SelectedUpgrade = null;
+            }
         }
     }
 }

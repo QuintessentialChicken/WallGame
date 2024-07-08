@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Upgrades;
 
 namespace Wall
 {
@@ -9,6 +11,10 @@ namespace Wall
         [Header("__________ Upgrades __________")]
         [Tooltip(">1 --> increased chance to be hit\n=1 --> normal chance to be hit\n<1 --> decreased chance to be hit")]
         public float probabilityModifier = 1.0f;
+
+        public int freeSlots = 2;
+
+        private List<Upgrade> _upgrades;
 
         [Header("__________ Wall __________")]
         public int wallMaxHealth = 3;

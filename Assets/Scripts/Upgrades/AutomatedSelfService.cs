@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public class AutomatedSelfService : CooldownUpgrade
+namespace Upgrades
 {
-    public override void Engage()
+    public class AutomatedSelfService : CooldownUpgrade
     {
-        Debug.LogWarning("I Can't repair myself yet ;(");
+        public override void Engage()
+        {
+            Debug.LogWarning("I Can't repair myself yet ;(");
+        }
+        public override UpgradeType Type => UpgradeType.AutomatedSelfService;
     }
 }

@@ -1,33 +1,46 @@
-using System;
 using UnityEngine;
 
-public abstract class Upgrade : MonoBehaviour
+namespace Upgrades
 {
-    /* Activates the Upgrade if possible and returns false if not possible, true otherwise. */
-    public abstract bool Activate();
-
-    public abstract void UpgradeUpdate();
-
-    public UpgradeName UpgradeName;
-
-    public bool DEBUG_Activate = false;
-
     
-    void Update()
+    
+    public abstract class Upgrade : MonoBehaviour
     {
-        if (DEBUG_Activate)
+        public enum UpgradeType
         {
-            bool success = Activate();
-            if (success)
-            {
-                Debug.Log("Activation Successful.");
-            } else
-            {
-                Debug.Log("Activation Failed!");
-            }
-            DEBUG_Activate = false;
+            None,
+            AutomatedSelfService,
+            LeviatedSpringDefense
         }
-        UpgradeUpdate();
-    }
 
+        public abstract UpgradeType Type
+        {
+            get;
+        }
+        
+        /* Activates the Upgrade if possible and returns false if not possible, true otherwise. */
+        public abstract bool Activate();
+
+        public abstract void UpgradeUpdate();
+
+        public UpgradeName UpgradeName;
+
+        public bool DEBUG_Activate = false;
+
+
+        private void Update()
+        {
+            if (DEBUG_Activate)
+            {
+                var success = Activate();
+                if (success)
+                    Debug.Log("Activation Successful.");
+                else
+                    Debug.Log("Activation Failed!");
+                DEBUG_Activate = false;
+            }
+
+            UpgradeUpdate();
+        }
+    }
 }
