@@ -23,6 +23,6 @@ public class LeviatedSpringDefense : CooldownUpgrade
         TargetProjectile projectile = Instantiate(trebuchetRound, projectileSpawnPoint.position, Quaternion.identity);
         projectile.SetDestination(ArmyController.instance.GetFootsoldierPosition());
         ArmyController.instance.Invoke(nameof(ArmyController.BombArrives), projectileFlightTime);
-        projectile.SetFlightTime(projectileFlightTime);
+        projectile.SetUp(ArmyController.instance.trebuchetStoneSettings);
     }
 }

@@ -160,7 +160,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c5d72e843931ee240a12d6b6651ba752,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.991
+      value: -0.411
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c5d72e843931ee240a12d6b6651ba752,
         type: 3}
@@ -244,8 +244,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23a39dd904f3131419b2e573825c9713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parabolaHeight: 20
+  circleEnabled: 0
+  warningSpritePrefab: {fileID: 0}
   meshRenderer: {fileID: 6974921398361236564}
+  damageWallPieceOnHit: 0
+  wallPieceToHit: -1
   spawnParticlesOnHit: 1
   onHitParticles: {fileID: 2271256507349694626, guid: a967977f507e84945a5dab76cadae4e9,
     type: 3}

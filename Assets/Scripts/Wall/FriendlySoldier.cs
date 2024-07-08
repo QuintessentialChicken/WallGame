@@ -10,13 +10,13 @@ namespace Wall
     {
         public float moveSpeed = 5f; // Speed at which the soldier moves
 
-        [SerializeField] private float boltFlightTime = 2;
-
         [SerializeField] private TargetProjectile boltPrefab;
 
         [SerializeField] private Transform releasePoint;
 
         [SerializeField] private List<GameObject> helmetVariants;
+
+        [SerializeField] private ProjectileSettings boltSettings;
 
         private Animator _anim;
         private int _animIDDeath;
@@ -103,12 +103,12 @@ namespace Wall
 
         public void AnimEvent_ShotFired()
         {
-            _armyController.Invoke(nameof(ArmyController.BoltArrives), boltFlightTime);
+            _armyController.Invoke(nameof(ArmyController.BoltArrives), boltSettings.flightTime);
 
             var bolt = Instantiate(boltPrefab, releasePoint.position, releasePoint.rotation);
             var nextVictim = _armyController.GetFootsoldierPosition();
             bolt.SetDestination(nextVictim);
-            bolt.SetFlightTime(boltFlightTime);
+            bolt.SetUp(boltSettings);
 
             RandomizeSpeed(0.95f, 1.05f); // Each shot is done with a little bit of different speed
         }
