@@ -1,6 +1,10 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Wall;
 
 namespace Enemies
 {
@@ -9,26 +13,23 @@ namespace Enemies
     {
         [Range(0.01f, 2f)] public float reloadSpeed = 1;
 
-        public ProjectileSettings projectileSettings;
-
         public Transform releasePoint;
 
         public Transform targetPoint;
 
         public bool ready = true;
+
+        private Queue<EnqueuedProjectile> orderedProjectiles;
+
         private int _animIDDeath;
 
         private int _animIDReadyWait;
         private int _animIDReloadSpeed;
         private int _animIDLaunch;
 
+        public List<string> debug_Queue;
+
         private Animator _anim;
-        
-        private TargetProjectile _projectile;
-
-        public Queue<TargetWallSegmentTuple> targetedWallSegments;
-
-        public Queue<int> indicesLaunchedAt;
 
         private void Start()
         {
@@ -38,28 +39,18 @@ namespace Enemies
             _animIDReloadSpeed = Animator.StringToHash("RewindSpeed");
             _animIDDeath = Animator.StringToHash("Death");
             _animIDLaunch= Animator.StringToHash("Launch");
-            
-            targetedWallSegments = new Queue<TargetWallSegmentTuple>();
-            indicesLaunchedAt = new Queue<int>();   
 
-            _anim.SetFloat(_animIDReadyWait, Random.Range(0.5f, 1.5f));
+            orderedProjectiles = new Queue<EnqueuedProjectile>();  
+
+            _anim.SetFloat(_animIDReadyWait, UnityEngine.Random.Range(0.5f, 1.5f));
+
+            debug_Queue = new List<string>();   
         }
 
-        public void SetUp(ProjectileSettings projectileSettings, float reloadAnimSpeed)
+        public void SetReloadSpeed(float reloadAnimSpeed)
         {
-            this.projectileSettings = projectileSettings;
             reloadSpeed = reloadAnimSpeed;
             Invoke(nameof(SetReloadSpeed), 0.1f);
-        }
-
-        public void SetFlightTime(float flightTime)
-        {
-            projectileSettings.flightTime = flightTime;
-        }
-
-        public void SetParabolaHeight(float parabolaHeight)
-        {
-            projectileSettings.parabolaHeight = parabolaHeight;
         }
 
         public void Kill()
@@ -72,50 +63,71 @@ namespace Enemies
             _anim.SetFloat(_animIDReloadSpeed, reloadSpeed);
         }
 
-        public void SetSelection(Vector3 target, int index)
-        {
-            targetedWallSegments.Enqueue(new TargetWallSegmentTuple(index, target));
-        }
-
         public void AnimEvent_DoneReloading()
         {
             ready = true;
         }
 
-        public bool Launch()
+        public void RequestLaunch(ProjectileType type, Vector3 target, int targetedWallPiece = -1)
         {
-            _anim.SetTrigger(_animIDLaunch);
-            ready = false;
-            return true;
+            orderedProjectiles.Enqueue(new EnqueuedProjectile(type, target, targetedWallPiece));
         }
 
         public void AnimEvent_Launch()
         {
-            var projectile = Instantiate(projectileSettings.prefab, releasePoint.position, Quaternion.identity);
+            EnqueuedProjectile nextUp = orderedProjectiles.Dequeue();
+            TargetProjectile projectile;
+            switch (nextUp._projectileType)
+            {
+                case ProjectileType.Stone:
+                    projectile = Instantiate(ArmyController.instance.trebuchetStonePrefab, releasePoint.position, Quaternion.identity);
+                    projectile.SetWallPieceIndex(nextUp._index);
+                    projectile.SetDestination(WallManager.instance.GetWallSegments().ElementAt(nextUp._index).transform.position);
+                    projectile.SetUp(ArmyController.instance.trebuchetStoneSettings);
+                    break;
+                case ProjectileType.TarBarrel:
+                    projectile = Instantiate(ArmyController.instance.tarBarrelPrefab, releasePoint.position, Quaternion.identity);
+                    projectile.SetDestination(nextUp._targetWorldPos);
+                    projectile.SetUp(ArmyController.instance.barrelSettings);
+                    break;
+                case ProjectileType.FlourBarrel:
+                    projectile = Instantiate(ArmyController.instance.flourBarrelPrefab, releasePoint.position, Quaternion.identity);
+                    projectile.SetDestination(nextUp._targetWorldPos);
+                    projectile.SetUp(ArmyController.instance.barrelSettings);
+                    break;
+            }
 
-            projectile.SetDestination(targetedWallSegments.Peek()._worldPos);
-            projectile.SetSettings(projectileSettings);
-
-
-            indicesLaunchedAt.Enqueue(targetedWallSegments.Dequeue()._index);
-            Invoke(nameof(WallPieceHit), projectileSettings.flightTime);
+            ready = true;
         }
 
-        private void WallPieceHit()
+        public void Update()
         {
-            //Debug.Log("Wall piece " + lastSelected + " hit!");
-            EventManager.RaiseOnWallPieceHit(indicesLaunchedAt.Dequeue());
+            if (ready && orderedProjectiles.Count != 0)
+            {    
+                _anim.SetTrigger(_animIDLaunch);
+                ready = false;
+            }
+
+            debug_Queue.Clear();
+            foreach (var e in orderedProjectiles)
+            {
+                debug_Queue.Add(e._projectileType + " aimed at " + e._targetWorldPos);
+            }
         }
     }
 
-    public class TargetWallSegmentTuple
+    public class EnqueuedProjectile
     {
-        public TargetWallSegmentTuple(int index, Vector3 worldPos)
+        public EnqueuedProjectile(ProjectileType type, Vector3 worldPos, int wallIndex = -1)
         {
-            _index = index;
-            _worldPos = worldPos;
+            _index = wallIndex;
+            _targetWorldPos = worldPos;
+            _projectileType = type;
         }
         public int _index;
-        public Vector3 _worldPos;
+        public Vector3 _targetWorldPos;
+        public ProjectileType _projectileType;
     }
+
+
 }
