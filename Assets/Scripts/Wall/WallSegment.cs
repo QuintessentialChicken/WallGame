@@ -116,6 +116,10 @@ namespace Wall
 
         private IEnumerator JuicyRepair()
         {
+            for (float x = 0; x < 0.1f; x += Time.deltaTime)
+            {
+                yield return null;
+            }
             for (float x = 0; x < 1; x += Time.deltaTime * 4)
             {
                 transform.localScale = Vector3.one * (1 + (1 - Mathf.Cos(x * 3.14f * 2)) / 2.5f);

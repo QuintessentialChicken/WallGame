@@ -309,7 +309,7 @@ namespace Player
                         // animator.SetTrigger(_animIDJump);
                         // _animator.SetBool(_animIDFreeFall, false);
                         _animController.SetFalling(false);
-                        _animController.SetAirTime(_airTime);
+                        //_animController.SetAirTime(_airTime);
                         // PauseMovement(_airTime < 1.2 ? 0.0f : 1f);
                     }
 
@@ -463,6 +463,7 @@ namespace Player
             {
                 backpackWood.GetChild(i).gameObject.SetActive(i < wood);
             }
+            _animController.GrabResource();
         }
 
         private void FillStone(int amount = 5)
@@ -473,6 +474,7 @@ namespace Player
             {
                 backpackStone.GetChild(i).gameObject.SetActive(i < stone);
             }
+            _animController.GrabResource();
             /* Leon's Implementation
             while (stoneReplenisher.childCount > 0 && amount > 0)
             {
@@ -493,6 +495,7 @@ namespace Player
             {
                 backpackWood.GetChild(i).gameObject.SetActive(i < wood);
             }
+            _animController.Repair();
             
             /*
             var toRemove = backpackWood.GetChild(0);
@@ -511,6 +514,7 @@ namespace Player
             {
                 backpackStone.GetChild(i).gameObject.SetActive(i < stone);
             }
+            _animController.Repair();
             /*var toRemove = backpackStone.GetChild(0);
             toRemove.SetParent(stoneReplenisher, false);
             toRemove.localRotation = Quaternion.Euler(0, Random.Range(-5, 5), 0);
