@@ -15,7 +15,6 @@ public class PostProcessing : MonoBehaviour
     private void Start()
     {
         _postProcessVolume = GetComponent<Volume>();
-        print(_postProcessVolume);
         _postProcessVolume.profile.TryGet(out _vignette);
     }
 
