@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wall;
 
 namespace Upgrades
 {
@@ -6,6 +7,8 @@ namespace Upgrades
     
     public abstract class Upgrade : MonoBehaviour
     {
+        public WallSegment ParentSegment { get; set; }
+
         public enum UpgradeType
         {
             None,
@@ -17,7 +20,7 @@ namespace Upgrades
         {
             get;
         }
-        
+
         /* Activates the Upgrade if possible and returns false if not possible, true otherwise. */
         public abstract bool Activate();
 

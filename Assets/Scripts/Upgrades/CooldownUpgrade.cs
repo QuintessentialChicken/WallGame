@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wall;
 
 namespace Upgrades
 {
@@ -11,7 +12,7 @@ namespace Upgrades
 
         [SerializeField] private ReadyFlag readyFlag;
 
-        private bool ready = false;
+        private bool ready = true;
 
         private float lastEngaged = -500.0f;
 
@@ -32,20 +33,23 @@ namespace Upgrades
             {
                 ready = true;
                 readyFlag.SwitchToGreen();
+                Ready();
             }
         }
 
-        public abstract void Engage();
+        protected virtual void Ready() {}
+
+        public abstract bool Engage();
 
         public override bool Activate()
         {
             if (ready)
             {
+                if (!Engage()) return false;
                 lastEngaged = Time.time;
                 ready = false;
                 readyFlag.SwitchToRed();
                 anim.SetTrigger("Engage");
-                Engage();
                 return true;
             }
 

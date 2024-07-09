@@ -166,13 +166,14 @@ namespace Wall
         {
             // Clear the existing list
             wallSegments = new List<WallSegment>();
-
+            var index = 0;
             // Iterate through all children and add their WallSegment component to the list
             foreach (Transform child in segmentsParent)
             {
                 var segment = child.GetComponent<WallSegment>();
                 _wallHealth += segment.wallMaxHealth;
                 if (segment != null) wallSegments.Add(segment);
+                segment.index = index++;
             }
 
             _maxWallHealth = _wallHealth;
@@ -419,23 +420,9 @@ namespace Wall
         {
             if (player.SelectedUpgrade)
             {
+                var upgrade = player.SelectedUpgrade.GetComponent<Upgrade>();
                 var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
-                if (parent.freeSlots <= 0)
-                {
-                    EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
-                    return;
-                }
-                var upgrade = Instantiate(player.SelectedUpgrade, parent.transform);
-                upgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
-                if (parent.freeSlots == 1)
-                {
-                    var newScale = upgrade.transform.localScale;
-                    newScale.x *= -1;
-                    upgrade.transform.localScale = newScale;
-                }
-
-                parent.freeSlots -= 1;
-                // player.SelectedUpgrade = null;
+                if (parent.AddUpgrade(upgrade)) player.SelectedUpgrade = null;
             }
         }
     }

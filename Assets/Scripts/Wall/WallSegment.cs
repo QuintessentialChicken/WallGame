@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -57,7 +58,7 @@ namespace Wall
 
         private readonly GUIStyle _style = new();
         private Material _wallMaterial;
-
+        public int index;
 
         public readonly WallSegmentNotCriticalEvent OnWallNotSegmentCritical = new();
 
@@ -74,6 +75,7 @@ namespace Wall
             wallHealth = wallMaxHealth;
             // UpdateSoldierState();
         }
+
 
         //public void Update()
         //{
@@ -246,6 +248,27 @@ namespace Wall
         public bool IsIntact()
         {
             return isScaffoldingIntact && wallHealth == wallMaxHealth;
+        }
+
+        public bool AddUpgrade(Upgrade upgrade)
+        {
+            if (freeSlots <= 0)
+            {
+                EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
+                return false;
+            }
+            var spawnedUpgrade = Instantiate(upgrade.gameObject, transform);
+            spawnedUpgrade.GetComponent<Upgrade>().ParentSegment = this;
+            spawnedUpgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
+            if (freeSlots == 1)
+            {
+                var newScale = spawnedUpgrade.transform.localScale;
+                newScale.x *= -1;
+                spawnedUpgrade.transform.localScale = newScale;
+            }
+
+            freeSlots -= 1;
+            return true;
         }
     }
 }

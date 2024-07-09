@@ -1,12 +1,36 @@
+using System;
 using UnityEngine;
 
 namespace Upgrades
 {
     public class AutomatedSelfService : CooldownUpgrade
     {
-        public override void Engage()
+        private void Start()
         {
-            Debug.LogWarning("I Can't repair myself yet ;(");
+            EventManager.OnWallPieceHit += TryActivate;
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.OnWallPieceHit -= TryActivate;
+        }
+        
+        private void TryActivate(int index)
+        {
+            if (ParentSegment.index == index)
+            {
+                Activate();
+            }
+        }
+
+        protected override void Ready()
+        {
+            Activate();
+        }
+
+        public override bool Engage()
+        {
+            return ParentSegment.RepairWall();
         }
         public override UpgradeType Type => UpgradeType.AutomatedSelfService;
     }

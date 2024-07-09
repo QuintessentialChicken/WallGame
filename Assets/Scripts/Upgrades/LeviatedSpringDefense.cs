@@ -16,12 +16,13 @@ namespace Upgrades
 
         public TargetProjectile trebuchetRound;
 
-        public override void Engage()
+        public override bool Engage()
         {
             var projectile = Instantiate(trebuchetRound, projectileSpawnPoint.position, Quaternion.identity);
             projectile.SetDestination(ArmyController.instance.GetFootsoldierPosition());
             ArmyController.instance.Invoke(nameof(ArmyController.BombArrives), projectileFlightTime);
             projectile.SetFlightTime(projectileFlightTime);
+            return true;
         }
 
         public override UpgradeType Type => UpgradeType.LeviatedSpringDefense;
