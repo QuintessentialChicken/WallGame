@@ -9,7 +9,7 @@ namespace Interaction
         public GameObject upgradePrefab;
         public void Interact(ThirdPersonController player)
         {
-            print("Assigning upgrade: " + upgradePrefab.GetComponent<Upgrade>().UpgradeName);
+            print("Assigning upgrade: " + upgradePrefab.GetComponent<Upgrade>().type);
             player.SelectedUpgrade = upgradePrefab;
         }
 

@@ -330,9 +330,9 @@ namespace Wall
         private void DamageWallSegment(WallSegment segment)
         {
             if (segment == null || !segment.wallPiece.activeSelf) return;
-            segment.DamageWall();
+            if (segment.DamageWall()) return;
             UpdateWallHealth(-1);
-        }
+        }   
 
         private void DamageWallSegment(int index)
         {

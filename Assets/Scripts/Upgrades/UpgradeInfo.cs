@@ -6,7 +6,7 @@ namespace Upgrades
     public class UpgradeInfo : ScriptableObject
     {
         public Upgrade upgradePrefab;
-        public UpgradeName id;
+        public Upgrade.UpgradeType id;
         public string title;
         public string subtitle;
 

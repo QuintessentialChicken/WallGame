@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Upgrades;
@@ -15,7 +16,7 @@ namespace Wall
 
         public int freeSlots = 2;
 
-        private List<Upgrade> _upgrades;
+        private HashSet<Upgrade> _upgrades;
 
         [Header("__________ Wall __________")]
         public int wallMaxHealth = 3;
@@ -73,6 +74,7 @@ namespace Wall
             normalWall = _wallMeshFilter.mesh;
             scaffoldingHealth = scaffoldingMaxHealth;
             wallHealth = wallMaxHealth;
+            _upgrades = new HashSet<Upgrade>();
             // UpdateSoldierState();
         }
 
@@ -202,10 +204,15 @@ namespace Wall
             return true;
         }
 
-        public void DamageWall()
+        public bool DamageWall()
         {
+            foreach (var lsdUpgrade in _upgrades.Select(upgrade => upgrade as LeviatedSpringDefense).Where(lsdUpgrade => lsdUpgrade))
+            {
+                lsdUpgrade.Activate();
+                return false;
+            }
             wallHealth -= 1;
-            if (wallHealth < 0) return;
+            if (wallHealth < 0) return false;
 
             ChangeWallState(wallHealth);
             if (isSoldierPresent)
@@ -215,6 +222,7 @@ namespace Wall
             }
 
             if (wallHealth == 0) OnWallSegmentCritical.Invoke(this);
+            return true;
         }
 
         public bool RepairWall()
@@ -258,7 +266,8 @@ namespace Wall
                 return false;
             }
             var spawnedUpgrade = Instantiate(upgrade.gameObject, transform);
-            spawnedUpgrade.GetComponent<Upgrade>().ParentSegment = this;
+            var upgradeScript = spawnedUpgrade.GetComponent<Upgrade>();
+            upgradeScript.ParentSegment = this;
             spawnedUpgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
             if (freeSlots == 1)
             {
@@ -267,6 +276,7 @@ namespace Wall
                 spawnedUpgrade.transform.localScale = newScale;
             }
 
+            _upgrades.Add(upgradeScript);
             freeSlots -= 1;
             return true;
         }

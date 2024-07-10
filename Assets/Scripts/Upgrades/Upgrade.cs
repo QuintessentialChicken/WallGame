@@ -11,9 +11,19 @@ namespace Upgrades
 
         public enum UpgradeType
         {
-            None,
-            AutomatedSelfService,
-            LeviatedSpringDefense
+            None = 0,
+
+            // Passive
+            Horseshoe = 1,
+            ScafReinforce = 2,
+            WallReinforce = 3,
+            BrokenMirror = 4,
+            Flame = 5,
+            Telescope = 6,
+
+            // Active
+            LSD = 10, // LeviatedSpringDefense
+            ASS = 11 // AutomatedSustainSystem
         }
 
         public abstract UpgradeType Type
@@ -26,7 +36,7 @@ namespace Upgrades
 
         public abstract void UpgradeUpdate();
 
-        public UpgradeName UpgradeName;
+        public UpgradeType type;
 
         public bool DEBUG_Activate = false;
 

@@ -32,6 +32,6 @@ namespace Upgrades
         {
             return ParentSegment.RepairWall();
         }
-        public override UpgradeType Type => UpgradeType.AutomatedSelfService;
+        public override UpgradeType Type => UpgradeType.ASS;
     }
 }

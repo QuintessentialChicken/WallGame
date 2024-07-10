@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee774de6d0a15649bafb2a92e5a6cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 758393063656991191, guid: 0d9cd706a51f9254d938672d1ed1f087,
+  upgradePrefab: {fileID: 8501818293497085220, guid: fddfe4633f0968544a63e95f72649a8d,
     type: 3}
 --- !u!135 &192783155
 SphereCollider:

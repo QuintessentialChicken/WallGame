@@ -25,6 +25,6 @@ namespace Upgrades
             return true;
         }
 
-        public override UpgradeType Type => UpgradeType.LeviatedSpringDefense;
+        public override UpgradeType Type => UpgradeType.LSD;
     }
 }
