@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 4070375494017052736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.341, z: -0.12}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6212832461229241475}
   m_Father: {fileID: 0}
@@ -108,7 +108,6 @@ MonoBehaviour:
   spawnSomethingOnHit: 1
   onHitPrefab: {fileID: 2913155782981411458, guid: 8cfbfb3ab5b594d5c937499c4af7e9dd,
     type: 3}
-  particlesSpawned: 0
 --- !u!1 &6608426624904858782
 GameObject:
   m_ObjectHideFlags: 0
