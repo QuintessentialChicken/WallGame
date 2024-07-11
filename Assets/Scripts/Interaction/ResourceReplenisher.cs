@@ -26,5 +26,10 @@ namespace Interaction
                 EventManager.RaiseOnReplenishStone(replenishAmount);
             }
         }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
     }
 }

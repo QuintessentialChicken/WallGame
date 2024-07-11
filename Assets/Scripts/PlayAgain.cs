@@ -19,6 +19,6 @@ public class PlayAgain : MonoBehaviour
 
     private void Restart()
     {
-        SceneManager.LoadScene("Tobi");
+        DayNightManager.instance.RequestChangeToDay();
     }
 }

@@ -136,7 +136,7 @@ namespace Wall
             if (other.gameObject.CompareTag("Player"))
             {
                 _nearWall = false;
-                _previousClosestSegment.SetPreview(false);
+                //_previousClosestSegment.SetPreview(false);
                 _previousClosestSegment = null;
             }
         }

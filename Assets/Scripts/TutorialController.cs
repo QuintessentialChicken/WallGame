@@ -52,7 +52,7 @@ public class TutorialController : MonoBehaviour
         new TutorialStep("Good job! Now make your way up there and repair the broken wall piece using the upper right shoulder button [RB]."
             , new Func<bool>(() => { return CheckWallHealthMax(); })),
         new TutorialStep("Now that the wall is safe again, a well-rested crossbowman will take the place of his fallen comrade and continue to return fire."),
-        new TutorialStep("By the gods, fire arrows!\nThe scaffolding is damaged! Go pick up wood from Wallter's shed on the botton left unsing [B]"
+        new TutorialStep("By the gods, fire arrows!\nGo pick up wood from Wallter's shed on the botton left using [B]"
             , new Func<int>(() => { ArmyController.instance.SetTargetingScheme(TargetingScheme.Random_NoWallTwice);  ArmyController.instance.LaunchFireArrows(); ArmyController.instance.SetTargetingScheme(TargetingScheme.HoldFire); return 0; })
             , new Func<bool>(() => { return CheckWalltherHasWood(); })),
         new TutorialStep("No time to waste! To get to any piece of the wall quickly, Wallther can launch himself using the catapult. Stand next to it and use [B] to enter."
@@ -91,7 +91,7 @@ public class TutorialController : MonoBehaviour
         
         if (currentIndex == _texts.Count)
         {
-            SceneManager.LoadScene("Tobi");
+            DayNightManager.instance.RequestChangeToDay();
         }
         if (-1 < currentIndex && currentIndex < _texts.Count)
         {
@@ -102,7 +102,7 @@ public class TutorialController : MonoBehaviour
 
     private void AbleToContinue()
     {
-        if (_texts[currentIndex].skippable)
+        if (currentIndex >= 0 && currentIndex < _texts.Count && _texts[currentIndex].skippable)
         {
             ableToContinue = true;
             continueButton.SetActive(true);
