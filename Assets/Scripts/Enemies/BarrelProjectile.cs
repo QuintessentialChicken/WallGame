@@ -16,14 +16,14 @@ public class BarrelProjectile : TargetProjectile
 
     private void Awake()
     {
-        Inputs.YPressed += TryRebouncing;
+        //Inputs.YPressed += TryRebouncing;
     }
 
     private void OnDestroy()
     {
         Destroy(goldenCircle.gameObject);
         Destroy(warningSprite.gameObject);
-        Inputs.YPressed -= TryRebouncing;
+        //Inputs.YPressed -= TryRebouncing;
     }
 
     new void Start()
@@ -63,7 +63,7 @@ public class BarrelProjectile : TargetProjectile
             goldenCircle.color = new Color(goldenCircle.color.r, goldenCircle.color.g, goldenCircle.color.b, skewedT);
         }
     }
-
+    /*
     private void TryRebouncing()
     {
         if (t >= 0.8f &&
@@ -78,5 +78,5 @@ public class BarrelProjectile : TargetProjectile
             warningSprite.transform.position = _destination + new Vector3(0, 0.2f, 0);
             goldenCircle.transform.position = _destination + new Vector3(0, 0.25f, 0);
         }
-    }
+    }*/
 }
