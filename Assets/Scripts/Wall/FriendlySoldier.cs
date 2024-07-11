@@ -85,12 +85,14 @@ namespace Wall
         {
             _anim.SetTrigger(_animIDDeath);
             _isMoving = false;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.crossbowmanDie, this.transform.position);
         }
 
         public void DieByArrows()
         {
             _anim.SetTrigger(_animIDDeathByArrows);
             _isMoving = false;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.crossbowmanScream, this.transform.position);
         }
 
         // Invoked by Soldier Animator after Death Animation has finished
@@ -106,6 +108,7 @@ namespace Wall
             _armyController.Invoke(nameof(ArmyController.BoltArrives), boltFlightTime);
 
             var bolt = Instantiate(boltPrefab, releasePoint.position, releasePoint.rotation);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.shootArrow, this.transform.position);
             var nextVictim = _armyController.GetFootsoldierPosition();
             bolt.SetDestination(nextVictim);
             bolt.SetFlightTime(boltFlightTime);

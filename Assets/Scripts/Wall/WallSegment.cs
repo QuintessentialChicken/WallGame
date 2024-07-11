@@ -191,6 +191,8 @@ namespace Wall
             RequestSoldier();
             StartCoroutine(nameof(JuicyRepair));
             ChangeScaffoldingState(scaffoldingHealth);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.fixWood, this.transform.position);
+
             return true;
         }
 
@@ -199,6 +201,7 @@ namespace Wall
             wallHealth -= 1;
             if (wallHealth < 0) return;
 
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.damageWall, this.transform.position);
             ChangeWallState(wallHealth);
             if (isSoldierPresent)
             {
@@ -221,6 +224,8 @@ namespace Wall
             RequestSoldier();
             OnWallNotSegmentCritical.Invoke(this);
             StartCoroutine(nameof(JuicyRepair));
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.fixStone, this.transform.position);
+
             return true;
         }
 

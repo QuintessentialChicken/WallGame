@@ -156,6 +156,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &166086231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166086233}
+  - component: {fileID: 166086232}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &166086232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166086231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb18a6f8bb61489c86a86a82a9b7f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 1
+  musicVolume: 1
+  SFXVolume: 1
+--- !u!4 &166086233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166086231}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.53326, y: 2.5387115, z: 134.34358}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 927026759}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &229942262
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,9 +273,9 @@ GameObject:
   m_Component:
   - component: {fileID: 490379806}
   - component: {fileID: 490379805}
-  - component: {fileID: 490379804}
   - component: {fileID: 490379803}
   - component: {fileID: 490379808}
+  - component: {fileID: 490379809}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -268,14 +316,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &490379804
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490379802}
-  m_Enabled: 1
 --- !u!20 &490379805
 Camera:
   m_ObjectHideFlags: 0
@@ -368,6 +408,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &490379809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490379802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 1369627527}
 --- !u!4 &550633523 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4736471680655504487, guid: d87241f0c4f8bdb4b81c09f7e96c3fba,
@@ -675,13 +728,190 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3dd7bedd0eae24e94da09461524f57, type: 3}
+--- !u!1 &927026758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 927026759}
+  - component: {fileID: 927026760}
+  m_Layer: 0
+  m_Name: FMODEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &927026759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927026758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 166086233}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927026760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927026758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9af35457cea4611adb4660719f09e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <music>k__BackingField:
+    Guid:
+      Data1: 531133957
+      Data2: 1239722633
+      Data3: -964308826
+      Data4: -582249093
+    Path: event:/Music/Drums
+  <walltherFootSteps>k__BackingField:
+    Guid:
+      Data1: -33900934
+      Data2: 1314721158
+      Data3: 89094828
+      Data4: -128507959
+    Path: event:/SFX/WalltherRun
+  <walltherLand>k__BackingField:
+    Guid:
+      Data1: -1692839648
+      Data2: 1228436415
+      Data3: 154808251
+      Data4: -321216652
+    Path: event:/SFX/WalltherLanding
+  <walltherGasp>k__BackingField:
+    Guid:
+      Data1: 1550890342
+      Data2: 1269411675
+      Data3: -1191501436
+      Data4: 1695735829
+    Path: event:/SFX/WalltherGasp
+  <walltherGrunt>k__BackingField:
+    Guid:
+      Data1: 955558673
+      Data2: 1192619938
+      Data3: -2088292214
+      Data4: 892885341
+    Path: event:/SFX/WalltherGrunt
+  <walltherRallyingTroops>k__BackingField:
+    Guid:
+      Data1: -2113957798
+      Data2: 1247366868
+      Data3: 994358192
+      Data4: 759701989
+    Path: event:/SFX/WalltherRallyingTroops
+  <skillUpgrade>k__BackingField:
+    Guid:
+      Data1: 1182840758
+      Data2: 1136485474
+      Data3: -342803301
+      Data4: -805546817
+    Path: event:/SFX/SkillUpgrade
+  <fixWood>k__BackingField:
+    Guid:
+      Data1: 1619858797
+      Data2: 1081894445
+      Data3: 1970714755
+      Data4: 1184337574
+    Path: event:/SFX/ScaffoldingFix
+  <fixStone>k__BackingField:
+    Guid:
+      Data1: -1707818475
+      Data2: 1148054569
+      Data3: 1264557447
+      Data4: -1240417606
+    Path: event:/SFX/WallFix
+  <pickStone>k__BackingField:
+    Guid:
+      Data1: -1534812629
+      Data2: 1277884432
+      Data3: -1528844364
+      Data4: -362184716
+    Path: event:/SFX/StoneCollect
+  <pickWood>k__BackingField:
+    Guid:
+      Data1: 1271550232
+      Data2: 1129023159
+      Data3: -148357731
+      Data4: 929558672
+    Path: event:/SFX/WoodCollect
+  <mountCatapult>k__BackingField:
+    Guid:
+      Data1: 1743618663
+      Data2: 1093544141
+      Data3: -1579651144
+      Data4: 565469767
+    Path: event:/SFX/CatapultMount
+  <exitCatapult>k__BackingField:
+    Guid:
+      Data1: -1025024655
+      Data2: 1145616098
+      Data3: 138090168
+      Data4: 781090896
+    Path: event:/SFX/CatapultRelease
+  <shootTrebuchet>k__BackingField:
+    Guid:
+      Data1: -62304480
+      Data2: 1215237371
+      Data3: 1505206455
+      Data4: 1938336490
+    Path: event:/SFX/TrebuchetShoot
+  <shootArrow>k__BackingField:
+    Guid:
+      Data1: 1038348313
+      Data2: 1250596211
+      Data3: 1095967913
+      Data4: 464545506
+    Path: event:/SFX/BowAimShoot
+  <damageWall>k__BackingField:
+    Guid:
+      Data1: -62304480
+      Data2: 1215237371
+      Data3: 1505206455
+      Data4: 1938336490
+    Path: event:/SFX/TrebuchetShoot
+  <burnScaffolding>k__BackingField:
+    Guid:
+      Data1: -1192477167
+      Data2: 1147549107
+      Data3: -1976337228
+      Data4: 1827557673
+    Path: event:/SFX/FireErupt
+  <crossbowmanDie>k__BackingField:
+    Guid:
+      Data1: -1422849468
+      Data2: 1120863910
+      Data3: 1316567701
+      Data4: -1075999583
+    Path: event:/SFX/EnemyHit
+  <crossbowmanScream>k__BackingField:
+    Guid:
+      Data1: 1806533269
+      Data2: 1292912637
+      Data3: -447289426
+      Data4: 477976523
+    Path: event:/SFX/CrossbowmanDie
 --- !u!114 &963348480 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4692628046276259239, guid: 0d0fc9e96d3d7564f9536361df977ada,
     type: 3}
   m_PrefabInstance: {fileID: 1764019655}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1369627527}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
@@ -1148,6 +1378,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 617795024156712516, guid: d87241f0c4f8bdb4b81c09f7e96c3fba,
     type: 3}
   m_PrefabInstance: {fileID: 1674144808}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1369627527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4692628046276259234, guid: 0d0fc9e96d3d7564f9536361df977ada,
+    type: 3}
+  m_PrefabInstance: {fileID: 1764019655}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1414437483
 GameObject:
@@ -1944,6 +2180,31 @@ PrefabInstance:
         type: 3}
       propertyPath: rotationSmoothTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4692628046276259239, guid: 0d0fc9e96d3d7564f9536361df977ada,
+        type: 3}
+      propertyPath: walltherJumpSound.Path
+      value: event:/WalltherJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 4692628046276259239, guid: 0d0fc9e96d3d7564f9536361df977ada,
+        type: 3}
+      propertyPath: walltherJumpSound.Guid.Data1
+      value: 955558673
+      objectReference: {fileID: 0}
+    - target: {fileID: 4692628046276259239, guid: 0d0fc9e96d3d7564f9536361df977ada,
+        type: 3}
+      propertyPath: walltherJumpSound.Guid.Data2
+      value: 1192619938
+      objectReference: {fileID: 0}
+    - target: {fileID: 4692628046276259239, guid: 0d0fc9e96d3d7564f9536361df977ada,
+        type: 3}
+      propertyPath: walltherJumpSound.Guid.Data3
+      value: -2088292214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4692628046276259239, guid: 0d0fc9e96d3d7564f9536361df977ada,
+        type: 3}
+      propertyPath: walltherJumpSound.Guid.Data4
+      value: 892885341
       objectReference: {fileID: 0}
     - target: {fileID: 4692628046276259241, guid: 0d0fc9e96d3d7564f9536361df977ada,
         type: 3}

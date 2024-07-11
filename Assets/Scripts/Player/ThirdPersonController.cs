@@ -8,6 +8,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using FMOD.Studio;
+using FMODUnity;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -117,6 +119,9 @@ namespace Player
 
         public bool inCatapult = false;
 
+        // audio
+        private EventInstance playerFootsteps;
+
         private void Awake()
         {
             // get a reference to our main camera
@@ -148,6 +153,8 @@ namespace Player
             // reset our timeouts on start
             _jumpTimeoutDelta = jumpTimeout;
             _fallTimeoutDelta = fallTimeout;
+
+            playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.walltherFootSteps);
         }
 
         private void Update()
@@ -155,6 +162,7 @@ namespace Player
             if (_currentState == PlayerState.Launched)
             {
                 Fly();
+                UpdateSound();
                 return;
             }
 
@@ -162,6 +170,7 @@ namespace Player
             GroundedCheck();
             Falling();
             Move();
+            UpdateSound();
         }
 
         private void OnDestroy()
@@ -296,6 +305,7 @@ namespace Player
                         // _animator.SetBool(_animIDFreeFall, false);
                         _animController.SetFalling(false);
                         _animController.SetAirTime(_airTime);
+                        AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherLand,this.transform.position);
                         // PauseMovement(_airTime < 1.2 ? 0.0f : 1f);
                     }
 
@@ -386,6 +396,7 @@ namespace Player
             transform.parent = null;
             // _controller.enabled = true;
             _animController.Launching(true);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.exitCatapult, this.transform.position);
         }
 
         private void Fly()
@@ -411,6 +422,7 @@ namespace Player
             _controller.SimpleMove(_launchPath[_launchPathLength - 1] - _launchPath[_launchPathLength - 2]);
             _animController.Launching(false);
             inCatapult = false;
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherLand,this.transform.position);
         }
 
         /// <summary>
@@ -518,6 +530,28 @@ namespace Player
             InCatapult,
             Launched,
             Stunned
+        }
+
+        private void UpdateSound()
+        {
+            var currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+            
+            // start footsteps event if the player has a horizontal velocity and is on the ground
+            if (currentHorizontalSpeed != 0 && grounded)
+            {
+                // get the playback state
+                PLAYBACK_STATE playbackState;
+                playerFootsteps.getPlaybackState(out playbackState);
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    playerFootsteps.start();
+                }
+            }
+            // otherwise, stop the footsteps event
+            else 
+            {
+                playerFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
     }
 }

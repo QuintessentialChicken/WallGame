@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMOD;
 
 public class EventManager : MonoBehaviour
 {

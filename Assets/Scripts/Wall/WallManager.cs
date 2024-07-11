@@ -358,6 +358,7 @@ namespace Wall
             }
             if (!segment.RepairScaffolding()) return false;
             EventManager.RaiseOnRepairedWood();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.fixWood, this.transform.position);
             return true;
         }
 
@@ -379,6 +380,7 @@ namespace Wall
             {
                 EventManager.RaiseGameOver();
             }
+            if (percentage <= loseThreshold + 0.3f) AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherGasp, this.transform.position);
             postProcessing.UpdateVignetteIntensity(percentage);
         }
     }

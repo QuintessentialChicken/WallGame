@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Wall;
 using Random = UnityEngine.Random;
+using FMODUnity;
 
 namespace Enemies
 {
@@ -194,6 +195,7 @@ namespace Enemies
 
             _trebuchets[trebuchetIndex].SetSelection(segments[chosenWallIndex].transform.position, chosenWallIndex);
             _trebuchets[trebuchetIndex].Launch();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.shootTrebuchet, this.transform.position);
 
             // Restart cooldown
             Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
@@ -228,7 +230,7 @@ namespace Enemies
                     var flightTime = 2 + Random.Range(-0.5f, 0.5f);
                     fireArrow.SetFlightTime(flightTime);
                 }
-
+                // AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, this.transform.position);
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
             }
 
@@ -336,6 +338,7 @@ namespace Enemies
                 victim.SetParent(_graveyardParent);
                 victim.GetComponent<Footsoldier>().StartCoroutine(nameof(Footsoldier.Die));
                 enemyCount--;
+                if (enemyCount % 50 == 0) AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherRallyingTroops, this.transform.position);
                 _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
                 if (enemyCount <= 0) SceneManager.LoadScene("Win");
             }

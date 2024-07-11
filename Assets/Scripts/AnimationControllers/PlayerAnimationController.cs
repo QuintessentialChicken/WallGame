@@ -59,6 +59,7 @@ namespace AnimationControllers
         public void EnterCatap()
         {
             _anim.SetTrigger(_animIDEnterCatapult);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.mountCatapult, this.transform.position);
         }
 
         private void AnimEvent_DoneAnimating()
@@ -69,6 +70,7 @@ namespace AnimationControllers
         public void SetJump()
         {
             _anim.SetTrigger(_animIDJump);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherGrunt, this.transform.position);
         }
 
         public void SetSpeed(float value)

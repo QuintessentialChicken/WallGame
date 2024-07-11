@@ -1,4 +1,5 @@
 using UnityEngine;
+using FMODUnity;
 
 public class BurningScaffolding : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class BurningScaffolding : MonoBehaviour
     private void Start()
     {
         _particleInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, transform.position);
         _fireParticleSystem = _particleInstance.GetComponent<ParticleSystem>();
         _fireParticleSystem.Simulate(simulationTime, true, true, true);
         _fireParticleSystem.Play();
