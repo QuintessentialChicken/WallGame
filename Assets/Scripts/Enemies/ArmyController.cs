@@ -15,12 +15,9 @@ namespace Enemies
 
         // Start is called before the first frame update
         [Header("_______________ Gameplay Relevant _______________")] [SerializeField]
+        public DifficultySettings difficultySettings;
         public int enemyCount = 100;
 
-        [Space] 
-        [SerializeField] private float trebuchetCooldown = 5;
-        [Tooltip("Time before first trebuchet shot gets launched")]
-        [SerializeField] private float trebuchetCooldownOffset = 0;
         [SerializeField]
         [Tooltip("RANDOM\nThe Columns are picket randomly\n\n" +
                  "SUCCESSION\nThe Columns are picket left to right\n\n" +
@@ -28,31 +25,6 @@ namespace Enemies
                  "RANDOMEQUAL_ANIM\nThe Columns are picket randomly and all wall columns are hit equally often. Trebuchets that have finished their reload animation are preferred in selection.\n\n" +
                  "RANDOMEQUAL_SWITCH\nThe Columns are picket randomly and all wall columns are hit equally often. No Trebuchet fires twice in a row.")]
         private TargetingScheme targetingScheme = TargetingScheme.Random;
-        [SerializeField]
-        [Tooltip("0.0 - Shots arrive exactly <trebuchet cooldown> seconds apart.\n" +
-                 "1.0 - Shots arrive with a random delay of up to 1 second")]
-        [Range(0.0f, 1.0f)]
-        private float trebuchetRandomness;
-
-        [Space]
-        [Tooltip("Leave at 0 to disable tar Barrels")]
-        [SerializeField] private float tarBarrelCooldown = 20;
-        [Tooltip("Time before first tar barrel gets launched")]
-        [SerializeField] private float tarBarrelCooldownOffset = 20;
-
-        [Space]
-        [Tooltip("Leave at 0 to disable flour Barrels")]
-        [SerializeField] private float flourBarrelCooldown = 20;
-        [Tooltip("Time before first flour barrel gets launched")]
-        [SerializeField] private float flourBarrelCooldownOffset = 20;
-
-        [Space]
-        [Tooltip("Leave at 0 to disable fire arrows")]
-        [SerializeField] private float fireArrowsCooldown = 20;
-        [Tooltip("Time before first fire arrows get launched")]
-        [SerializeField] private float fireArrowsCooldownOffset = 20;
-
-        [SerializeField] [Range(0f, 1f)] private float fireArrowsDestruction = 0.8f;
 
         [Header("_______________ Projectiles _______________")]
         [Header(" ___ Trebuchet Stones ___")]
@@ -136,10 +108,10 @@ namespace Enemies
             SpawnTrebuchets();
             SpawnBowmen();
 
-            Invoke(nameof(LaunchTrebuchet), trebuchetCooldownOffset);
-            if (fireArrowsCooldown != 0) Invoke(nameof(LaunchFireArrows), fireArrowsCooldownOffset);
-            if (flourBarrelCooldown != 0) Invoke(nameof(LaunchFlourBarrel), flourBarrelCooldownOffset);
-            if (tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), tarBarrelCooldownOffset);
+            Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldownOffset);
+            if (difficultySettings.fireArrowsCooldown != 0) Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldownOffset);
+            if (difficultySettings.flourBarrelCooldown != 0) Invoke(nameof(LaunchFlourBarrel), difficultySettings.flourBarrelCooldownOffset);
+            if (difficultySettings.tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), difficultySettings.tarBarrelCooldownOffset);
             
             _wallManager = FindObjectOfType<WallManager>();
             columnsHit = new List<bool>();
@@ -206,7 +178,7 @@ namespace Enemies
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, new Vector3(worldX, 0, barrelArea.z));
 
             // Restart cooldown
-            Invoke(nameof(LaunchTarBarrel), tarBarrelCooldown);
+            Invoke(nameof(LaunchTarBarrel), difficultySettings.tarBarrelCooldown);
         }
 
         private void LaunchFlourBarrel()
@@ -220,14 +192,14 @@ namespace Enemies
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.FlourBarrel, new Vector3(worldX, 0, barrelArea.z));
 
             // Restart cooldown
-            Invoke(nameof(LaunchFlourBarrel), flourBarrelCooldown);
+            Invoke(nameof(LaunchFlourBarrel), difficultySettings.flourBarrelCooldown);
         }
 
         private void LaunchTrebuchet()
         {
             if (targetingScheme == TargetingScheme.HoldFire)
             {
-                Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
+                Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldown);
                 return;
             }
 
@@ -270,14 +242,14 @@ namespace Enemies
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.Stone, segments[chosenWallIndex].transform.position, chosenWallIndex);
 
             // Restart cooldown
-            Invoke(nameof(LaunchTrebuchet), trebuchetCooldown);
+            Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldown);
         }
 
         public void LaunchFireArrows()
         {
             if (targetingScheme == TargetingScheme.HoldFire)
             {
-                Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
+                Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldown);
                 return;
             }
             var parts = bowmen.count / _columns;
@@ -287,7 +259,7 @@ namespace Enemies
             {
                 
                 if (i == _columns - 1) parts += remainder;
-                if (Random.Range(0f, 1f) > fireArrowsDestruction) continue;
+                if (Random.Range(0f, 1f) > difficultySettings.fireArrowsDestruction) continue;
                 for (var j = 0; j < parts; j++)
                 {
                     var worldStart = transform.position
@@ -306,7 +278,7 @@ namespace Enemies
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
             }
 
-            Invoke(nameof(LaunchFireArrows), fireArrowsCooldown);
+            Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldown);
         }
 
         public void SetTargetingScheme(TargetingScheme scheme)
@@ -342,6 +314,7 @@ namespace Enemies
 
         private void SpawnArmy()
         {
+            enemyCount = difficultySettings.enemySoldiers;
             float vertDistance = (footsoldiers.spawnAreaUpperRight.y - footsoldiers.spawnAreaLowerLeft.y) / enemyCount;
             for (var i = 0; i < enemyCount; i++)
             {
@@ -413,7 +386,10 @@ namespace Enemies
                 victim.GetComponent<Footsoldier>().StartCoroutine(nameof(Footsoldier.Die));
                 enemyCount--;
                 _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
-                if (enemyCount <= 0) SceneManager.LoadScene("Win");
+                if (enemyCount <= 0)
+                {
+                    DayNightManager.instance.RequestChangeToNight();
+                }
             }
         }
 
@@ -521,8 +497,6 @@ namespace Enemies
         public float reloadSpeed;
     }
 
- 
-
     [Serializable]
     internal class FootsoldierSettings : EnemyTroop
     {
@@ -555,5 +529,23 @@ namespace Enemies
         /* The target wall gets picket randomly, but no wall piece is targetet twice in a row. */
 
         HoldFire
+    }
+
+    [System.Serializable]
+    public class DifficultySettings
+    {
+        public int enemySoldiers;
+        [Space]
+        public float trebuchetCooldown;
+        public float trebuchetCooldownOffset;
+        [Space]
+        public float fireArrowsCooldown;
+        public float fireArrowsCooldownOffset;
+        public float fireArrowsDestruction;
+        [Space]
+        public float tarBarrelCooldown;
+        public float tarBarrelCooldownOffset;
+        public float flourBarrelCooldown;
+        public float flourBarrelCooldownOffset;
     }
 }

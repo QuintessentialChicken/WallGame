@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.99607843, g: 0.99607843, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 7501adfbac4c59848962873396d14356, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f7cca015462cb6344b6c4b419f062e5a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1821378, g: 0.15628806, b: 0.12890826, a: 1}
+  m_IndirectSpecularColor: {r: 0.5806906, g: 0.5728814, b: 0.56810445, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: a963a603ac434894495c6301176e5d3b,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: e2e94be842aab1241bc4ab6b015c9b05,
     type: 2}
 --- !u!196 &4
@@ -1832,6 +1833,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333429486291097567, guid: 55865918ee6360945b29020c61307b5c,
         type: 3}
+      propertyPath: gravity
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7333429486291097567, guid: 55865918ee6360945b29020c61307b5c,
+        type: 3}
       propertyPath: woodReplenisher
       value: 
       objectReference: {fileID: 1905168847}
@@ -2681,7 +2687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3363,22 +3369,22 @@ PrefabInstance:
     - target: {fileID: 3205418180241466145, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.050418302
+      value: 0.81960785
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.5478238
+      value: 0.9529412
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.9716981
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -3388,22 +3394,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 9.403955e-38
+      value: 1.2707553e+14
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 4.5905e-41
+      value: 9.1835e-41
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.000001199096
+      value: 2.2e-44
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 4.5905e-41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -3423,22 +3429,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.14560026
+      value: 0.6829085
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.97783935
+      value: 0.2598124
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.023407465
+      value: -0.53436995
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1486033
+      value: 0.42494985
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180852729608, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -3503,8 +3509,13 @@ PrefabInstance:
     - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: timeOfDay
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: fadeScreen
+      value: 
+      objectReference: {fileID: 1800346000}
     - target: {fileID: 3205418181857823307, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_IsActive
@@ -3513,7 +3524,7 @@ PrefabInstance:
     - target: {fileID: 3205418181955337021, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a538c6e213a1fb042a155e06a45a4992, type: 3}
@@ -3814,7 +3825,7 @@ PrefabInstance:
     - target: {fileID: 7494733541712630480, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 132.1
+      value: 171.4
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630480, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -3860,6 +3871,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: enemyCount
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -3911,8 +3927,13 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: tarBarrelCooldown
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: trebuchetCooldown
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -3926,8 +3947,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: footsoldiers.hatred
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: _trebuchetRandomness
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: footsoldiers.ecstasy
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -3962,7 +3993,7 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: tarBarrelCooldownOffset
-      value: 5
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -3982,7 +4013,7 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: flourBarrelCooldownOffset
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -4051,6 +4082,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: difficultySettings.enemySoldiers
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: _trebuchets.projectile.flightTime
       value: 2
       objectReference: {fileID: 0}
@@ -4067,7 +4103,12 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: footsoldiers.spawnAreaLowerLeft.x
-      value: -25
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: footsoldiers.spawnAreaLowerLeft.y
+      value: -109.79
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -4082,7 +4123,12 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: footsoldiers.spawnAreaUpperRight.x
-      value: 25
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: footsoldiers.spawnAreaUpperRight.y
+      value: -30.7
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -4096,8 +4142,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: difficultySettings.tarBarrelCooldown
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.trebuchetCooldown
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.fireArrowsCooldown
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: trebuchetStoneSettings.parabolaHeight
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.flourBarrelCooldown
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -4123,6 +4189,31 @@ PrefabInstance:
         type: 3}
       propertyPath: trebuchetSettings.spawnAreaUpperRight.y
       value: -16.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.fireArrowsDestruction
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.tarBarrelCooldownOffset
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.trebuchetCooldownOffset
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.fireArrowsCooldownOffset
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultySettings.flourBarrelCooldownOffset
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7494733542117577529, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}

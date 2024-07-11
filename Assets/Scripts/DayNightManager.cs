@@ -1,8 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class DayNightManager : MonoBehaviour
@@ -20,6 +21,11 @@ public class DayNightManager : MonoBehaviour
     [Space]
     [SerializeField]
     private Light dirLight;
+    [Space]
+    [SerializeField]
+    public RawImage fadeScreen;
+
+    public static DayNightManager instance;
 
     private TimeOfDay setTimeOfDay;
 
@@ -27,8 +33,61 @@ public class DayNightManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(nameof(FadeIn));
+        
         if (map == null) SetUpDictionary();
+
+        ChangeTimeOfDay(timeOfDay);
         UpdateSky();
+        instance = this;
+    }
+
+    public void ChangeTimeOfDay(TimeOfDay time)
+    {
+        timeOfDay = time;
+    }
+
+    private IEnumerator ChangeToDay()
+    {
+        StopCoroutine(nameof(ChangeToNight));
+        for (float t = 0; t <= 1; t += Time.deltaTime)
+        {
+            fadeScreen.color = new Color(0, 0, 0, t);
+            yield return null;
+        }
+        SceneManager.LoadScene("Day");
+        yield return null;
+    }
+
+    public void RequestChangeToDay()
+    {
+        StartCoroutine(nameof(ChangeToDay));
+    }
+
+    public void RequestChangeToNight()
+    {
+        StartCoroutine(nameof(ChangeToNight));
+    }
+
+    private IEnumerator FadeIn()
+    {
+        for (float t = 0; t <= 1; t += Time.deltaTime)
+        {
+            fadeScreen.color = new Color(0, 0, 0, 1-t);
+            yield return null;
+        }
+    }
+
+    private IEnumerator ChangeToNight()
+    {
+        StopCoroutine(nameof(ChangeToDay));
+        for (float t = 0; t <= 1; t += Time.deltaTime)
+        {
+            fadeScreen.color = new Color(0, 0, 0, t);
+            yield return null;
+        }
+        SceneManager.LoadScene("Night");
+        yield return null;
     }
 
     private void SetUpDictionary()
