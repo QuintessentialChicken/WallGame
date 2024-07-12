@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e6ea6527-a346-4099-85a6-0db851f9ee4a}">
+		<property name="assetPath">
+			<value>skill-upgrade.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.996734693877551</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{182dcdef-19a6-49b1-ad2d-5c047eeacac1}">
+		<property name="assetPath">
+			<value>trebuchet-projectile-flung.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>2.3673242630385487</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>
+		</relationship>
+	</object>
+</objects>

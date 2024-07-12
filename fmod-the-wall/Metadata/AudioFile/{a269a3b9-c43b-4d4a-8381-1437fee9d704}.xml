@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a269a3b9-c43b-4d4a-8381-1437fee9d704}">
+		<property name="assetPath">
+			<value>stone-crash - Trimmed (2).wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.85823129251700681</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>
+		</relationship>
+	</object>
+</objects>

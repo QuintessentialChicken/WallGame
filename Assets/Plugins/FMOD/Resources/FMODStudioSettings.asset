@@ -380,8 +380,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../Documents/fmod-the-wall/fmod-the-wall.fspro
-  sourceBankPath: ../../Documents/fmod-the-wall/Build
+  sourceProjectPath: fmod-the-wall/fmod-the-wall.fspro
+  sourceBankPath: fmod-the-wall/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

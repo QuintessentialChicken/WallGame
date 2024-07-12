@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{1defbf39-a62f-4092-af24-857f24b9cb81}">
+		<property name="name">
+			<value>Finish offset</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4d31f56f-0a12-4db1-9db6-866a552da7b2}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{8a3bfcfe-e53a-40e4-93f8-160318fd529e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{8a3bfcfe-e53a-40e4-93f8-160318fd529e}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
