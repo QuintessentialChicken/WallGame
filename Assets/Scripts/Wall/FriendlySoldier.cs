@@ -108,7 +108,7 @@ namespace Wall
             _armyController.Invoke(nameof(ArmyController.BoltArrives), boltSettings.flightTime);
 
             var bolt = Instantiate(boltPrefab, releasePoint.position, releasePoint.rotation);
-            // AudioManager.instance.PlayOneShot(FMODEvents.instance.shootArrow, this.transform.position);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.shootArrow, this.transform.position);
             var nextVictim = _armyController.GetFootsoldierPosition();
             bolt.SetDestination(nextVictim);
             bolt.SetUp(boltSettings);
