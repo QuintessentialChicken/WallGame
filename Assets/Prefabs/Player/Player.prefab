@@ -1354,6 +1354,14 @@ MonoBehaviour:
   stoneReplenisher: {fileID: 0}
   stone: 1
   stoneCapacity: 3
+  tarpitSlowPercentage: 0.4
+  tarpitJumpHindrance: 0.88
+  tarpitSlowTime: 3
+  blackFeetMaterial: {fileID: 2100000, guid: 81f24e6b0e02cf64987bb514f22a091f, type: 2}
+  cleanFeetMaterial: {fileID: 2100000, guid: 23c6cfedc960baf42a561d9f86f48f0d, type: 2}
+  bodyRenderer: {fileID: 8752970828935316739}
+  tarpitSpeedMod: 1
+  tarpitJumpMod: 1
   wood: 1
   woodCapacity: 3
   launchDuration: 0.75
@@ -1886,8 +1894,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d5df3b2bfa857478e9f0d3d5ddd82b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  falling: 0
+  DEBUG_Falling: 0
+  DEBUG_Speed: 0
+  DEBUG_Grab: 0
+  DEBUG_Repair: 0
+  hammer: {fileID: 0}
+  hipHolster: {fileID: 0}
+  hand: {fileID: 0}
+  leftHandIK: {fileID: 0}
+  ikConstraint: {fileID: 0}
+  grabRadius: 0.25
+  grabSpeed: 2
+  grabForward: 2
+  repairRadius: 0.25
+  repairSpeed: 2
+  repairForward: 2
 --- !u!1 &5686328724151643912
 GameObject:
   m_ObjectHideFlags: 0

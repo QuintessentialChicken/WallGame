@@ -12,7 +12,6 @@ public abstract class Upgrade : MonoBehaviour
 
     public bool DEBUG_Activate = false;
 
-    
     void Update()
     {
         if (DEBUG_Activate)

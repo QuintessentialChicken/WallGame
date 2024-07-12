@@ -154,16 +154,19 @@ namespace Interaction
             }
         }
 
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+
         private void StartAiming(Transform t)
         {
-            Debug.Log("StartAiming");
             _currentlyAiming = true;
             _lineRenderer.enabled = true;
         }
 
         private void StopAiming(Transform t)
         {
-            Debug.Log("StopAiming");
             _currentlyAiming = false;
             _lineRenderer.enabled = false;
         }
@@ -195,13 +198,11 @@ namespace Interaction
 
         public void ActionEvent_FullyRewound()
         {
-            Debug.Log("Catapult ready");
             _ready = true;
         }
 
         public void OnFire(Vector3[] path, int vertexCount)
         {
-            Debug.Log("Firing!");
             StopAiming(transform);
             _anim.SetTrigger(_animIDShoot);
         }
