@@ -20,10 +20,12 @@ namespace Interaction
             if (resource == Resource.Wood)
             {
                 EventManager.RaiseOnReplenishWood(replenishAmount);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.pickWood,this.transform.position);
             }
             else
             {
                 EventManager.RaiseOnReplenishStone(replenishAmount);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.pickStone,this.transform.position);
             }
         }
 

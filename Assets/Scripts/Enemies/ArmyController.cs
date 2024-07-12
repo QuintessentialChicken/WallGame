@@ -276,7 +276,8 @@ namespace Enemies
                     fireArrow.SetUp(fireArrowSettings);
                     fireArrow.AddDelay(Random.Range(0, 0.5f));
                 }
-                // AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, this.transform.position);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyArrowWhoosh, this.transform.position);
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, this.transform.position);
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
             }
 

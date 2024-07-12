@@ -215,6 +215,13 @@ MonoBehaviour:
     dirRotation: {x: 28.6, y: 40.38, z: -7.92}
   dirLight: {fileID: 3205418180442503098}
   fadeScreen: {fileID: 0}
+  ambientMusic:
+    Guid:
+      Data1: 535839300
+      Data2: 1230386050
+      Data3: -583384440
+      Data4: -1266050084
+    Path: event:/Music/NightHangout
 --- !u!1 &3205418181857823307
 GameObject:
   m_ObjectHideFlags: 0

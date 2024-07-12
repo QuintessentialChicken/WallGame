@@ -176,7 +176,7 @@ namespace Player
             if (_currentState == PlayerState.Launched)
             {
                 Fly();
-                UpdateSound();
+                UpdateFootStepsSound();
                 return;
             }
 
@@ -184,7 +184,7 @@ namespace Player
             GroundedCheck();
             Falling();
             Move();
-            UpdateSound();
+            UpdateFootStepsSound();
         }
 
         private void OnDestroy()
@@ -574,7 +574,7 @@ namespace Player
             Stunned
         }
 
-        private void UpdateSound()
+        private void UpdateFootStepsSound()
         {
             var currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
             

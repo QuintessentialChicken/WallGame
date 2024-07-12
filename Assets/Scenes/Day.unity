@@ -204,28 +204,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
-      propertyPath: <damageWall>k__BackingField.Path
-      value: event:/SFX/TrebuchetShoot 2
+      propertyPath: <drumStartMusic>k__BackingField.Path
+      value: event:/Music/Drums
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
-      propertyPath: <damageWall>k__BackingField.Guid.Data1
-      value: 726863937
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Path
+      value: event:/SFX/EnemyArrowWhoosh
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
-      propertyPath: <damageWall>k__BackingField.Guid.Data2
-      value: 1306725856
+      propertyPath: <nightAmbientMusic>k__BackingField.Path
+      value: event:/Music/NightHangout
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
-      propertyPath: <damageWall>k__BackingField.Guid.Data3
-      value: -1813144928
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data1
+      value: 531133957
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
-      propertyPath: <damageWall>k__BackingField.Guid.Data4
-      value: -1291138116
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data2
+      value: 1239722633
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data3
+      value: -964308826
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data4
+      value: -582249093
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data1
+      value: -30304041
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data2
+      value: 1238418047
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data3
+      value: -2056448362
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data4
+      value: 1350682923
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data1
+      value: 535839300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data2
+      value: 1230386050
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data3
+      value: -583384440
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data4
+      value: -1266050084
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -3487,43 +3537,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
-      propertyPath: m_Intensity
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
-        type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 1.197676e+18
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: -7.1016804e-12
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.12
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -3607,23 +3637,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
-      propertyPath: timeOfDay
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
-        type: 3}
       propertyPath: fadeScreen
       value: 
       objectReference: {fileID: 1800346000}
-    - target: {fileID: 3205418181857823307, guid: a538c6e213a1fb042a155e06a45a4992,
+    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: ambientMusic.Path
+      value: event:/Music/NightHangout
       objectReference: {fileID: 0}
-    - target: {fileID: 3205418181955337021, guid: a538c6e213a1fb042a155e06a45a4992,
+    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: ambientMusic.Guid.Data1
+      value: 535839300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: ambientMusic.Guid.Data2
+      value: 1230386050
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: ambientMusic.Guid.Data3
+      value: -583384440
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: ambientMusic.Guid.Data4
+      value: -1266050084
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a538c6e213a1fb042a155e06a45a4992, type: 3}

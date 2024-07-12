@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AnimationControllers;
+using FMOD.Studio;
 using Input;
 using Player;
 using UnityEngine;
@@ -56,6 +57,9 @@ namespace Wall
         private Queue<WallSegment> _requestedSoldierPositions;
         private float _spawnTimer;
 
+        // audio
+        private EventInstance playerGasping;
+
         private void Awake()
         {
             if (instance == null)
@@ -89,6 +93,7 @@ namespace Wall
 
             postProcessing.maxDestruction = loseThreshold;
             // InvokeRepeating(nameof(DamageRandomSegment), 0f, 2f);
+            playerGasping = AudioManager.instance.CreateInstance(FMODEvents.instance.walltherGasp);
         }
 
         public void Update()
@@ -380,8 +385,27 @@ namespace Wall
             {
                 EventManager.RaiseGameOver();
             }
-            if (percentage <= loseThreshold + 0.3f) AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherGasp, this.transform.position);
+            UpdateGaspingSound(percentage);
             postProcessing.UpdateVignetteIntensity(percentage);
+        }
+
+        private void UpdateGaspingSound(float wallHealthPercentage)
+        {
+            if (wallHealthPercentage <= loseThreshold + 0.3f)
+            {
+                // get the playback state
+                PLAYBACK_STATE playbackState;
+                playerGasping.getPlaybackState(out playbackState);
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    playerGasping.start();
+                }
+            }
+            // otherwise, stop the footsteps event
+            else 
+            {
+                playerGasping.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
         }
     }
 }

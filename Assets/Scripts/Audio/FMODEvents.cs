@@ -6,7 +6,8 @@ using FMODUnity;
 public class FMODEvents : MonoBehaviour
 {
     [field: Header("Music")]
-    [field: SerializeField] public EventReference music { get; private set; }
+    [field: SerializeField] public EventReference drumStartMusic { get; private set; }
+    [field: SerializeField] public EventReference nightAmbientMusic { get; private set; }
 
     [field: Header("SFX")]
 
@@ -32,6 +33,7 @@ public class FMODEvents : MonoBehaviour
     // Damage
     [field: SerializeField] public EventReference damageWall { get; private set; }
     [field: SerializeField] public EventReference burnScaffolding { get; private set; }
+    [field: SerializeField] public EventReference enemyArrowWhoosh { get; private set; }
 
     // Crossbowmen
     // [field: SerializeField] public EventReference crossbowmanSpawn { get; private set; }

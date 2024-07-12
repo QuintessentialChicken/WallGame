@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{7fca087a-e2e4-4766-8bb7-482eb02e5772}">
+		<property name="name">
+			<value>Volume</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4d31f56f-0a12-4db1-9db6-866a552da7b2}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{f4333441-f166-46d4-b308-215406aecb62}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{f4333441-f166-46d4-b308-215406aecb62}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="automators">
+			<destination>{d47587a4-51bd-43ec-8d6a-a17f0784b646}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{d47587a4-51bd-43ec-8d6a-a17f0784b646}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>cursorPosition</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{ed44e797-8b47-4642-9cf2-6a5f2f8616ab}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationCurve" id="{ed44e797-8b47-4642-9cf2-6a5f2f8616ab}">
+		<relationship name="parameter">
+			<destination>{e1876739-63e6-403f-901c-094c1da6bc14}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{12a80ab2-3a32-4021-b3a7-18f60dcc34d3}</destination>
+			<destination>{97c5a8a2-872f-4aa1-a303-70649db0ee74}</destination>
+			<destination>{05f1aefe-14f4-4984-b706-ef1137a40043}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationPoint" id="{12a80ab2-3a32-4021-b3a7-18f60dcc34d3}">
+		<property name="position">
+			<value>0.80000000000000004</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{97c5a8a2-872f-4aa1-a303-70649db0ee74}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+		<property name="curveShape">
+			<value>0.0167315248</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{05f1aefe-14f4-4984-b706-ef1137a40043}">
+		<property name="position">
+			<value>0.45000000000000001</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+	</object>
+</objects>

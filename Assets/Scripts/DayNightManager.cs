@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -86,6 +87,7 @@ public class DayNightManager : MonoBehaviour
             fadeScreen.color = new Color(0, 0, 0, t);
             yield return null;
         }
+        // AudioManager.instance.UpdateMusic(ambientMusic);
         SceneManager.LoadScene("Night");
         yield return null;
     }

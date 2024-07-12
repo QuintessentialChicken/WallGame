@@ -95,6 +95,9 @@
 	</object>
 	<object class="MultiSound" id="{bcb48f3a-5489-490a-9350-801629aabe78}" />
 	<object class="SingleSound" id="{7d930b8f-d8e9-4f76-aa19-60f1020dac4a}">
+		<property name="start">
+			<value>2.4000000000000004</value>
+		</property>
 		<property name="length">
 			<value>3</value>
 		</property>

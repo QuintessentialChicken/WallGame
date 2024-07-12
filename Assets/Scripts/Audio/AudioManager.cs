@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using UnityEngine.SceneManagement;
+
 
 public class AudioManager : MonoBehaviour
 {
@@ -43,7 +45,15 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        InitializeMusic(FMODEvents.instance.music);
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Retrieve the scene name and build index
+        string sceneName = currentScene.name;
+        if (sceneName == "Day") {
+            InitializeMusic(FMODEvents.instance.drumStartMusic);
+        } else {
+            InitializeMusic(FMODEvents.instance.nightAmbientMusic);
+        }
     }
 
     private void Update()
@@ -55,6 +65,13 @@ public class AudioManager : MonoBehaviour
 
     private void InitializeMusic(EventReference musicEventReference)
     {
+        musicEventInstance = CreateInstance(musicEventReference);
+        musicEventInstance.start();
+    }
+
+    public void UpdateMusic(EventReference musicEventReference)
+    {
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         musicEventInstance = CreateInstance(musicEventReference);
         musicEventInstance.start();
     }

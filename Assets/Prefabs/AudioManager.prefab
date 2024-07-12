@@ -185,11 +185,11 @@ MonoBehaviour:
     Path: event:/SFX/CatapultRelease
   <shootTrebuchet>k__BackingField:
     Guid:
-      Data1: -62304480
-      Data2: 1215237371
-      Data3: 1505206455
-      Data4: 1938336490
-    Path: event:/SFX/TrebuchetShoot
+      Data1: -375256225
+      Data2: 1259337611
+      Data3: 1062354355
+      Data4: -1415570796
+    Path: event:/SFX/TrebuchetWhoosh
   <shootArrow>k__BackingField:
     Guid:
       Data1: 1038348313
@@ -199,11 +199,11 @@ MonoBehaviour:
     Path: event:/SFX/BowAimShoot
   <damageWall>k__BackingField:
     Guid:
-      Data1: -62304480
-      Data2: 1215237371
-      Data3: 1505206455
-      Data4: 1938336490
-    Path: event:/SFX/TrebuchetShoot
+      Data1: -10476069
+      Data2: 1227114015
+      Data3: -1030870876
+      Data4: 1134352705
+    Path: event:/SFX/WallHit
   <burnScaffolding>k__BackingField:
     Guid:
       Data1: -1192477167
