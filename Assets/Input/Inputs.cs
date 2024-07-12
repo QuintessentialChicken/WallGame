@@ -27,6 +27,7 @@ namespace Input
         public static event OnInputNoParams RepairStone;
         public static event OnInputNoParams UpgradeWood;
         public static event OnInputNoParams UpgradeStone;
+        public static event OnInputNoParams Confirm;
 
         public static event OnInputNoParams YPressed;
         public static event OnInputVector2 Select;
@@ -70,6 +71,13 @@ namespace Input
             if (context.started)
             {
                 Interact?.Invoke();
+            }
+        }
+        public void OnConfirm(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                Confirm?.Invoke();
             }
         }
 
