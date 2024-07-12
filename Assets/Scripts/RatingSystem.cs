@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //structure to hold rating relevant information for each day
-public struct RatingTime
+public class RatingTime
 {
     public float startTime;
     public float endTime;
@@ -21,22 +21,18 @@ public class RatingSystem : MonoBehaviour
     public static RatingSystem Instance;
 
     //list to hold the structure for the whole game
-    private List<RatingTime> ratingTimes;
+    private List<RatingTime> ratingTimes = new List<RatingTime>();
 
     private float startCriticalTime = 0f;
     private float endCriticalTime = 0f;
 
-    [SerializeField] private float twoStarRatingPercentage = 0f;
-    [SerializeField] private float threeStarRatingPercentage = 0f;
+    [SerializeField] private float twoStarRatingThreshold = 0.3f;
+    [SerializeField] private float threeStarRatingThreshold = 0.7f;
 
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
-        ratingTimes = new List<RatingTime>();
+        DontDestroyOnLoad(this);
     }
 
     private RatingTime GetLatestRatingTime()
@@ -45,18 +41,13 @@ public class RatingSystem : MonoBehaviour
         return ratingTimes[lastIndex];
     }
 
-    private void SetLatestRatingTime(RatingTime ratingTime)
-    {
-        int lastIndex = ratingTimes.Count - 1;
-        ratingTimes[lastIndex] = ratingTime;
-    }
-
     //create the tuple for current day and set start time
     public void SetRatingTime()
     {
         float startTime = Time.fixedTime;
         RatingTime myTuple = new RatingTime(startTime);
         ratingTimes.Add(myTuple);
+        Debug.Log(ratingTimes.Count);
     }
 
     //set endtime for current day
@@ -65,6 +56,8 @@ public class RatingSystem : MonoBehaviour
         float endTime = Time.fixedTime;
 
         int lastIndex = ratingTimes.Count - 1;
+
+        Debug.Log(lastIndex);
 
         RatingTime ratingTime = GetLatestRatingTime();
         ratingTime.endTime = endTime;
@@ -79,24 +72,26 @@ public class RatingSystem : MonoBehaviour
     }
 
     //set critical end time
-    public void SetEndCriticalTime()
+    public void SetEndCriticalTime(bool gameOver = false)
     {
         endCriticalTime = Time.fixedTime;
-        AddCriticalEndTime();
+        AddCriticalEndTime(gameOver);
         ResetCriticalTimes();
     }
 
     //add to the total critical end time for current day
-    private void AddCriticalEndTime()
+    private void AddCriticalEndTime(bool gameOver = false)
     {
-        float criticalTime = startCriticalTime - endCriticalTime;
+        float criticalTime;
+
+        if (gameOver)
+            criticalTime = Time.fixedTime - startCriticalTime;
+        else
+            criticalTime = endCriticalTime - startCriticalTime;
         
         int lastIndex = ratingTimes.Count - 1;
 
-        RatingTime ratingTime = ratingTimes[lastIndex];
-        ratingTime.criticalTime += criticalTime;
-
-        ratingTimes[lastIndex] = ratingTime;
+        ratingTimes[lastIndex].criticalTime += criticalTime;
     }
 
     //reset critical time
@@ -117,12 +112,12 @@ public class RatingSystem : MonoBehaviour
     {
         float playTime = ratingTime.endTime - ratingTime.startTime;
 
-        float percentageCritical = ratingTime.criticalTime / playTime * 100;
+        float percentageCritical = ratingTime.criticalTime / playTime;
 
-        if (percentageCritical > threeStarRatingPercentage)
+        if (percentageCritical > threeStarRatingThreshold)
             return 3;
 
-        if (percentageCritical > twoStarRatingPercentage)
+        if (percentageCritical > twoStarRatingThreshold)
             return 2;
 
         return 1;
