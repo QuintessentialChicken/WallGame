@@ -117,6 +117,8 @@ namespace Enemies
             columnsHit = new List<bool>();
             _columns = WallManager.instance.wallColumns;
             for (var i = 0; i < _trebuchetCount; i++) columnsHit.Add(false);
+
+            RatingSystem.Instance.SetRatingTime();
         }
 
         private void Update()
@@ -217,7 +219,7 @@ namespace Enemies
                 List<float> normalizedProbabilities = segments.ConvertAll<float>(x => x.probabilityModifier / sum);
                 if (targetingScheme == TargetingScheme.Random_NoWallTwice && lastWallIndexHit != -1) normalizedProbabilities[lastWallIndexHit] = 0;
 
-                Debug.Log("Normalized Probabilities: " + string.Join(")  (", normalizedProbabilities));
+                //Debug.Log("Normalized Probabilities: " + string.Join(")  (", normalizedProbabilities));
 
                 float choice = Random.Range(0.0f, 1.0f);
 
@@ -233,7 +235,7 @@ namespace Enemies
                     }
                 }
             }
-            Debug.Log("Chosen Wall Piece: " + chosenWallIndex);
+            //Debug.Log("Chosen Wall Piece: " + chosenWallIndex);
             lastWallIndexHit = chosenWallIndex;
 
             // Picking correct trebuchet
@@ -389,6 +391,7 @@ namespace Enemies
                 if (enemyCount <= 0)
                 {
                     DayNightManager.instance.RequestChangeToNight();
+                    RatingSystem.Instance.SetEndTime();
                 }
             }
         }
