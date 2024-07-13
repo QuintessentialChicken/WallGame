@@ -35,12 +35,12 @@ public class FloatingTextManager : MonoBehaviour
 
     private void ReplenishWood(int i)
     {
-        DoFloatingText("+ " + i + " Wood!");
+        DoFloatingText("Wood Refilled!");
     }
 
     private void ReplenishStone(int i)
     {
-        DoFloatingText("+ " + i + " Stone!");
+        DoFloatingText("Stone Refilled!");
     }
 
     private void EnterCatapult(Transform catapultBowl)
