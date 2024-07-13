@@ -515,6 +515,54 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "MainMenu",
+            "id": "f47ee083-ac1e-4931-88cc-68eef3ae2d04",
+            "actions": [
+                {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "dd3e28a6-780e-453c-8913-4b6fb7912d37",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "d3a8b126-0283-434b-8b03-706623726302",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "46d11244-c775-475e-aa5d-c25d2bfbb599",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69c438f8-4869-4f25-b234-f8b6b0876d8b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;Xbox Controller;PS4 Controller",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

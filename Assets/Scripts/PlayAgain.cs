@@ -19,6 +19,6 @@ public class PlayAgain : MonoBehaviour
 
     private void Restart()
     {
-        DayNightManager.instance.RequestChangeToDay();
+        DayNightManager.instance.ChangeToMainMenu();
     }
 }

@@ -3121,6 +3121,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gewickeltes Seil
       objectReference: {fileID: 0}
+    - target: {fileID: 2319105587769940932, guid: fb106c4c04e76a04abe04c7791047010,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3448319575385441556, guid: fb106c4c04e76a04abe04c7791047010,
         type: 3}
       propertyPath: m_IsActive
@@ -3155,6 +3160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotSpeed
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448319576107628860, guid: fb106c4c04e76a04abe04c7791047010,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3448319576107628860, guid: fb106c4c04e76a04abe04c7791047010,
         type: 3}

@@ -857,11 +857,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crossbowmen
       objectReference: {fileID: 0}
-    - target: {fileID: 8900817340479880561, guid: b1c08aa7253799e4bae0aae528b86947,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 8915612173608224443, guid: b1c08aa7253799e4bae0aae528b86947,
         type: 3}
       propertyPath: m_Layer
