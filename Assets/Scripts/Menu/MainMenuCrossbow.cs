@@ -126,7 +126,7 @@ public class MainMenuCrossbow : MonoBehaviour
             schild3quit.SetActive(false);
             currentSelection = 1;
         }
-            Debug.Log(crossbow.localRotation.eulerAngles.y);
+            //Debug.Log(crossbow.localRotation.eulerAngles.y);
         bopParent.transform.localRotation = initialRotation;
         bopParent.transform.Rotate(bop * Mathf.Sin(Time.time), 0, 0);
 

@@ -41,7 +41,7 @@ namespace Wall
             _anim = GetComponent<Animator>();
             _anim.SetTrigger(_animIDStopRunning);
             _anim.SetBool(_animIDRightPlace, true);
-            RandomizeLook();
+            
             RandomizeSpeed(0.95f, 1.05f);
             _armyController = FindObjectOfType<ArmyController>();
         }
@@ -140,15 +140,6 @@ namespace Wall
             bolt.SetUp(boltSettings);
 
             RandomizeSpeed(0.95f, 1.05f); // Each shot is done with a little bit of different speed
-        }
-
-        private void RandomizeLook()
-        {
-            var leftHanded = Random.Range(0.0f, 1.0f) < 0.3f;
-            transform.localScale = new Vector3((leftHanded ? -1 : 1) * transform.localScale.x, transform.localScale.y,
-                transform.localScale.z);
-            var helmet = Random.Range(0, helmetVariants.Count);
-            for (var i = 0; i < helmetVariants.Count; i++) helmetVariants[i].SetActive(i == helmet);
         }
 
         private void RandomizeSpeed(float minSpeed, float maxSpeed)
