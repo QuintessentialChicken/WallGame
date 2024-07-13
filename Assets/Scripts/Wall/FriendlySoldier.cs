@@ -8,6 +8,8 @@ namespace Wall
 {
     public class FriendlySoldier : MonoBehaviour
     {
+        public bool DEBUG_Death;
+        [Space]
         public float moveSpeed = 5f; // Speed at which the soldier moves
 
         [SerializeField] private TargetProjectile boltPrefab;
@@ -46,6 +48,11 @@ namespace Wall
 
         private void Update()
         {
+            if (DEBUG_Death)
+            {
+                Die();
+                DEBUG_Death = false;
+            }
             if (!_isMoving) return;
             if (!_targetSegment.IsIntact()) Die();
             transform.position = Vector3.MoveTowards(transform.position, _targetPosition, moveSpeed * Time.deltaTime);
@@ -91,6 +98,28 @@ namespace Wall
         {
             _anim.SetTrigger(_animIDDeathByArrows);
             _isMoving = false;
+        }
+
+        public void EnableRagdoll()
+        {
+            _anim.enabled = false;
+
+            foreach (Rigidbody rB in GetComponentsInChildren<Rigidbody>())
+            {
+                rB.isKinematic = false;
+                rB.velocity = new Vector3(Random.Range(-0.5f, 0.5f), 3 + Random.Range(-0.5f, 0.5f), -3);
+            }
+            Invoke(nameof(AnimEvent_Death), 3);
+        }
+
+        public void DisableRagdoll()
+        {
+            _anim.enabled = true;
+
+            foreach (Rigidbody rB in GetComponentsInChildren<Rigidbody>())
+            {
+                rB.isKinematic = true;
+            }
         }
 
         // Invoked by Soldier Animator after Death Animation has finished

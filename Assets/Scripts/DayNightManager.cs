@@ -59,6 +59,19 @@ public class DayNightManager : MonoBehaviour
         yield return null;
     }
 
+    private IEnumerator ChangeToTutorial()
+    {
+        StopCoroutine(nameof(ChangeToNight));
+        StopCoroutine(nameof(ChangeToDay));
+        for (float t = 0; t <= 1; t += Time.deltaTime)
+        {
+            fadeScreen.color = new Color(0, 0, 0, t);
+            yield return null;
+        }
+        SceneManager.LoadScene("Tutorial");
+        yield return null;
+    }
+
     public void RequestChangeToDay()
     {
         StartCoroutine(nameof(ChangeToDay));
@@ -67,6 +80,11 @@ public class DayNightManager : MonoBehaviour
     public void RequestChangeToNight()
     {
         StartCoroutine(nameof(ChangeToNight));
+    }
+
+    public void RequestChangeToTutorial()
+    {
+        StartCoroutine(nameof(ChangeToTutorial));
     }
 
     private IEnumerator FadeIn()
@@ -98,6 +116,11 @@ public class DayNightManager : MonoBehaviour
             { TimeOfDay.Evening, evening },
             { TimeOfDay.Night, night }
         };
+    }
+
+    public void ChangeToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void OnDrawGizmos()

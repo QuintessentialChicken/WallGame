@@ -44,18 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bfe6b831eb4143bae5c828ab38a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultySettings:
+    enemySoldiers: 0
+    trebuchetCooldown: 0
+    trebuchetCooldownOffset: 0
+    fireArrowsCooldown: 0
+    fireArrowsCooldownOffset: 0
+    fireArrowsDestruction: 0
+    tarBarrelCooldown: 0
+    tarBarrelCooldownOffset: 0
+    flourBarrelCooldown: 0
+    flourBarrelCooldownOffset: 0
   enemyCount: 100
-  trebuchetCooldown: 3
-  trebuchetCooldownOffset: 0
   targetingScheme: 2
-  trebuchetRandomness: 0.277
-  tarBarrelCooldown: 20
-  tarBarrelCooldownOffset: 10
-  flourBarrelCooldown: 20
-  flourBarrelCooldownOffset: 0
-  fireArrowsCooldown: 8
-  fireArrowsCooldownOffset: 20
-  fireArrowsDestruction: 0.4
   trebuchetStonePrefab: {fileID: -6403147066047381681, guid: c3ae024c823c9884fa88310c92374b80,
     type: 3}
   trebuchetStoneSettings:
