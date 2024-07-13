@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 public class FloatingTextManager : MonoBehaviour
 {
     public static FloatingTextManager instance;
     private float cloneDeathTimer = 1f;
+
+    [SerializeField] GameObject player;
+
+    private Canvas canvas;
 
     private void Awake()
     {
@@ -21,6 +21,8 @@ public class FloatingTextManager : MonoBehaviour
         EventManager.OnReplenishStone += ReplenishStone;
         EventManager.OnEnterCatapult += EnterCatapult;
         EventManager.OnCatapultFire += GetLaunched;
+
+        canvas = gameObject.transform.parent.GetComponent<Canvas>();
     }
 
     private void OnDestroy()
@@ -33,12 +35,12 @@ public class FloatingTextManager : MonoBehaviour
 
     private void ReplenishWood(int i)
     {
-        DoFloatingText("+ " + i + " Wood!");
+        DoFloatingText("Wood Refilled!");
     }
 
     private void ReplenishStone(int i)
     {
-        DoFloatingText("+ " + i + " Stone!");
+        DoFloatingText("Stone Refilled!");
     }
 
     private void EnterCatapult(Transform catapultBowl)
@@ -53,10 +55,34 @@ public class FloatingTextManager : MonoBehaviour
 
     public void DoFloatingText(string str)
     {
-        GameObject duplicate = Instantiate(gameObject.transform.GetChild(0).gameObject);
-        Destroy(duplicate, cloneDeathTimer);
-        duplicate.transform.GetChild(0).GetComponent<TextMeshPro>().text = str;
-        duplicate.transform.GetChild(0).GetComponent<Animator>().enabled = true;
-        duplicate.transform.position = gameObject.transform.position;
+        Vector3 offset = new Vector3(-80, 70, 0);
+
+        GameObject duplicatedGameObject = Instantiate(gameObject.transform.GetChild(0).gameObject, transform);
+        //Destroy(duplicate, cloneDeathTimer);
+
+        //duplicate.transform.parent = gameObject.transform;
+        duplicatedGameObject.SetActive(true);
+
+        GameObject textObject = duplicatedGameObject.transform.GetChild(0).gameObject;
+
+        textObject.GetComponent<TextMeshProUGUI>().SetText(str);
+        textObject.GetComponent<TextMeshProUGUI>().enabled = true;
+
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(player.transform.position);
+
+        //Debug.Log(screenPosition);
+
+        //duplicatedGameObject.GetComponent<RectTransform>().position = screenPosition + offset;
+        //duplicatedGameObject.GetComponent<RectTransform>().position.z = 0;
+        //textObject.GetComponent<RectTransform>().position = Vector2.zero;
+
+        //float scaleFactor = canvas.scaleFactor;
+        //screenPosition /= scaleFactor;
+
+        //rectTransform.anchoredPosition = screenPosition;
+
+        duplicatedGameObject.transform.localPosition = screenPosition + offset;
+        textObject.transform.localPosition = Vector3.zero;
+        textObject.GetComponent<Animator>().enabled = true;
     }
 }
