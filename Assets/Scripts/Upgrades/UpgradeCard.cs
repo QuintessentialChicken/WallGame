@@ -137,6 +137,11 @@ namespace Upgrades
                     break;
             }
         }
+
+        public GameObject GetPrefab()
+        {
+            return scriptableObject.upgradePrefab;
+        }
     }
 
     [Serializable]
@@ -147,4 +152,5 @@ namespace Upgrades
         public Color backgroundColor = Color.white;
         public Color glowColor = Color.white;
     }
+    
 }

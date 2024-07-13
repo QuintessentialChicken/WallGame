@@ -5,7 +5,7 @@ namespace Upgrades
     [CreateAssetMenu(fileName = "UpgradeInfo", menuName = "UpgradeInfo")]
     public class UpgradeInfo : ScriptableObject
     {
-        public Upgrade upgradePrefab;
+        public GameObject upgradePrefab;
         public Upgrade.UpgradeType id;
         public string title;
         public string subtitle;

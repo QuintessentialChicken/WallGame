@@ -151,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6d7496b6d8ee73f46a009a5642085ed9,
         type: 3}
       propertyPath: m_Name
-      value: A.S.S. fbx
+      value: A.S.S.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d7496b6d8ee73f46a009a5642085ed9, type: 3}
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897b27a51b6fedc47b6105e18b65a3b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradeName: 11
+  type: 11
   DEBUG_Activate: 0
   cooldown: 5
   standardAnimDur: 1.2

@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Input;
 using Player;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Upgrades
 {
@@ -20,11 +22,19 @@ namespace Upgrades
         {
             Inputs.Select += ChangeSelection;
             Inputs.Confirm += ConfirmCard;
+            Invoke(nameof(PresentUpgrades), 3f);
+        }
+
+        private void OnDestroy()
+        {
+            Inputs.Select -= ChangeSelection;
+            Inputs.Confirm -= ConfirmCard;
         }
 
         private void ChangeSelection(Vector2 input)
         {
-            if (input.x != 0) _selected = Mathf.Clamp(_selected + (int) input.x, 0, 2);
+            if (input.x != 0) _selected = Mathf.Clamp(_selected + (int) input.x, 0, cards.Count - 1);
+            print(_selected);
             // Indicate which is selected
             // _selected.SetSelected(true);
             // upgrades[lastSelected].SetSelected(false);
@@ -33,7 +43,8 @@ namespace Upgrades
 
         private void ConfirmCard()
         {
-            // player.SelectedUpgrade = cards[_selected].UpgradePrefab;
+            print("Selected: " + cards[_selected]);
+            player.SelectedUpgrade = cards[_selected].GetPrefab();
             foreach (var card in cards)
             {
                 card.gameObject.SetActive(false);
@@ -46,7 +57,7 @@ namespace Upgrades
             var indices = DrawRandomUpgrade(2);
             for (var i = 0; i < cards.Count; i++)
             {
-                cards[i].SetUpgradeInfo(upgrades[indices[i]]);
+                cards[i].SetUpgradeInfo(upgrades[0]);
                 cards[i].gameObject.SetActive(true);
             }
 

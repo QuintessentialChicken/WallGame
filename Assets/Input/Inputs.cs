@@ -83,7 +83,7 @@ namespace Input
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            Select?.Invoke(context.ReadValue<Vector2>());
+            if (context.started) Select?.Invoke(context.ReadValue<Vector2>());
         }
 
         public void OnRepairWood(InputAction.CallbackContext context)

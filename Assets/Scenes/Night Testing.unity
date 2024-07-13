@@ -164,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
@@ -234,7 +234,7 @@ PrefabInstance:
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
@@ -259,7 +259,12 @@ PrefabInstance:
     - target: {fileID: 7086135214059801333, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
       propertyPath: m_Name
-      value: Upgrade Card Prefab
+      value: Card Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 7086135214059801333, guid: 7ddd72326e83af24b99095dcaf4fff39,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ddd72326e83af24b99095dcaf4fff39, type: 3}
@@ -697,7 +702,7 @@ PrefabInstance:
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
@@ -767,7 +772,7 @@ PrefabInstance:
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -200
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 7086135214059801330, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
@@ -792,7 +797,12 @@ PrefabInstance:
     - target: {fileID: 7086135214059801333, guid: 7ddd72326e83af24b99095dcaf4fff39,
         type: 3}
       propertyPath: m_Name
-      value: Upgrade Card Prefab (2)
+      value: Card Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 7086135214059801333, guid: 7ddd72326e83af24b99095dcaf4fff39,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ddd72326e83af24b99095dcaf4fff39, type: 3}
@@ -1751,8 +1761,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 760036155}
   - {fileID: 683962361}
+  - {fileID: 760036155}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1773,8 +1783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25a79b9264202644a2c719995ab7fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardLeft: {fileID: 760036158}
-  cardRight: {fileID: 683962364}
+  cards:
+  - {fileID: 683962364}
+  - {fileID: 760036158}
   upgrades:
   - {fileID: 11400000, guid: 9b164f553d63b094fa88b682eb165239, type: 2}
   - {fileID: 11400000, guid: 7db8c568904cdd749aad9953da570720, type: 2}
@@ -1784,6 +1795,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f52e41b57c0302343a81edb43da8f9ec, type: 2}
   - {fileID: 11400000, guid: 63c0c667138e686469f4d7191fe27429, type: 2}
   - {fileID: 11400000, guid: 5bdde390e6d07fb4e9f8d1af16e9bd72, type: 2}
+  player: {fileID: 963348480}
   DEBUG_Present: 0
 --- !u!1 &1414437483
 GameObject:
