@@ -22,13 +22,14 @@ namespace Upgrades
         {
             Inputs.Select += ChangeSelection;
             Inputs.Confirm += ConfirmCard;
-            Invoke(nameof(PresentUpgrades), 3f);
+            EventManager.OnShowUpgrades += PresentUpgrades;
         }
 
         private void OnDestroy()
         {
             Inputs.Select -= ChangeSelection;
             Inputs.Confirm -= ConfirmCard;
+            EventManager.OnShowUpgrades -= PresentUpgrades;
         }
 
         private void ChangeSelection(Vector2 input)
