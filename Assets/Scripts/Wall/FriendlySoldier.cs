@@ -127,6 +127,7 @@ namespace Wall
         private void AnimEvent_Death()
         {
             //print("I dieded");
+            DisableRagdoll();
             gameObject.SetActive(false); // Destroy the soldier if the scaffolding is not walkable
             WallManager.instance.RecycleSoldier(this);
         }
