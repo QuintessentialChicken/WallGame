@@ -381,6 +381,7 @@ namespace Enemies
 
         private void Kill(int count)
         {
+            if (enemyCount <= 0) return;
             for (var i = 0; i < count; i++)
             {
                 var victim = _footsoldierParent.GetChild(0);

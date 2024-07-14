@@ -47,19 +47,19 @@ public class TutorialController : MonoBehaviour
         new TutorialStep("Watch out! The enemy has commenced their attack!"
             , new Func<int>(() => { ArmyController.instance.SetTargetingScheme(TargetingScheme.Succession); Invoke(nameof(HaltEnemyAttack), 2.5f); return 0; })
             , new Func<bool>(() => { return !CheckWallHealthMax(); })),
-        new TutorialStep("A trebuchet round hit the wall! To repair it, you first need stones. Pick them up from the masonry on the bottom right using [B]"
+        new TutorialStep("1) Pick up stones\n\nA trebuchet round hit the wall! To repair it, you first need stones. Pick them up from the masonry on the bottom right using [B]"
             , new Func<bool>(() => { return CheckWalltherHasStones(); })),
-        new TutorialStep("Good job! Now make your way up there and repair the broken wall piece using the upper right shoulder button [RB]."
+        new TutorialStep("2) Repair the wall\n\nMake your way up the wall and repair the broken wall piece using the upper right shoulder button [RB]."
             , new Func<bool>(() => { return CheckWallHealthMax(); })),
-        new TutorialStep("Now that the wall is safe again, a well-rested crossbowman will take the place of his fallen comrade and continue to return fire."),
-        new TutorialStep("By the gods, fire arrows!\nGo pick up wood from Wallter's shed on the botton left using [B]"
+        new TutorialStep("Good job! Now that the wall is safe again, a well-rested crossbowman will take the place of his fallen comrade and continue to return fire."),
+        new TutorialStep("3) Pick up some planks\\nBy the gods, fire arrows!\nGo pick up wood from Wallter's shed on the botton left using [B]"
             , new Func<int>(() => { ArmyController.instance.SetTargetingScheme(TargetingScheme.Random_NoWallTwice);  ArmyController.instance.LaunchFireArrows(); ArmyController.instance.SetTargetingScheme(TargetingScheme.HoldFire); return 0; })
             , new Func<bool>(() => { return CheckWalltherHasWood(); })),
-        new TutorialStep("No time to waste! To get to any piece of the wall quickly, Wallther can launch himself using the catapult. Stand next to it and use [B] to enter."
+        new TutorialStep("4) Use the Catapult\n\nNo time to waste! To get to any piece of the wall quickly, Wallther can launch himself using the catapult. Stand next to it and use [B] to enter."
             , new Func<bool>(() => { return CheckWalltherInsideCatapult(); })),
-        new TutorialStep("Now aim using the left stick and launch yourself with [B]!"
+        new TutorialStep("4) Use the Catapult\n\nNow aim using the left stick and launch yourself with [B]!"
             , new Func<bool>(() => { return !CheckWalltherInsideCatapult(); })),
-        new TutorialStep("The Wooden scaffolding is repaired using the left shoulder button [LB]."),
+        new TutorialStep("5) Repair the Scaffolding\n\nThe Wooden scaffolding is repaired using the left shoulder button [LB]."),
         new TutorialStep("If the wall gets damaged more than 50% you will lose and the enemy will take your city."),
         new TutorialStep("If the crossbowmen are able to repel the attack, you win! You can tell how many soldiers the enemy has left with the amount of flags on the horizon."),
         new TutorialStep("Now you know everything you need to know, we will reset the level and let you play! Good luck! Don't let the wall falter!")

@@ -100,14 +100,15 @@ namespace Wall
             _isMoving = false;
         }
 
-        public void EnableRagdoll()
+        public void EnableRagdoll(float multipl)
         {
             _anim.enabled = false;
-
+            transform.parent = null;
             foreach (Rigidbody rB in GetComponentsInChildren<Rigidbody>())
             {
                 rB.isKinematic = false;
-                rB.velocity = new Vector3(Random.Range(-0.5f, 0.5f), 3 + Random.Range(-0.5f, 0.5f), -3);
+                
+                rB.velocity = multipl * new Vector3(Random.Range(-0.5f, 0.5f), 3 + Random.Range(-0.5f, 0.5f), -3);
             }
             Invoke(nameof(AnimEvent_Death), 3);
         }

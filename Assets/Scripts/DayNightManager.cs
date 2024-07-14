@@ -55,7 +55,7 @@ public class DayNightManager : MonoBehaviour
             fadeScreen.color = new Color(0, 0, 0, t);
             yield return null;
         }
-        SceneManager.LoadScene("Day");
+        SceneManager.LoadScene("Day_Siege");
         yield return null;
     }
 
@@ -67,11 +67,11 @@ public class DayNightManager : MonoBehaviour
             fadeScreen.color = new Color(0, 0, 0, t);
             yield return null;
         }
-        SceneManager.LoadScene("Night");
+        SceneManager.LoadScene("Evening_Upgrades");
         yield return null;
     }
 
-    private IEnumerator ChangeToRating()
+    /*private IEnumerator ChangeToRating()
     {
         StopCoroutine(nameof(ChangeToDay));
         for (float t = 0; t <= 1; t += Time.deltaTime)
@@ -81,7 +81,7 @@ public class DayNightManager : MonoBehaviour
         }
         SceneManager.LoadScene("Rating");
         yield return null;
-    }
+    }*/
 
     private IEnumerator ChangeToTutorial()
     {
@@ -132,10 +132,7 @@ public class DayNightManager : MonoBehaviour
                 StartCoroutine(nameof(ChangeToDay));
                 break;
             case TimeOfDay.Evening_Upgrades:
-                StartCoroutine(nameof(ChangeToDay));
-                break;
-            case TimeOfDay.Night_Rating:
-                StartCoroutine(nameof(ChangeToRating));
+                StartCoroutine(nameof(ChangeToNight));
                 break;
             case TimeOfDay.Tutorial:
                 StartCoroutine(nameof(ChangeToTutorial));

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.99607843, g: 0.99607843, b: 1, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 7501adfbac4c59848962873396d14356, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f7cca015462cb6344b6c4b419f062e5a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1821378, g: 0.15628806, b: 0.12890826, a: 1}
+  m_IndirectSpecularColor: {r: 0.5806906, g: 0.5728814, b: 0.56810445, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,9 +97,9 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: a963a603ac434894495c6301176e5d3b,
+  m_LightingDataAsset: {fileID: 112000000, guid: a7d93123037c4e8419021b709f36b803,
     type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: e2e94be842aab1241bc4ab6b015c9b05,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: dea2d3832226ecb4b921b2d826c9663c,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -9763,42 +9763,42 @@ PrefabInstance:
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.050418302
+      value: 0.81960785
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.5478238
+      value: 0.9529412
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.9716981
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_Intensity
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -1.3126894e+31
+      value: 0.0625
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.2e-43
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 7.1e-44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: NaN
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -9818,22 +9818,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.14560026
+      value: 0.84743947
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.97783935
+      value: 0.5124502
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.023407465
+      value: 0.088779025
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1486033
+      value: 0.106580965
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180852729608, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -9898,7 +9898,7 @@ PrefabInstance:
     - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: timeOfDay
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180852729612, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
