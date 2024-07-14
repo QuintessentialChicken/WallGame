@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,37 +45,39 @@ public class RatingSystem : MonoBehaviour
     //create the tuple for current day and set start time
     public void SetRatingTime()
     {
-        float startTime = Time.fixedTime;
+        float startTime = Time.time;
+        //RatingTime myTuple = new RatingTime(startTime);
         RatingTime myTuple = new RatingTime(startTime);
         ratingTimes.Add(myTuple);
-        Debug.Log(ratingTimes.Count);
+        Debug.Log("IN");
     }
 
     //set endtime for current day
     public void SetEndTime()
     {
-        float endTime = Time.fixedTime;
+        float endTime = Time.time;
+
+        //int lastIndex = ratingTimes.Count - 1;
 
         int lastIndex = ratingTimes.Count - 1;
+        ratingTimes[lastIndex].endTime = endTime;
 
-        Debug.Log(lastIndex);
 
-        RatingTime ratingTime = GetLatestRatingTime();
-        ratingTime.endTime = endTime;
+        //GetLatestRatingTime().endTime = endTime;
 
-        ratingTimes[lastIndex] = ratingTime;
+        //ratingTimes[lastIndex] = ratingTime;
     }
 
     //set critical start time
     public void SetStartCritialTime()
     {
-        startCriticalTime = Time.fixedTime;
+        startCriticalTime = Time.time;
     }
 
     //set critical end time
     public void SetEndCriticalTime(bool gameOver = false)
     {
-        endCriticalTime = Time.fixedTime;
+        endCriticalTime = Time.time;
         AddCriticalEndTime(gameOver);
         ResetCriticalTimes();
     }
@@ -85,10 +88,10 @@ public class RatingSystem : MonoBehaviour
         float criticalTime;
 
         if (gameOver)
-            criticalTime = Time.fixedTime - startCriticalTime;
+            criticalTime = Time.time - startCriticalTime;
         else
             criticalTime = endCriticalTime - startCriticalTime;
-        
+
         int lastIndex = ratingTimes.Count - 1;
 
         ratingTimes[lastIndex].criticalTime += criticalTime;
@@ -129,7 +132,7 @@ public class RatingSystem : MonoBehaviour
         RatingTime ratingTime;
         int currentRating = 0;
 
-        for (int i = 0; i < ratingTimes.Count; i++) 
+        for (int i = 0; i < ratingTimes.Count; i++)
         {
             ratingTime = ratingTimes[i];
             currentRating += GetRating(ratingTime);
@@ -138,5 +141,67 @@ public class RatingSystem : MonoBehaviour
         currentRating /= ratingTimes.Count;
 
         return currentRating;
+    }
+
+    public (string, string) GetRatingTimeStamps()
+    {
+        RatingTime ratingTime = GetLatestRatingTime();
+
+        float playTime = ratingTime.endTime - ratingTime.startTime;
+        float criticalTime = ratingTime.criticalTime;
+
+        Debug.Log(ratingTime.startTime);
+        Debug.Log(ratingTime.endTime);
+        Debug.Log(playTime);
+
+        (TimeSpan, TimeSpan) timeSpanTuple = GetTimeStamps(playTime, criticalTime);
+        (string, string) timeStrings = GetTimeStringsMMSS(timeSpanTuple);
+
+        return timeStrings;
+    }
+
+    public (string, string) GetTotalRatingTimeStamps()
+    {
+        RatingTime ratingTime;
+
+        float playTime = 0f;
+        float criticalTime = 0f;
+
+        for (int i = 0; i < ratingTimes.Count; i++)
+        {
+            ratingTime = ratingTimes[i];
+
+            playTime += (ratingTime.endTime - ratingTime.startTime);
+            criticalTime += ratingTime.criticalTime;
+        }
+
+        (TimeSpan, TimeSpan) timeSpanTuple = GetTimeStamps(playTime, criticalTime);
+        (string, string) timeStrings = GetTimeStringsHHMMSS(timeSpanTuple);
+
+        return timeStrings;
+    }
+
+    private (string, string) GetTimeStringsMMSS((TimeSpan, TimeSpan) timeSpanTuple)
+    {
+        string playTime = $"{timeSpanTuple.Item1.Minutes:00}:{timeSpanTuple.Item1.Seconds:00}";
+        string criticalTime = $"{timeSpanTuple.Item2.Minutes:00}:{timeSpanTuple.Item2.Seconds:00}";
+
+        return (playTime, criticalTime);
+    }
+
+    private (string, string) GetTimeStringsHHMMSS((TimeSpan, TimeSpan) timeSpanTuple)
+    {
+        string playTime = $"{timeSpanTuple.Item1.Hours:00}{timeSpanTuple.Item1.Minutes:00}:{timeSpanTuple.Item1.Seconds:00}";
+        string criticalTime = $"{timeSpanTuple.Item2.Hours:00}{timeSpanTuple.Item2.Minutes:00}:{timeSpanTuple.Item2.Seconds:00}";
+
+        return (playTime, criticalTime);
+    }
+
+    private (TimeSpan, TimeSpan) GetTimeStamps(float playTime, float criticalTime)
+    {
+        TimeSpan playTimeSpan = TimeSpan.FromSeconds(playTime);
+        TimeSpan criticalTimeSpan = TimeSpan.FromSeconds(criticalTime);
+
+        return (playTimeSpan, criticalTimeSpan);
     }
 }

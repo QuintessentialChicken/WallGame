@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RatingUI : MonoBehaviour
 {
     [SerializeField] private GameObject[] stars = new GameObject[3];
+
+    [SerializeField] private TextMeshProUGUI totalTimeText;
+    
+    [SerializeField] private TextMeshProUGUI criticalTimeText;
 
     // Start is called before the first frame update
     private void Start()
@@ -32,5 +37,8 @@ public class RatingUI : MonoBehaviour
         {
             stars[j].SetActive(false);
         }
+
+        totalTimeText.text = RatingSystem.Instance.GetRatingTimeStamps().Item1;
+        criticalTimeText.text = RatingSystem.Instance.GetRatingTimeStamps().Item2;
     }
 }

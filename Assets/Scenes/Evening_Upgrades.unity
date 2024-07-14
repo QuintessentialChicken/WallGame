@@ -345,6 +345,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1016530933}
     m_Modifications:
+    - target: {fileID: 546112408696483033, guid: 0f5b63d91562ebb4a9a18c8c8fc96680,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2307604447226669191, guid: 0f5b63d91562ebb4a9a18c8c8fc96680,
         type: 3}
       propertyPath: m_RootOrder
@@ -2182,6 +2187,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1016530933}
     m_Modifications:
+    - target: {fileID: 546112408696483033, guid: 0f5b63d91562ebb4a9a18c8c8fc96680,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2307604447226669191, guid: 0f5b63d91562ebb4a9a18c8c8fc96680,
         type: 3}
       propertyPath: m_RootOrder
@@ -4345,6 +4355,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1016530933}
     m_Modifications:
+    - target: {fileID: 546112408696483033, guid: 0f5b63d91562ebb4a9a18c8c8fc96680,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2307604447226669191, guid: 0f5b63d91562ebb4a9a18c8c8fc96680,
         type: 3}
       propertyPath: m_RootOrder
@@ -5121,7 +5136,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.5e-44, y: 0, z: 0, w: 1e-45}
+  m_BoundingSphereOverride: {x: 7.214e-42, y: 2.4e-44, z: 3.3825e-41, w: 9.647963e+31}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -8132,6 +8147,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8605937691654165093, guid: 39bbbfd8303980143a55cd8ae189301a,
+        type: 3}
+      propertyPath: totalTimeText
+      value: 
+      objectReference: {fileID: 745622708}
+    - target: {fileID: 8605937691654165093, guid: 39bbbfd8303980143a55cd8ae189301a,
+        type: 3}
+      propertyPath: criticalTimeText
+      value: 
+      objectReference: {fileID: 1130259848}
     - target: {fileID: 8605937691654165093, guid: 39bbbfd8303980143a55cd8ae189301a,
         type: 3}
       propertyPath: stars.Array.data[0]
