@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,8 +24,8 @@ public class RatingSystem : MonoBehaviour
     //list to hold the structure for the whole game
     private List<RatingTime> ratingTimes = new List<RatingTime>();
 
-    private float startCriticalTime = 0f;
-    private float endCriticalTime = 0f;
+    private float startCriticalTime = float.MinValue;
+    private float endCriticalTime = float.MinValue;
 
     [SerializeField] private float twoStarRatingThreshold = 0.3f;
     [SerializeField] private float threeStarRatingThreshold = 0.7f;
@@ -44,50 +45,64 @@ public class RatingSystem : MonoBehaviour
     //create the tuple for current day and set start time
     public void SetRatingTime()
     {
-        float startTime = Time.fixedTime;
+        float startTime = Time.time;
+        //RatingTime myTuple = new RatingTime(startTime);
         RatingTime myTuple = new RatingTime(startTime);
         ratingTimes.Add(myTuple);
-        Debug.Log(ratingTimes.Count);
     }
 
     //set endtime for current day
     public void SetEndTime()
     {
-        float endTime = Time.fixedTime;
+        float endTime = Time.time;
+
+        //int lastIndex = ratingTimes.Count - 1;
 
         int lastIndex = ratingTimes.Count - 1;
+        ratingTimes[lastIndex].endTime = endTime;
 
-        Debug.Log(lastIndex);
 
-        RatingTime ratingTime = GetLatestRatingTime();
-        ratingTime.endTime = endTime;
+        //GetLatestRatingTime().endTime = endTime;
 
-        ratingTimes[lastIndex] = ratingTime;
+        //ratingTimes[lastIndex] = ratingTime;
     }
 
     //set critical start time
     public void SetStartCritialTime()
     {
-        startCriticalTime = Time.fixedTime;
+        if (startCriticalTime != float.MinValue)
+            return;
+
+        startCriticalTime = Time.time;
+
+        Debug.Log("startCriticalTime");
+        Debug.Log(startCriticalTime);
     }
 
     //set critical end time
-    public void SetEndCriticalTime(bool gameOver = false)
+    public void SetEndCriticalTime()
     {
-        endCriticalTime = Time.fixedTime;
-        AddCriticalEndTime(gameOver);
+        Debug.Log(startCriticalTime == float.MinValue);
+        Debug.Log(startCriticalTime);
+
+        if (startCriticalTime == float.MinValue)
+            return;
+
+        endCriticalTime = Time.time;
+
+        Debug.Log("endCriticalTime");
+        //Debug.Log(endCriticalTime);
+
+        AddCriticalEndTime();
         ResetCriticalTimes();
     }
 
     //add to the total critical end time for current day
-    private void AddCriticalEndTime(bool gameOver = false)
+    private void AddCriticalEndTime()
     {
         float criticalTime;
 
-        if (gameOver)
-            criticalTime = Time.fixedTime - startCriticalTime;
-        else
-            criticalTime = endCriticalTime - startCriticalTime;
+        criticalTime = endCriticalTime - startCriticalTime;
         
         int lastIndex = ratingTimes.Count - 1;
 
@@ -97,8 +112,8 @@ public class RatingSystem : MonoBehaviour
     //reset critical time
     private void ResetCriticalTimes()
     {
-        startCriticalTime = 0f;
-        endCriticalTime = 0f;
+        startCriticalTime = float.MinValue;
+        endCriticalTime = float.MinValue;
     }
 
     //get rating for current day
@@ -138,5 +153,63 @@ public class RatingSystem : MonoBehaviour
         currentRating /= ratingTimes.Count;
 
         return currentRating;
+    }
+
+    public (string, string) GetRatingTimeStamps()
+    {
+        RatingTime ratingTime = GetLatestRatingTime();
+
+        float playTime = ratingTime.endTime - ratingTime.startTime;
+        float criticalTime = ratingTime.criticalTime;
+
+        (TimeSpan, TimeSpan) timeSpanTuple = GetTimeStamps(playTime, criticalTime);
+        (string, string) timeStrings = GetTimeStringsMMSS(timeSpanTuple);
+
+        return timeStrings;
+    }
+
+    public (string, string) GetTotalRatingTimeStamps()
+    {
+        RatingTime ratingTime;
+
+        float playTime = 0f;
+        float criticalTime = 0f;
+
+        for (int i = 0; i < ratingTimes.Count; i++)
+        {
+            ratingTime = ratingTimes[i];
+
+            playTime += (ratingTime.endTime - ratingTime.startTime);
+            criticalTime += ratingTime.criticalTime;
+        }
+
+        (TimeSpan, TimeSpan) timeSpanTuple = GetTimeStamps(playTime, criticalTime);
+        (string, string) timeStrings = GetTimeStringsHHMMSS(timeSpanTuple);
+
+        return timeStrings;
+    }
+
+    private (string, string) GetTimeStringsMMSS((TimeSpan, TimeSpan) timeSpanTuple)
+    {
+        string playTime = $"{timeSpanTuple.Item1.Minutes:00}:{timeSpanTuple.Item1.Seconds:00}";
+        string criticalTime = $"{timeSpanTuple.Item2.Minutes:00}:{timeSpanTuple.Item2.Seconds:00}";
+
+        return (playTime, criticalTime);
+    }
+
+    private (string, string) GetTimeStringsHHMMSS((TimeSpan, TimeSpan) timeSpanTuple)
+    {
+        string playTime = $"{timeSpanTuple.Item1.Hours:00}{timeSpanTuple.Item1.Minutes:00}:{timeSpanTuple.Item1.Seconds:00}";
+        string criticalTime = $"{timeSpanTuple.Item2.Hours:00}{timeSpanTuple.Item2.Minutes:00}:{timeSpanTuple.Item2.Seconds:00}";
+
+        return (playTime, criticalTime);
+    }
+
+    private (TimeSpan, TimeSpan) GetTimeStamps(float playTime, float criticalTime)
+    {
+        TimeSpan playTimeSpan = TimeSpan.FromSeconds(playTime);
+        TimeSpan criticalTimeSpan = TimeSpan.FromSeconds(criticalTime);
+
+        return (playTimeSpan, criticalTimeSpan);
     }
 }

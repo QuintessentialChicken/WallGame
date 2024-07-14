@@ -1040,8 +1040,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7034121076448561292, guid: 197417fc520c3f24786b2e91e111f49a,
         type: 3}
+      propertyPath: _wallHealth
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034121076448561292, guid: 197417fc520c3f24786b2e91e111f49a,
+        type: 3}
       propertyPath: loseThreshold
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034121076448561292, guid: 197417fc520c3f24786b2e91e111f49a,
+        type: 3}
+      propertyPath: _maxWallHealth
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7034121076448561292, guid: 197417fc520c3f24786b2e91e111f49a,
         type: 3}
@@ -1052,6 +1062,11 @@ PrefabInstance:
         type: 3}
       propertyPath: highlightingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034121076448561292, guid: 197417fc520c3f24786b2e91e111f49a,
+        type: 3}
+      propertyPath: criticalThreshold
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 7034121076448561293, guid: 197417fc520c3f24786b2e91e111f49a,
         type: 3}
@@ -3223,6 +3238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: fireArrowsDestruction
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: trebuchets.reloadSpeed
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}

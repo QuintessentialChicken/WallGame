@@ -15,15 +15,23 @@ public class RatingUI : MonoBehaviour
         }
 
         DisplayRating();
+
+        Test();
+    }
+    
+    private void Test()
+    {
+        Debug.Log(RatingSystem.Instance.GetRatingTimeStamps());
+        Debug.Log(RatingSystem.Instance.GetTotalRatingTimeStamps());
     }
 
     private void DisplayRating()
     {
-        int i = RatingSystem.Instance.GetRating();
+        int i = 4 - RatingSystem.Instance.GetRating();
         //int i = RatingSystem.Instance.GetTotalRating();
-        int j = 0;
+        int j;
 
-        for (j = 0; j < i; j++)
+        for (j =0; j < i; j++)
         {
             stars[j].SetActive(true);
         }
