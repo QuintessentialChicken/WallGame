@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Wall;
 
@@ -25,7 +26,7 @@ namespace Upgrades
             LSD = 10, // LeviatedSpringDefense
             ASS = 11 // AutomatedSustainSystem
         }
-
+        
         public abstract UpgradeType Type
         {
             get;
@@ -40,6 +41,10 @@ namespace Upgrades
 
         public bool DEBUG_Activate = false;
 
+        private void Start()
+        {
+            Activate();
+        }
 
         private void Update()
         {

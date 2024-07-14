@@ -392,27 +392,14 @@ namespace Wall
         {
             if (player.SelectedUpgrade)
             {
+                var upgrade = player.SelectedUpgrade.GetComponent<Upgrade>();
                 var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
                 if (!parent.scaffoldingPiece)
                 {
                     EventManager.RaiseOnUpgradeFailed("Segment doesn't have scaffolding");
                     return;
                 }
-                if (parent.freeSlots <= 0)
-                {
-                    EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
-                    return;
-                }
-                var upgrade = Instantiate(player.SelectedUpgrade, parent.transform);
-                upgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
-                if (parent.freeSlots == 1)
-                {
-                    var newScale = upgrade.transform.localScale;
-                    newScale.x *= -1;
-                    upgrade.transform.localScale = newScale;
-                }
-                parent.freeSlots -= 1;
-                player.SelectedUpgrade = null;
+                if (parent.AddUpgrade(upgrade)) player.SelectedUpgrade = null;
             }
         }
         
@@ -421,6 +408,11 @@ namespace Wall
             if (player.SelectedUpgrade)
             {
                 var upgrade = player.SelectedUpgrade.GetComponent<Upgrade>();
+                if (upgrade.type == Upgrade.UpgradeType.ScafReinforce)
+                {
+                    EventManager.RaiseOnUpgradeFailed("This upgrade goes on the scaffolding");
+                    return;
+                }
                 var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
                 if (parent.AddUpgrade(upgrade)) player.SelectedUpgrade = null;
             }

@@ -23,6 +23,7 @@ namespace Upgrades
             Inputs.Select += ChangeSelection;
             Inputs.Confirm += ConfirmCard;
             EventManager.OnShowUpgrades += PresentUpgrades;
+            Invoke(nameof(PresentUpgrades), 3f);
         }
 
         private void OnDestroy()
@@ -44,7 +45,6 @@ namespace Upgrades
 
         private void ConfirmCard()
         {
-            print("Selected: " + cards[_selected]);
             player.SelectedUpgrade = cards[_selected].GetPrefab();
             foreach (var card in cards)
             {
@@ -58,7 +58,7 @@ namespace Upgrades
             var indices = DrawRandomUpgrade(2);
             for (var i = 0; i < cards.Count; i++)
             {
-                cards[i].SetUpgradeInfo(upgrades[0]);
+                cards[i].SetUpgradeInfo(upgrades[indices[i]]);
                 cards[i].gameObject.SetActive(true);
             }
 

@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 namespace Upgrades
 {
     public class AutomatedSelfService : CooldownUpgrade

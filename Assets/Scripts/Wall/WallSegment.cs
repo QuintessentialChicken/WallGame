@@ -242,7 +242,7 @@ namespace Wall
 
         private void RequestSoldier()
         {
-            if (wallHealth == wallMaxHealth && scaffoldingHealth == scaffoldingMaxHealth && !soldierRequested)
+            if (wallHealth == wallMaxHealth && scaffoldingHealth == scaffoldingMaxHealth && !soldierRequested && !isSoldierPresent)
                 WallManager.instance.RequestSoldier(this);
         }
 
@@ -258,6 +258,8 @@ namespace Wall
             return isScaffoldingIntact && wallHealth == wallMaxHealth;
         }
 
+        
+        
         public bool AddUpgrade(Upgrade upgrade)
         {
             if (freeSlots <= 0)
