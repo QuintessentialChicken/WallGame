@@ -45,7 +45,7 @@ public class WallSegmentCriticalUI : MonoBehaviour
 
     private void OnWallSegmentCritical(WallSegment segment)
     {
-        Debug.Log("OnWallSegmentCritical");
+        //Debug.Log("OnWallSegmentCritical");
         criticalWallSegments.Add(segment);
         gameObject.SetActive(true);
     }

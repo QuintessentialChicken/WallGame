@@ -30,7 +30,7 @@ namespace Wall
         public PostProcessing postProcessing;
         public HighlightingMode highlightingMode;
         public float loseThreshold = 0.2f;
-        public float criticalThreshold = 0.5f;
+        public float criticalThreshold = 0.9f;
 
         public int wallRows;
         public int wallColumns;
@@ -378,7 +378,7 @@ namespace Wall
             var percentage = (float)_wallHealth / _maxWallHealth;
             if (percentage <= loseThreshold)
             {
-                RatingSystem.Instance.SetEndCriticalTime(true);
+                RatingSystem.Instance.SetEndCriticalTime();
                 RatingSystem.Instance.SetEndTime();
                 EventManager.RaiseGameOver();
             }

@@ -27,11 +27,11 @@ public class RatingUI : MonoBehaviour
 
     private void DisplayRating()
     {
-        int i = RatingSystem.Instance.GetRating();
+        int i = 4 - RatingSystem.Instance.GetRating();
         //int i = RatingSystem.Instance.GetTotalRating();
-        int j = 0;
+        int j;
 
-        for (j = 0; j < i; j++)
+        for (j =0; j < i; j++)
         {
             stars[j].SetActive(true);
         }
