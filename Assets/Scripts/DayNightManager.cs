@@ -55,9 +55,33 @@ public class DayNightManager : MonoBehaviour
             fadeScreen.color = new Color(0, 0, 0, t);
             yield return null;
         }
-        SceneManager.LoadScene("Day");
+        SceneManager.LoadScene("Day_Siege");
         yield return null;
     }
+
+    private IEnumerator ChangeToNight()
+    {
+        StopCoroutine(nameof(ChangeToDay));
+        for (float t = 0; t <= 1; t += Time.deltaTime)
+        {
+            fadeScreen.color = new Color(0, 0, 0, t);
+            yield return null;
+        }
+        SceneManager.LoadScene("Evening_Upgrades");
+        yield return null;
+    }
+
+    /*private IEnumerator ChangeToRating()
+    {
+        StopCoroutine(nameof(ChangeToDay));
+        for (float t = 0; t <= 1; t += Time.deltaTime)
+        {
+            fadeScreen.color = new Color(0, 0, 0, t);
+            yield return null;
+        }
+        SceneManager.LoadScene("Rating");
+        yield return null;
+    }*/
 
     private IEnumerator ChangeToTutorial()
     {
@@ -71,7 +95,7 @@ public class DayNightManager : MonoBehaviour
         SceneManager.LoadScene("Tutorial");
         yield return null;
     }
-
+    /*
     public void RequestChangeToDay()
     {
         StartCoroutine(nameof(ChangeToDay));
@@ -85,7 +109,7 @@ public class DayNightManager : MonoBehaviour
     public void RequestChangeToTutorial()
     {
         StartCoroutine(nameof(ChangeToTutorial));
-    }
+    }*/
 
     private IEnumerator FadeIn()
     {
@@ -96,25 +120,36 @@ public class DayNightManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ChangeToNight()
+    private bool changing = false;
+
+    public void RequestChangeTo(TimeOfDay timeOfDay)
     {
-        StopCoroutine(nameof(ChangeToDay));
-        for (float t = 0; t <= 1; t += Time.deltaTime)
+        if (changing) return;
+        changing = true;
+        switch (timeOfDay)
         {
-            fadeScreen.color = new Color(0, 0, 0, t);
-            yield return null;
+            case TimeOfDay.Day_Siege:
+                StartCoroutine(nameof(ChangeToDay));
+                break;
+            case TimeOfDay.Evening_Upgrades:
+                StartCoroutine(nameof(ChangeToNight));
+                break;
+            case TimeOfDay.Tutorial:
+                StartCoroutine(nameof(ChangeToTutorial));
+                break;
         }
-        SceneManager.LoadScene("Night");
-        yield return null;
     }
+
+    
 
     private void SetUpDictionary()
     {
         map = new Dictionary<TimeOfDay, LightingSettings>
         {
-            { TimeOfDay.Day, day },
-            { TimeOfDay.Evening, evening },
-            { TimeOfDay.Night, night }
+            { TimeOfDay.Day_Siege, day },
+            { TimeOfDay.Evening_Upgrades, evening },
+            { TimeOfDay.Night_Rating, night },
+            { TimeOfDay.Tutorial, day }
         };
     }
 
@@ -141,11 +176,7 @@ public class DayNightManager : MonoBehaviour
     private void UpdateSky()
     {
         LightingSettings settings;
-        if (map.TryGetValue(setTimeOfDay, out settings))
-        {
-            settings.timeSpecificProps?.SetActive(false);
-        }
-
+        
         if (map.TryGetValue(timeOfDay, out settings))
         { 
             dirLight.intensity = settings.dirLightIntensity;
@@ -153,7 +184,7 @@ public class DayNightManager : MonoBehaviour
             dirLight.transform.rotation = Quaternion.Euler(settings.dirRotation);
             UnityEngine.RenderSettings.skybox = settings.skyMaterial;
 
-            settings.timeSpecificProps?.SetActive(true);
+            //settings.timeSpecificProps?.SetActive(true);
         }
         
         setTimeOfDay = timeOfDay;
@@ -161,13 +192,14 @@ public class DayNightManager : MonoBehaviour
 
     public enum TimeOfDay
     {
-        Day, Evening, Night
+        Tutorial = 100,
+        Day_Siege = 0, Evening_Upgrades = 1, Night_Rating = 2
     }
 
     [System.Serializable]
     public class LightingSettings
     {
-        public GameObject timeSpecificProps;
+        //public GameObject timeSpecificProps;
         public Material skyMaterial;
         public float dirLightIntensity;
         public Color dirLightColor;

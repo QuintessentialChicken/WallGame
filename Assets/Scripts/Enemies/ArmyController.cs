@@ -12,11 +12,19 @@ namespace Enemies
     public class ArmyController : MonoBehaviour
     {
         public static ArmyController instance;
+        public int enemyCount = 100;
 
         // Start is called before the first frame update
         [Header("_______________ Gameplay Relevant _______________")] [SerializeField]
-        public DifficultySettings difficultySettings;
-        public int enemyCount = 100;
+        
+        public int day = 1;
+        public DifficultySettings currentDifficulty;
+        [Space]
+        public DifficultySettings difficultyDay1;
+        public DifficultySettings difficultyDay7;
+        public int tarBarrelsFromDay = 2;
+        public int flourBarrelsFromDay = 3;
+        
 
         [SerializeField]
         [Tooltip("RANDOM\nThe Columns are picket randomly\n\n" +
@@ -95,6 +103,11 @@ namespace Enemies
             instance = this;
         }
 
+        public void OnValidate()
+        {
+            currentDifficulty = GetDifficulty(day);
+        }
+
         private void Start()
         {
             _columns = WallManager.instance.wallColumns;
@@ -103,16 +116,18 @@ namespace Enemies
                 Debug.LogError("trebuchet projectile flight time should never be lower than trebuchet cooldown! flight time will now be set to " + (_trebuchetCooldown + 0.1f));
                 _trebuchets.projectile.flightTime = _trebuchetCooldown + 0.1f;
             }*/
+            currentDifficulty = GetDifficulty(day);
             CreateEmptyParents();
             SpawnArmy();
             SpawnTrebuchets();
             SpawnBowmen();
 
-            Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldownOffset);
-            if (difficultySettings.fireArrowsCooldown != 0) Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldownOffset);
-            if (difficultySettings.flourBarrelCooldown != 0) Invoke(nameof(LaunchFlourBarrel), difficultySettings.flourBarrelCooldownOffset);
-            if (difficultySettings.tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), difficultySettings.tarBarrelCooldownOffset);
-            
+            Invoke(nameof(LaunchTrebuchet), currentDifficulty.trebuchetCooldownOffset);
+            if (currentDifficulty.fireArrowsCooldown != 0) Invoke(nameof(LaunchFireArrows), currentDifficulty.fireArrowsCooldownOffset);
+            //if (currentDifficulty.flourBarrelCooldown != 0) Invoke(nameof(LaunchFlourBarrel), currentDifficulty.flourBarrelCooldownOffset);
+            //if (currentDifficulty.tarBarrelCooldown != 0) Invoke(nameof(LaunchTarBarrel), currentDifficulty.tarBarrelCooldownOffset);
+            StartCoroutine(nameof(BarrelCoroutine));
+
             _wallManager = FindObjectOfType<WallManager>();
             columnsHit = new List<bool>();
             _columns = WallManager.instance.wallColumns;
@@ -180,7 +195,7 @@ namespace Enemies
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, new Vector3(worldX, 0, barrelArea.z));
 
             // Restart cooldown
-            Invoke(nameof(LaunchTarBarrel), difficultySettings.tarBarrelCooldown);
+            //Invoke(nameof(LaunchTarBarrel), currentDifficulty.barrelCooldown);
         }
 
         private void LaunchFlourBarrel()
@@ -194,14 +209,14 @@ namespace Enemies
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.FlourBarrel, new Vector3(worldX, 0, barrelArea.z));
 
             // Restart cooldown
-            Invoke(nameof(LaunchFlourBarrel), difficultySettings.flourBarrelCooldown);
+            //Invoke(nameof(LaunchFlourBarrel), currentDifficulty.flourBarrelCooldown);
         }
 
         private void LaunchTrebuchet()
         {
             if (targetingScheme == TargetingScheme.HoldFire)
             {
-                Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldown);
+                Invoke(nameof(LaunchTrebuchet), currentDifficulty.trebuchetCooldown);
                 return;
             }
 
@@ -242,14 +257,14 @@ namespace Enemies
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.Stone, segments[chosenWallIndex].transform.position, chosenWallIndex);
 
             // Restart cooldown
-            Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldown);
+            Invoke(nameof(LaunchTrebuchet), currentDifficulty.trebuchetCooldown);
         }
 
         public void LaunchFireArrows()
         {
             if (targetingScheme == TargetingScheme.HoldFire)
             {
-                Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldown);
+                Invoke(nameof(LaunchFireArrows), currentDifficulty.fireArrowsCooldown);
                 return;
             }
             var parts = bowmen.count / _columns;
@@ -259,7 +274,7 @@ namespace Enemies
             {
                 
                 if (i == _columns - 1) parts += remainder;
-                if (Random.Range(0f, 1f) > difficultySettings.fireArrowsDestruction) continue;
+                if (Random.Range(0f, 1f) > currentDifficulty.fireArrowsDestruction) continue;
                 for (var j = 0; j < parts; j++)
                 {
                     var worldStart = transform.position
@@ -278,7 +293,7 @@ namespace Enemies
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
             }
 
-            Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldown);
+            Invoke(nameof(LaunchFireArrows), currentDifficulty.fireArrowsCooldown);
         }
 
         public void SetTargetingScheme(TargetingScheme scheme)
@@ -312,9 +327,22 @@ namespace Enemies
             Kill(5);
         }
 
+
+        private bool lastBarrelTar = false;
+        private IEnumerator BarrelCoroutine()
+        {
+            while (enemyCount > 5)
+            {
+                yield return new WaitForSeconds(currentDifficulty.barrelCooldown);
+                lastBarrelTar = !lastBarrelTar;
+                if (lastBarrelTar && day > flourBarrelsFromDay) LaunchFlourBarrel();
+                else if (day > tarBarrelsFromDay) LaunchTarBarrel();
+            }
+        }
+
         private void SpawnArmy()
         {
-            enemyCount = difficultySettings.enemySoldiers;
+            enemyCount = currentDifficulty.enemySoldiers;
             float vertDistance = (footsoldiers.spawnAreaUpperRight.y - footsoldiers.spawnAreaLowerLeft.y) / enemyCount;
             for (var i = 0; i < enemyCount; i++)
             {
@@ -379,6 +407,7 @@ namespace Enemies
 
         private void Kill(int count)
         {
+            if (enemyCount <= 0) return;
             for (var i = 0; i < count; i++)
             {
                 var victim = _footsoldierParent.GetChild(0);
@@ -388,10 +417,22 @@ namespace Enemies
                 _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
                 if (enemyCount <= 0)
                 {
-                    DayNightManager.instance.RequestChangeToNight();
+                    DayNightManager.instance.RequestChangeTo(DayNightManager.TimeOfDay.Evening_Upgrades);
                     RatingSystem.Instance.SetEndTime();
                 }
             }
+        }
+
+        private DifficultySettings GetDifficulty(int day)
+        {
+            float lerpValue = (day - 1.0f) / 6.0f;
+            return new DifficultySettings(
+                difficultyDay1.enemySoldiers + (day-1) * 10,
+                Mathf.LerpUnclamped(difficultyDay1.trebuchetCooldown, difficultyDay7.trebuchetCooldown, lerpValue),
+                Mathf.LerpUnclamped(difficultyDay1.fireArrowsCooldown, difficultyDay7.fireArrowsCooldown, lerpValue),
+                Mathf.LerpUnclamped(difficultyDay1.fireArrowsDestruction, difficultyDay7.fireArrowsDestruction, lerpValue),
+                day <= tarBarrelsFromDay? 0 : Mathf.LerpUnclamped(difficultyDay1.barrelCooldown, difficultyDay7.barrelCooldown, lerpValue)
+                );
         }
 
         private void KillTrebuchet()
@@ -535,18 +576,34 @@ namespace Enemies
     [System.Serializable]
     public class DifficultySettings
     {
+        public DifficultySettings(int _enemyCount, 
+            float _trebuchetCooldown, 
+            float _firearrowCooldown,
+            float _fireArrowDestruction,
+            float _barrelCooldown) { 
+            enemySoldiers = _enemyCount;
+            trebuchetCooldown = _trebuchetCooldown;
+            trebuchetCooldownOffset = trebuchetCooldown;
+
+            fireArrowsCooldown = _firearrowCooldown;
+            fireArrowsDestruction = _fireArrowDestruction;
+            fireArrowsCooldownOffset = _firearrowCooldown / 2;
+
+            barrelCooldown = _barrelCooldown;
+            barrelCooldownOffset = barrelCooldown / 2;
+        }
         public int enemySoldiers;
         [Space]
         public float trebuchetCooldown;
-        public float trebuchetCooldownOffset;
+        public float trebuchetCooldownOffset { get; private set; }
         [Space]
         public float fireArrowsCooldown;
-        public float fireArrowsCooldownOffset;
+        public float fireArrowsCooldownOffset { get; private set; }
         public float fireArrowsDestruction;
         [Space]
-        public float tarBarrelCooldown;
-        public float tarBarrelCooldownOffset;
-        public float flourBarrelCooldown;
-        public float flourBarrelCooldownOffset;
+        public float barrelCooldown;
+        public float barrelCooldownOffset { get; private set; }
+        
+     
     }
 }
