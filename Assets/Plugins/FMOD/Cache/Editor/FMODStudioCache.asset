@@ -1,0 +1,860 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9142907880351331070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/NightHangout
+  m_EditorClassIdentifier: 
+  Path: event:/Music/NightHangout
+  Guid:
+    Data1: 535839300
+    Data2: 1230386050
+    Data3: -583384440
+    Data4: -1266050084
+  Banks:
+  - {fileID: -1098851174194091924}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8245557306876827660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/EnemyHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/EnemyHit
+  Guid:
+    Data1: -1422849468
+    Data2: 1120863910
+    Data3: 1316567701
+    Data4: -1075999583
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7723787633294202433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WalltherGasp
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WalltherGasp
+  Guid:
+    Data1: 1550890342
+    Data2: 1269411675
+    Data3: -1191501436
+    Data4: 1695735829
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 5330401266378151811}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7548656779407462462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Drums
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Drums
+  Guid:
+    Data1: 531133957
+    Data2: 1239722633
+    Data3: -964308826
+    Data4: -582249093
+  Banks:
+  - {fileID: -1098851174194091924}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7396312243065041733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: fmod-the-wall/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638564727613602369
+  FileSizes:
+  - Name: Desktop
+    Value: 2204
+  Exists: 1
+--- !u!114 &-6713228502488116203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WalltherLanding
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WalltherLanding
+  Guid:
+    Data1: -1692839648
+    Data2: 1228436415
+    Data3: 154808251
+    Data4: -321216652
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6484530055729486339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/StoneCollect
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/StoneCollect
+  Guid:
+    Data1: -1534812629
+    Data2: 1277884432
+    Data3: -1528844364
+    Data4: -362184716
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6405210066078838047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/ScaffoldingFix
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/ScaffoldingFix
+  Guid:
+    Data1: 1619858797
+    Data2: 1081894445
+    Data3: 1970714755
+    Data4: 1184337574
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 600
+--- !u!114 &-6134364529488127355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WalltherGrunt
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WalltherGrunt
+  Guid:
+    Data1: 955558673
+    Data2: 1192619938
+    Data3: -2088292214
+    Data4: 892885341
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6015819329106733538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/EnemyArrowWhoosh
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/EnemyArrowWhoosh
+  Guid:
+    Data1: -30304041
+    Data2: 1238418047
+    Data3: -2056448362
+    Data4: 1350682923
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1812
+--- !u!114 &-5244278140885980333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TrebuchetShoot 2
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TrebuchetShoot 2
+  Guid:
+    Data1: 726863937
+    Data2: 1306725856
+    Data3: -1813144928
+    Data4: -1291138116
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1108
+--- !u!114 &-5101906691539197851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/SkillUpgrade
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/SkillUpgrade
+  Guid:
+    Data1: 1182840758
+    Data2: 1136485474
+    Data3: -342803301
+    Data4: -805546817
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4021584644928239314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/CrossbowmenArrowShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/CrossbowmenArrowShoot
+  Guid:
+    Data1: -1397613089
+    Data2: 1279902066
+    Data3: -347581534
+    Data4: 1045225641
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1098851174194091924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: fmod-the-wall/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638563789985439616
+  FileSizes:
+  - Name: Desktop
+    Value: 1991648
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -7396312243065041733}
+  - {fileID: 7199108342733774473}
+  - {fileID: -1098851174194091924}
+  - {fileID: 908550654524595327}
+  EditorEvents:
+  - {fileID: -7548656779407462462}
+  - {fileID: -9142907880351331070}
+  - {fileID: 898531028451854133}
+  - {fileID: -6134364529488127355}
+  - {fileID: 8965115186469670802}
+  - {fileID: 1923767087441528494}
+  - {fileID: 1774381785656110450}
+  - {fileID: 2335392274029900596}
+  - {fileID: -6713228502488116203}
+  - {fileID: -6484530055729486339}
+  - {fileID: -5244278140885980333}
+  - {fileID: -8245557306876827660}
+  - {fileID: 6846384500174436608}
+  - {fileID: -7723787633294202433}
+  - {fileID: 5139710739864750472}
+  - {fileID: -6405210066078838047}
+  - {fileID: 3314616789023712781}
+  - {fileID: 6809333000260099053}
+  - {fileID: 29428684040022247}
+  - {fileID: -5101906691539197851}
+  - {fileID: -6015819329106733538}
+  - {fileID: 4599346409160628847}
+  - {fileID: -4021584644928239314}
+  - {fileID: 9181690369873669518}
+  - {fileID: 386122356051262174}
+  - {fileID: 3659867395357131885}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 7199108342733774473}
+  StringsBanks:
+  - {fileID: -7396312243065041733}
+  cacheTime: 638564727613682384
+  cacheVersion: 131618
+--- !u!114 &29428684040022247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/CrossbowmanDie
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/CrossbowmanDie
+  Guid:
+    Data1: 1806533269
+    Data2: 1292912637
+    Data3: -447289426
+    Data4: 477976523
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &386122356051262174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TrebuchetDamage
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TrebuchetDamage
+  Guid:
+    Data1: 911856507
+    Data2: 1097000123
+    Data3: 711784080
+    Data4: 270604643
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5000
+--- !u!114 &898531028451854133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FireErupt
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FireErupt
+  Guid:
+    Data1: -1192477167
+    Data2: 1147549107
+    Data3: -1976337228
+    Data4: 1827557673
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 57200
+--- !u!114 &908550654524595327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: fmod-the-wall/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638564727613682384
+  FileSizes:
+  - Name: Desktop
+    Value: 1684576
+  Exists: 1
+--- !u!114 &1774381785656110450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/BowAimShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/BowAimShoot
+  Guid:
+    Data1: 1038348313
+    Data2: 1250596211
+    Data3: 1095967913
+    Data4: 464545506
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1923767087441528494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WoodCollect
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WoodCollect
+  Guid:
+    Data1: 1271550232
+    Data2: 1129023159
+    Data3: -148357731
+    Data4: 929558672
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2335392274029900596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TrebuchetShoot
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TrebuchetShoot
+  Guid:
+    Data1: -62304480
+    Data2: 1215237371
+    Data3: 1505206455
+    Data4: 1938336490
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1058
+--- !u!114 &3314616789023712781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/CatapultRelease
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/CatapultRelease
+  Guid:
+    Data1: -1025024655
+    Data2: 1145616098
+    Data3: 138090168
+    Data4: 781090896
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 400
+--- !u!114 &3659867395357131885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TrebuchetShoot 3
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TrebuchetShoot 3
+  Guid:
+    Data1: -2144741752
+    Data2: 1093932345
+    Data3: -1226090867
+    Data4: -1607290087
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 658
+--- !u!114 &4599346409160628847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WallHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WallHit
+  Guid:
+    Data1: -10476069
+    Data2: 1227114015
+    Data3: -1030870876
+    Data4: 1134352705
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5139710739864750472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/CatapultMount
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/CatapultMount
+  Guid:
+    Data1: 1743618663
+    Data2: 1093544141
+    Data3: -1579651144
+    Data4: 565469767
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5330401266378151811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/WalltherGasp/VolumeCurve
+  m_EditorClassIdentifier: 
+  Name: VolumeCurve
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1213193187
+    data2: 3286897205
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &6809333000260099053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WalltherRun
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WalltherRun
+  Guid:
+    Data1: -33900934
+    Data2: 1314721158
+    Data3: 89094828
+    Data4: -128507959
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6846384500174436608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WalltherRallyingTroops
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WalltherRallyingTroops
+  Guid:
+    Data1: -2113957798
+    Data2: 1247366868
+    Data3: 994358192
+    Data4: 759701989
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7199108342733774473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: fmod-the-wall/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638563789985367753
+  FileSizes:
+  - Name: Desktop
+    Value: 1340
+  Exists: 1
+--- !u!114 &8965115186469670802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/WallFix
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/WallFix
+  Guid:
+    Data1: -1707818475
+    Data2: 1148054569
+    Data3: 1264557447
+    Data4: -1240417606
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9181690369873669518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TrebuchetWhoosh
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TrebuchetWhoosh
+  Guid:
+    Data1: -375256225
+    Data2: 1259337611
+    Data3: 1062354355
+    Data4: -1415570796
+  Banks:
+  - {fileID: 908550654524595327}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3186

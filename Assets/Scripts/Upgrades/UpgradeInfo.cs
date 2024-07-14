@@ -1,32 +1,32 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "UpgradeInfo", menuName = "UpgradeInfo")]
-public class UpgradeInfo : ScriptableObject
+namespace Upgrades
 {
-    public Upgrade upgradePrefab;
-    public UpgradeName id;
-    public string title;
-    public string subtitle;
+    [CreateAssetMenu(fileName = "UpgradeInfo", menuName = "UpgradeInfo")]
+    public class UpgradeInfo : ScriptableObject
+    {
+        public GameObject upgradePrefab;
+        public Upgrade.UpgradeType id;
+        public string title;
+        public string subtitle;
 
-    public Rarity rarety;
+        public Rarity rarety;
 
-    [TextArea]
-    public string description;
+        [TextArea] public string description;
 
-    [Header("For Active Upgrades")]
-    public float cooldown;
+        [Header("For Active Upgrades")] public float cooldown;
 
-    [Header("Images")]
-    public Sprite foreground;
-    public Sprite glow;
-    public Sprite background;
+        [Header("Images")] public Sprite foreground;
+        public Sprite glow;
+        public Sprite background;
 
-    [Header("Smite me down, Odin")]
-    public int lineCount = 1;
-}
+        [Header("Smite me down, Odin")] public int lineCount = 1;
+    }
 
-public enum Rarity
-{
-    Common, Rare, Epic
+    public enum Rarity
+    {
+        Common,
+        Rare,
+        Epic
+    }
 }

@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using Upgrades;
 using Random = UnityEngine.Random;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -105,8 +106,6 @@ namespace Player
         private bool _hasCamera;
 
         private Inputs _input;
-        // inventory
-
 
         // timeout
         private float _jumpTimeoutDelta;
@@ -123,6 +122,10 @@ namespace Player
 
         // player
         private float _speed;
+
+        // upgrades
+
+        public GameObject SelectedUpgrade { get; set; }
 
 
         private readonly GUIStyle _style = new();

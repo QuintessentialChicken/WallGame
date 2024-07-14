@@ -8,6 +8,8 @@ namespace Wall
 {
     public class FriendlySoldier : MonoBehaviour
     {
+        public bool DEBUG_Death;
+        [Space]
         public float moveSpeed = 5f; // Speed at which the soldier moves
 
         [SerializeField] private TargetProjectile boltPrefab;
@@ -32,6 +34,7 @@ namespace Wall
         private WallSegment _targetSegment;
 
         private ArmyController _armyController;
+        public int Damage { get; set; } = 1;
 
         private void Awake()
         {
@@ -39,13 +42,18 @@ namespace Wall
             _anim = GetComponent<Animator>();
             _anim.SetTrigger(_animIDStopRunning);
             _anim.SetBool(_animIDRightPlace, true);
-            RandomizeLook();
+            
             RandomizeSpeed(0.95f, 1.05f);
             _armyController = FindObjectOfType<ArmyController>();
         }
 
         private void Update()
         {
+            if (DEBUG_Death)
+            {
+                Die();
+                DEBUG_Death = false;
+            }
             if (!_isMoving) return;
             if (!_targetSegment.IsIntact()) Die();
             transform.position = Vector3.MoveTowards(transform.position, _targetPosition, moveSpeed * Time.deltaTime);
@@ -93,17 +101,44 @@ namespace Wall
             _isMoving = false;
         }
 
+        public void EnableRagdoll(float multipl)
+        {
+            _anim.enabled = false;
+            transform.parent = null;
+            foreach (Rigidbody rB in GetComponentsInChildren<Rigidbody>())
+            {
+                rB.isKinematic = false;
+                
+                rB.velocity = multipl * new Vector3(Random.Range(-0.5f, 0.5f), 3 + Random.Range(-0.5f, 0.5f), -3);
+            }
+            Invoke(nameof(AnimEvent_Death), 3);
+        }
+
+        public void DisableRagdoll()
+        {
+            _anim.enabled = true;
+
+            foreach (Rigidbody rB in GetComponentsInChildren<Rigidbody>())
+            {
+                rB.isKinematic = true;
+            }
+        }
+
         // Invoked by Soldier Animator after Death Animation has finished
         private void AnimEvent_Death()
         {
             //print("I dieded");
+            DisableRagdoll();
             gameObject.SetActive(false); // Destroy the soldier if the scaffolding is not walkable
             WallManager.instance.RecycleSoldier(this);
         }
 
         public void AnimEvent_ShotFired()
         {
-            _armyController.Invoke(nameof(ArmyController.BoltArrives), boltSettings.flightTime);
+            for (var i = 0; i < Damage; i++)
+            {
+                _armyController.Invoke(nameof(ArmyController.BoltArrives), boltSettings.flightTime);
+            }
 
             var bolt = Instantiate(boltPrefab, releasePoint.position, releasePoint.rotation);
             var nextVictim = _armyController.GetFootsoldierPosition();
@@ -111,15 +146,6 @@ namespace Wall
             bolt.SetUp(boltSettings);
 
             RandomizeSpeed(0.95f, 1.05f); // Each shot is done with a little bit of different speed
-        }
-
-        private void RandomizeLook()
-        {
-            var leftHanded = Random.Range(0.0f, 1.0f) < 0.3f;
-            transform.localScale = new Vector3((leftHanded ? -1 : 1) * transform.localScale.x, transform.localScale.y,
-                transform.localScale.z);
-            var helmet = Random.Range(0, helmetVariants.Count);
-            for (var i = 0; i < helmetVariants.Count; i++) helmetVariants[i].SetActive(i == helmet);
         }
 
         private void RandomizeSpeed(float minSpeed, float maxSpeed)

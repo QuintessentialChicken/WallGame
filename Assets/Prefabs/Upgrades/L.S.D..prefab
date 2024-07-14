@@ -207,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 02aa4ecb45cc7234cbb901ace6021f7a,
         type: 3}
       propertyPath: m_Name
-      value: LeviatedSpringDefense
+      value: L.S.D.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02aa4ecb45cc7234cbb901ace6021f7a, type: 3}
@@ -250,11 +250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0434bcc771aa554fb021ab7308c0689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpgradeName: 10
+  type: 10
   DEBUG_Activate: 0
   cooldown: 10
+  standardAnimDur: 3.03
   readyFlag: {fileID: 8517731932497797298}
-  remaining: 0
+  remainingSeconds: 0
   enemyDamage: 5
   projectileFlightTime: 2
   projectileSpawnPoint: {fileID: 1307852958}

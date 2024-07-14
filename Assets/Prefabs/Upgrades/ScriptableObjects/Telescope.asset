@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f2abd53f7a6c419285dc0d4324a61, type: 3}
   m_Name: Telescope
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 7849088900141762529, guid: 292a6d23ed2fc0742995665d6f5295d2,
+  upgradePrefab: {fileID: 3579713853021790887, guid: 292a6d23ed2fc0742995665d6f5295d2,
     type: 3}
   id: 6
   title: Telescope

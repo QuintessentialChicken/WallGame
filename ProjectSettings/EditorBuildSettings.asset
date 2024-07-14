@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Towsif.unity
     guid: e89b08e781af97d4693164066b491840
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: d20b03585defae34abf6a1c57c916633
+  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 9e681407950f54a419518a8a08046904
   - enabled: 1
@@ -20,12 +23,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: c991fa03af9000e40a85638bde16a0ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Day.unity
     guid: e579069aa2053b94ca3404634550f643
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Night.unity
     guid: 9c0236e7b9be3244f88ebb198daa48f1
+  - enabled: 1
+    path: Assets/Scenes/Evening_Upgrades.unity
+    guid: 5eecfc9e69b22484495b4c5b76f7f80a
+  - enabled: 1
+    path: Assets/Scenes/Night_Rating.unity
+    guid: 8f4d9009063c53147ba06a6ba9e00fa9
+  - enabled: 1
+    path: Assets/Scenes/Day_Siege.unity
+    guid: 3359c3ad0076be5419beb6c6b3be84bb
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}

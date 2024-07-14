@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f2abd53f7a6c419285dc0d4324a61, type: 3}
   m_Name: BrokenMirror
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 4587192352923221397, guid: 32983d9f09f8c794f9b0fbc0d6ebed07,
+  upgradePrefab: {fileID: 4084832699302935687, guid: 32983d9f09f8c794f9b0fbc0d6ebed07,
     type: 3}
   id: 4
   title: Broken Mirror

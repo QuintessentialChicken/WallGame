@@ -1,18 +1,13 @@
-
-
 using UnityEngine;
 
-public class PassiveUpgrade : Upgrade
+namespace Upgrades
 {
-    public override bool Activate()
+    public abstract class PassiveUpgrade : Upgrade
     {
-        Debug.Log("The " + name + " took effect.");
-        return true;
-    }
-
-    public override void UpgradeUpdate()
-    {
-        // Passive
+        public override void UpgradeUpdate()
+        {
+            return;
+            // Passive
+        }
     }
 }
-
