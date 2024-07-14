@@ -390,7 +390,7 @@ namespace Enemies
                 _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
                 if (enemyCount <= 0)
                 {
-                    DayNightManager.instance.RequestChangeToNight();
+                    DayNightManager.instance.RequestChangeTo(DayNightManager.TimeOfDay.Evening_Upgrades);
                     RatingSystem.Instance.SetEndTime();
                 }
             }

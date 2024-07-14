@@ -91,7 +91,7 @@ public class TutorialController : MonoBehaviour
         
         if (currentIndex == _texts.Count)
         {
-            DayNightManager.instance.RequestChangeToDay();
+            DayNightManager.instance.RequestChangeTo(DayNightManager.TimeOfDay.Day_Siege);
         }
         if (-1 < currentIndex && currentIndex < _texts.Count)
         {

@@ -78,7 +78,7 @@ public class MainMenuCrossbow : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         schild1tutorial.transform.parent.Rotate(-5, 0, 0);
         yield return new WaitForSeconds(0.5f);
-        DayNightManager.instance.RequestChangeToTutorial();
+        DayNightManager.instance.RequestChangeTo(DayNightManager.TimeOfDay.Tutorial);
     }
 
     public IEnumerator DelayedFreePlayStart()
@@ -86,7 +86,7 @@ public class MainMenuCrossbow : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         schild2freeplay.transform.parent.Rotate(-5, 0, 0);
         yield return new WaitForSeconds(0.5f);
-        DayNightManager.instance.RequestChangeToDay();
+        DayNightManager.instance.RequestChangeTo(DayNightManager.TimeOfDay.Day_Siege);
     }
 
     IEnumerator Reloading()
