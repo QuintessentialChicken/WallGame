@@ -56,7 +56,11 @@
 			<destination>{97ebdec7-26a0-48a6-83dc-06059fdc7801}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{4ffd7971-4497-44ac-ae84-b787b0cab34f}" />
+	<object class="EventAutomatableProperties" id="{4ffd7971-4497-44ac-ae84-b787b0cab34f}">
+		<property name="isPersistent">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{78a4aa8e-8d67-4f61-b148-6c45986030b4}" />
 	<object class="Timeline" id="{876b05f3-841d-4766-8f73-2ad9e0d7663e}">
 		<relationship name="modules">
@@ -75,11 +79,11 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{72d675f9-3a16-483a-b3fe-a05415887ea1}">
-		<property name="start">
-			<value>0.60000000000000009</value>
-		</property>
 		<property name="length">
-			<value>2.5861224489795918</value>
+			<value>0.98612244897959145</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>1.6000000000000003</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{bf81ff6d-76a9-4dbb-b19c-0b90463f19b4}</destination>
@@ -94,9 +98,31 @@
 	<object class="MixerBusEffectChain" id="{247b10a1-5154-4d43-9739-2c730c39b855}">
 		<relationship name="effects">
 			<destination>{2c28c08e-476e-47bf-9e2c-7ff5d7ea923d}</destination>
+			<destination>{94d81097-d285-455a-ace7-a7d6128fb093}</destination>
+			<destination>{093e181d-9173-4751-946e-7f1bc9c15033}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{d91e0a93-5ccf-4a5a-9bd8-13d023c149b5}" />
+	<object class="MixerBusPanner" id="{d91e0a93-5ccf-4a5a-9bd8-13d023c149b5}">
+		<property name="stereoPan">
+			<value>18</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{7cbd7c26-b304-4dbd-ba14-a521c7b7a899}" />
 	<object class="MixerBusFader" id="{2c28c08e-476e-47bf-9e2c-7ff5d7ea923d}" />
+	<object class="ObjectSpatialiserEffect" id="{94d81097-d285-455a-ace7-a7d6128fb093}">
+		<property name="minimumDistance">
+			<value>0</value>
+		</property>
+		<property name="maximumDistance">
+			<value>8.80000019</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{093e181d-9173-4751-946e-7f1bc9c15033}">
+		<property name="decayTime">
+			<value>6500</value>
+		</property>
+		<property name="wetLevel">
+			<value>-7.5</value>
+		</property>
+	</object>
 </objects>

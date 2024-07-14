@@ -90,9 +90,9 @@ namespace Wall
 
         public void DieByArrows()
         {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.crossbowmanScream, this.transform.position);
             _anim.SetTrigger(_animIDDeathByArrows);
             _isMoving = false;
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.crossbowmanScream, this.transform.position);
         }
 
         // Invoked by Soldier Animator after Death Animation has finished

@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{fae0edc2-c248-4a20-b092-253d1037b556}">
+	<object class="AudioFile" id="{7778e91e-328f-4b95-9279-df6f4000a083}">
 		<property name="assetPath">
-			<value>crowd-panic.mp3</value>
-		</property>
-		<property name="isStreaming">
-			<value>true</value>
+			<value>catapult-release.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>24</value>
+			<value>44.0999985</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>136.24799999999999</value>
+			<value>1</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>

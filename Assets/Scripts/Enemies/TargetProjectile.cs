@@ -86,6 +86,11 @@ namespace Enemies
             _destination = position;
         }
 
+        public Vector3 GetDestination()
+        {
+            return _destination;
+        }
+
         private void StartFlightTimer()
         {
             _startOfLife = Time.time;

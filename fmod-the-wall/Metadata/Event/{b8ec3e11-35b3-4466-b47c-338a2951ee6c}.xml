@@ -95,9 +95,6 @@
 	</object>
 	<object class="MultiSound" id="{bcb48f3a-5489-490a-9350-801629aabe78}" />
 	<object class="SingleSound" id="{7d930b8f-d8e9-4f76-aa19-60f1020dac4a}">
-		<property name="start">
-			<value>2.4000000000000004</value>
-		</property>
 		<property name="length">
 			<value>3</value>
 		</property>
@@ -131,9 +128,13 @@
 	<object class="MixerBusEffectChain" id="{79e44a20-b0fd-443f-9afc-a956ed968a36}">
 		<relationship name="effects">
 			<destination>{51305751-295d-467b-94cc-de6ea1c90aed}</destination>
+			<destination>{36803062-b341-41c1-af8a-5a17d43d62c7}</destination>
+			<destination>{bc5d81a2-39ed-496c-9ddf-17cd679889ba}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e2853212-ce31-4b03-b405-07aea9944dc0}" />
 	<object class="MixerBusFader" id="{f03735f2-dad9-4aec-b1a9-4bff10cbdc43}" />
 	<object class="MixerBusFader" id="{51305751-295d-467b-94cc-de6ea1c90aed}" />
+	<object class="ObjectSpatialiserEffect" id="{36803062-b341-41c1-af8a-5a17d43d62c7}" />
+	<object class="PannerEffect" id="{bc5d81a2-39ed-496c-9ddf-17cd679889ba}" />
 </objects>

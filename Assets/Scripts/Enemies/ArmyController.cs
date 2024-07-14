@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using Wall;
 using Random = UnityEngine.Random;
 using FMODUnity;
+using Player;
 
 namespace Enemies
 {
@@ -176,10 +177,13 @@ namespace Enemies
             int trebuchetIndex = Mathf.FloorToInt(((worldX + barrelArea.x) / (barrelArea.x*2)) * WallManager.instance.wallColumns);
 
             // Launch
-            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, new Vector3(worldX, 0, barrelArea.z));
+            Vector3 target = new(worldX, 0, barrelArea.z);
+            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.TarBarrel, target);
 
             // Restart cooldown
             Invoke(nameof(LaunchTarBarrel), difficultySettings.tarBarrelCooldown);
+            StartCoroutine(InvokeAfterDelay(3, LaunchTrebuchetSound, target));
+            StartCoroutine(InvokeAfterDelay(4.8f, LaunchBarrelBreakingSound, target));
         }
 
         private void LaunchFlourBarrel()
@@ -190,10 +194,13 @@ namespace Enemies
             int trebuchetIndex = Mathf.FloorToInt(((worldX + barrelArea.x) / (barrelArea.x * 2)) * WallManager.instance.wallColumns);
 
             // Launch
-            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.FlourBarrel, new Vector3(worldX, 0, barrelArea.z));
+            Vector3 target = new(worldX, 0, barrelArea.z);
+            _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.FlourBarrel, target);
 
             // Restart cooldown
             Invoke(nameof(LaunchFlourBarrel), difficultySettings.flourBarrelCooldown);
+            StartCoroutine(InvokeAfterDelay(3, LaunchTrebuchetSound, target));
+            StartCoroutine(InvokeAfterDelay(4.8f, LaunchBarrelBreakingSound, target));
         }
 
         private void LaunchTrebuchet()
@@ -241,10 +248,15 @@ namespace Enemies
             int trebuchetIndex = chosenWallIndex % WallManager.instance.wallColumns;
 
             _trebuchets[trebuchetIndex].RequestLaunch(ProjectileType.Stone, segments[chosenWallIndex].transform.position, chosenWallIndex);
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.shootTrebuchet, this.transform.position);
 
             // Restart cooldown
+            StartCoroutine(InvokeAfterDelay(2, LaunchTrebuchetSound, segments[chosenWallIndex].transform.position));
             Invoke(nameof(LaunchTrebuchet), difficultySettings.trebuchetCooldown);
+        }
+
+        private void LaunchTrebuchetSound(Vector3 destination)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.shootTrebuchet, destination);
         }
 
         public void LaunchFireArrows()
@@ -275,14 +287,26 @@ namespace Enemies
                     
                     fireArrow.SetUp(fireArrowSettings);
                     fireArrow.AddDelay(Random.Range(0, 0.5f));
+                    StartCoroutine(InvokeAfterDelay(1.6f, LaunchFireArrowsSound, fireArrow.GetDestination()));
                 }
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyArrowWhoosh, this.transform.position);
-                AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, this.transform.position);
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
             }
 
             Invoke(nameof(LaunchFireArrows), difficultySettings.fireArrowsCooldown);
         }
+
+        private void LaunchFireArrowsSound(Vector3 arrowDestination)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyArrowWhoosh, arrowDestination);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, arrowDestination);
+
+        }
+
+        private void LaunchBarrelBreakingSound(Vector3 arrowDestination)
+        {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.barrelBreaking, arrowDestination);
+        }
+
 
         public void SetTargetingScheme(TargetingScheme scheme)
         {
@@ -388,11 +412,17 @@ namespace Enemies
                 victim.SetParent(_graveyardParent);
                 victim.GetComponent<Footsoldier>().StartCoroutine(nameof(Footsoldier.Die));
                 enemyCount--;
-                if (enemyCount % 50 == 0) AudioManager.instance.PlayOneShot(FMODEvents.instance.walltherRallyingTroops, this.transform.position);
                 _footsoldiersForefeit = Mathf.Max(_footsoldiersForefeit - 1, 0);
                 if (enemyCount <= 0)
                 {
                     DayNightManager.instance.RequestChangeToNight();
+                }
+
+                if (Enumerable.Range(1,5).Contains(enemyCount % 25)) {
+                    AudioManager.instance.PlayOneShot(
+                        FMODEvents.instance.walltherRallyingTroops,
+                        GameObject.FindGameObjectWithTag("MainCamera").transform.position
+                    );
                 }
             }
         }

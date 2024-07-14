@@ -4,6 +4,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using UnityEngine.SceneManagement;
+using System;
 
 
 public class AudioManager : MonoBehaviour
@@ -12,10 +13,13 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     public float masterVolume = 1;
     [Range(0, 1)]
+    public float ambienceVolume;
+    [Range(0, 1)]
     public float musicVolume = 1;
     [Range(0, 1)]
     public float SFXVolume = 1;
 
+    private Bus ambienceBus;
     private Bus masterBus;
     private Bus musicBus;
     private Bus sfxBus;
@@ -38,6 +42,7 @@ public class AudioManager : MonoBehaviour
         eventInstances = new List<EventInstance>();
         eventEmitters = new List<StudioEventEmitter>();
 
+        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
@@ -50,22 +55,41 @@ public class AudioManager : MonoBehaviour
         // Retrieve the scene name and build index
         string sceneName = currentScene.name;
         if (sceneName == "Day") {
-            InitializeMusic(FMODEvents.instance.drumStartMusic);
+            InitializeSound(FMODEvents.instance.drumStartMusic, true);
+            InitializeSound(FMODEvents.instance.battleAmbience, true);
         } else {
-            InitializeMusic(FMODEvents.instance.nightAmbientMusic);
+            InitializeSound(FMODEvents.instance.nightAmbientMusic);
+            SFXVolume *= 0.25f;
         }
+    }
+
+    public void FadeForGasping()
+    {
+        ambienceBus.setVolume(ambienceVolume * 0.3f);
+        musicBus.setVolume(musicVolume * 0.3f);
+    }
+
+    public void IncreaseAfterGasping()
+    {
+        ambienceBus.setVolume(ambienceVolume / 0.3f);
+        musicBus.setVolume(musicVolume / 0.3f);
     }
 
     private void Update()
     {
+        ambienceBus.setVolume(ambienceVolume);
         masterBus.setVolume(masterVolume);
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(SFXVolume);
     }
 
-    private void InitializeMusic(EventReference musicEventReference)
+    private void InitializeSound(EventReference musicEventReference, Boolean threeD = false)
     {
         musicEventInstance = CreateInstance(musicEventReference);
+        if (threeD) {
+            var attributes = RuntimeUtils.To3DAttributes(transform.position);
+            musicEventInstance.set3DAttributes(attributes);
+        }
         musicEventInstance.start();
     }
 

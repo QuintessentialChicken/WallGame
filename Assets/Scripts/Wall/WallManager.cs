@@ -399,12 +399,14 @@ namespace Wall
                 if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
                 {
                     playerGasping.start();
+                    AudioManager.instance.FadeForGasping();
                 }
             }
             // otherwise, stop the footsteps event
             else 
             {
                 playerGasping.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                AudioManager.instance.IncreaseAfterGasping();
             }
         }
     }

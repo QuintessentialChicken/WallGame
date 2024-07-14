@@ -8,6 +8,10 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Music")]
     [field: SerializeField] public EventReference drumStartMusic { get; private set; }
     [field: SerializeField] public EventReference nightAmbientMusic { get; private set; }
+    
+    [field: Header("Ambience")]
+    [field: SerializeField] public EventReference battleAmbience { get; private set; }
+
 
     [field: Header("SFX")]
 
@@ -29,7 +33,8 @@ public class FMODEvents : MonoBehaviour
 
     // Enemy
     [field: SerializeField] public EventReference shootTrebuchet { get; private set; }
-    [field: SerializeField] public EventReference shootArrow { get; private set; }    
+    [field: SerializeField] public EventReference shootArrow { get; private set; }
+    [field: SerializeField] public EventReference barrelBreaking { get; private set; }
     // Damage
     [field: SerializeField] public EventReference damageWall { get; private set; }
     [field: SerializeField] public EventReference burnScaffolding { get; private set; }

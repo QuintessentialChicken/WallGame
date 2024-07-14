@@ -202,6 +202,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3009799073377501268, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: musicVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799073377501268, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: ambienceVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Path
+      value: event:/SFX/BarrelBreaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Path
+      value: event:/Ambience/BattleAmbience
+      objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: <drumStartMusic>k__BackingField.Path
@@ -216,6 +236,46 @@ PrefabInstance:
         type: 3}
       propertyPath: <nightAmbientMusic>k__BackingField.Path
       value: event:/Music/NightHangout
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data1
+      value: 1313345107
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data2
+      value: 1287220832
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data3
+      value: 2023412360
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data4
+      value: -2146483633
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data1
+      value: 231777932
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data2
+      value: 1231750342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data3
+      value: 172402052
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data4
+      value: 955956420
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -277,6 +337,11 @@ PrefabInstance:
       propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data4
       value: -1266050084
       objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528459, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_RootOrder
@@ -285,17 +350,17 @@ PrefabInstance:
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.53326
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5387115
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 134.34358
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -3538,22 +3603,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.197676e+18
-      objectReference: {fileID: 0}
-    - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
-        type: 3}
-      propertyPath: m_BoundingSphereOverride.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1e-45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -7.1016804e-12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 3e-45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}

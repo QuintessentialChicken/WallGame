@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{d32032f0-7071-41f8-8365-d0b3f4e0d980}">
+	<object class="AudioFile" id="{d2677f1b-643f-441a-a469-1c4c922388f1}">
 		<property name="assetPath">
-			<value>arrow-cutting-through-air.wav</value>
-		</property>
-		<property name="isStreaming">
-			<value>true</value>
+			<value>hit-on-wood-4.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
@@ -14,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>10.535229166666667</value>
+			<value>0.2426875</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>
