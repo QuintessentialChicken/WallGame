@@ -34,6 +34,7 @@ namespace Wall
         private WallSegment _targetSegment;
 
         private ArmyController _armyController;
+        public int Damage { get; set; } = 1;
 
         private void Awake()
         {
@@ -132,7 +133,10 @@ namespace Wall
 
         public void AnimEvent_ShotFired()
         {
-            _armyController.Invoke(nameof(ArmyController.BoltArrives), boltSettings.flightTime);
+            for (var i = 0; i < Damage; i++)
+            {
+                _armyController.Invoke(nameof(ArmyController.BoltArrives), boltSettings.flightTime);
+            }
 
             var bolt = Instantiate(boltPrefab, releasePoint.position, releasePoint.rotation);
             var nextVictim = _armyController.GetFootsoldierPosition();

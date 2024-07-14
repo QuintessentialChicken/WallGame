@@ -5,6 +5,7 @@ using Input;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Upgrades;
 using Random = UnityEngine.Random;
 
 namespace Wall
@@ -72,6 +73,8 @@ namespace Wall
         {
             Inputs.RepairWood += RepairScaffoldingSegment;
             Inputs.RepairStone += RepairWallSegment;
+            Inputs.UpgradeWood += UpgradeWoodSegment;
+            Inputs.UpgradeStone += UpgradeStoneSegment;
             EventManager.OnWallPieceHit += DamageWallSegment;
             EventManager.OnScaffoldingHit += DamageScaffoldingSegment;
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<ThirdPersonController>();
@@ -118,6 +121,8 @@ namespace Wall
         {
             Inputs.RepairWood -= RepairScaffoldingSegment;
             Inputs.RepairStone -= RepairWallSegment;
+            Inputs.UpgradeWood -= UpgradeWoodSegment;
+            Inputs.UpgradeStone -= UpgradeStoneSegment;
             EventManager.OnWallPieceHit -= DamageWallSegment;
             EventManager.OnScaffoldingHit -= DamageScaffoldingSegment;
         }
@@ -162,13 +167,14 @@ namespace Wall
         {
             // Clear the existing list
             wallSegments = new List<WallSegment>();
-
+            var index = 0;
             // Iterate through all children and add their WallSegment component to the list
             foreach (Transform child in segmentsParent)
             {
                 var segment = child.GetComponent<WallSegment>();
                 _wallHealth += segment.wallMaxHealth;
                 if (segment != null) wallSegments.Add(segment);
+                segment.index = index++;
             }
 
             _maxWallHealth = _wallHealth;
@@ -325,9 +331,9 @@ namespace Wall
         private void DamageWallSegment(WallSegment segment)
         {
             if (segment == null || !segment.wallPiece.activeSelf) return;
-            segment.DamageWall();
+            if (segment.DamageWall()) return;
             UpdateWallHealth(-1);
-        }
+        }   
 
         private void DamageWallSegment(int index)
         {
@@ -390,6 +396,36 @@ namespace Wall
                 RatingSystem.Instance.SetEndCriticalTime();
             }
             postProcessing.UpdateVignetteIntensity(percentage);
+        }
+
+        private void UpgradeWoodSegment()
+        {
+            if (player.SelectedUpgrade)
+            {
+                var upgrade = player.SelectedUpgrade.GetComponent<Upgrade>();
+                var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
+                if (!parent.scaffoldingPiece)
+                {
+                    EventManager.RaiseOnUpgradeFailed("Segment doesn't have scaffolding");
+                    return;
+                }
+                if (parent.AddUpgrade(upgrade)) player.SelectedUpgrade = null;
+            }
+        }
+        
+        private void UpgradeStoneSegment()
+        {
+            if (player.SelectedUpgrade)
+            {
+                var upgrade = player.SelectedUpgrade.GetComponent<Upgrade>();
+                if (upgrade.type == Upgrade.UpgradeType.ScafReinforce)
+                {
+                    EventManager.RaiseOnUpgradeFailed("This upgrade goes on the scaffolding");
+                    return;
+                }
+                var parent = _closestSegment ? _closestSegment : wallSegments[GetClosestSegmentDirect(_playerTransform.position)];
+                if (parent.AddUpgrade(upgrade)) player.SelectedUpgrade = null;
+            }
         }
     }
 }
