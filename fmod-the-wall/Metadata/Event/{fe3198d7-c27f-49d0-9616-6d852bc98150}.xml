@@ -102,5 +102,18 @@
 	<object class="MixerBusFader" id="{25f89a18-d554-4c41-9676-b12c73775b70}" />
 	<object class="MixerBusFader" id="{90e6226b-fa8b-45bd-909d-cc81213acfd2}" />
 	<object class="SFXReverbEffect" id="{20a5a9cb-80c8-4f1a-a79a-55cd636c59f8}" />
-	<object class="ObjectSpatialiserEffect" id="{960f017e-fcbc-4882-9e84-b055b65d1605}" />
+	<object class="ObjectSpatialiserEffect" id="{960f017e-fcbc-4882-9e84-b055b65d1605}">
+		<property name="maximumDistance">
+			<value>55</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>5.5</value>
+		</property>
+	</object>
 </objects>

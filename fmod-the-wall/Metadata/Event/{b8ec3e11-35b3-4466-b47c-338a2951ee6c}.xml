@@ -28,9 +28,6 @@
 		<relationship name="timeline">
 			<destination>{2d3fba81-90ff-4c55-b94a-1de7788b92f8}</destination>
 		</relationship>
-		<relationship name="parameters">
-			<destination>{829b20ed-0ca9-4419-8c5c-57bf25e72248}</destination>
-		</relationship>
 		<relationship name="banks">
 			<destination>{32a73968-5db4-415e-9ae3-cc9aa603dd19}</destination>
 		</relationship>
@@ -42,7 +39,6 @@
 	</object>
 	<object class="MasterTrack" id="{3ccc6c8c-7b3a-4732-86df-3b57f84c7fa1}">
 		<relationship name="modules">
-			<destination>{bcb48f3a-5489-490a-9350-801629aabe78}</destination>
 			<destination>{7d930b8f-d8e9-4f76-aa19-60f1020dac4a}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
@@ -74,11 +70,6 @@
 			<destination>{3af0ebae-543e-4a37-8eea-12c111457708}</destination>
 		</relationship>
 	</object>
-	<object class="ActionSheet" id="{829b20ed-0ca9-4419-8c5c-57bf25e72248}">
-		<relationship name="modules">
-			<destination>{bcb48f3a-5489-490a-9350-801629aabe78}</destination>
-		</relationship>
-	</object>
 	<object class="EventMixerMaster" id="{facbbbf8-bcba-4dc9-adad-816f125b1b0b}">
 		<property name="volume">
 			<value>-4</value>
@@ -93,7 +84,6 @@
 			<destination>{9de0bfbc-f879-42b3-8c91-8cfb42d0d358}</destination>
 		</relationship>
 	</object>
-	<object class="MultiSound" id="{bcb48f3a-5489-490a-9350-801629aabe78}" />
 	<object class="SingleSound" id="{7d930b8f-d8e9-4f76-aa19-60f1020dac4a}">
 		<property name="length">
 			<value>3</value>
@@ -135,6 +125,13 @@
 	<object class="MixerBusPanner" id="{e2853212-ce31-4b03-b405-07aea9944dc0}" />
 	<object class="MixerBusFader" id="{f03735f2-dad9-4aec-b1a9-4bff10cbdc43}" />
 	<object class="MixerBusFader" id="{51305751-295d-467b-94cc-de6ea1c90aed}" />
-	<object class="ObjectSpatialiserEffect" id="{36803062-b341-41c1-af8a-5a17d43d62c7}" />
+	<object class="ObjectSpatialiserEffect" id="{36803062-b341-41c1-af8a-5a17d43d62c7}">
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>4.5999999</value>
+		</property>
+	</object>
 	<object class="PannerEffect" id="{bc5d81a2-39ed-496c-9ddf-17cd679889ba}" />
 </objects>

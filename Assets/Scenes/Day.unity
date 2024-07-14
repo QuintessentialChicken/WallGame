@@ -214,6 +214,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
+      propertyPath: <walltherGasp>k__BackingField.Path
+      value: event:/SFX/WalltherGaspLo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
       propertyPath: <barrelBreaking>k__BackingField.Path
       value: event:/SFX/BarrelBreaking
       objectReference: {fileID: 0}
@@ -226,6 +231,16 @@ PrefabInstance:
         type: 3}
       propertyPath: <drumStartMusic>k__BackingField.Path
       value: event:/Music/Drums
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Path
+      value: event:/SFX/WalltherGaspHi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Path
+      value: event:/SFX/WalltherGaspLo
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -299,6 +314,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data1
+      value: 1896605936
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data2
+      value: 1316241617
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data3
+      value: 680711857
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data4
+      value: -896904525
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data1
+      value: 1550890342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data2
+      value: 1269411675
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data3
+      value: -1191501436
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data4
+      value: 1695735829
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
       propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data1
       value: -30304041
       objectReference: {fileID: 0}
@@ -350,17 +405,17 @@ PrefabInstance:
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3
+      value: -0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.3
+      value: 24.3
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -3603,22 +3658,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 2e-44
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 1e-45
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 6.382e-42
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 1.02e-43
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}

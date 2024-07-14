@@ -287,7 +287,7 @@ namespace Enemies
                     
                     fireArrow.SetUp(fireArrowSettings);
                     fireArrow.AddDelay(Random.Range(0, 0.5f));
-                    StartCoroutine(InvokeAfterDelay(1.6f, LaunchFireArrowsSound, fireArrow.GetDestination()));
+                    StartCoroutine(InvokeAfterDelay(1.8f, LaunchFireArrowsSound, fireArrow.GetDestination()));
                 }
                 StartCoroutine(InvokeAfterDelay(3, EventManager.RaiseOnScaffoldingHit, i));
             }
@@ -416,13 +416,6 @@ namespace Enemies
                 if (enemyCount <= 0)
                 {
                     DayNightManager.instance.RequestChangeToNight();
-                }
-
-                if (Enumerable.Range(1,5).Contains(enemyCount % 25)) {
-                    AudioManager.instance.PlayOneShot(
-                        FMODEvents.instance.walltherRallyingTroops,
-                        GameObject.FindGameObjectWithTag("MainCamera").transform.position
-                    );
                 }
             }
         }

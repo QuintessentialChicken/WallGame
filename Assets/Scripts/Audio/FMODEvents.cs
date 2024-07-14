@@ -18,7 +18,8 @@ public class FMODEvents : MonoBehaviour
     // Wallther
     [field: SerializeField] public EventReference walltherFootSteps { get; private set; }
     [field: SerializeField] public EventReference walltherLand { get; private set; }
-    [field: SerializeField] public EventReference walltherGasp { get; private set; }
+    [field: SerializeField] public EventReference walltherGaspLow { get; private set; }
+    [field: SerializeField] public EventReference walltherGaspHi { get; private set; }
     [field: SerializeField] public EventReference walltherGrunt { get; private set; }
     [field: SerializeField] public EventReference walltherRallyingTroops { get; private set; }
 

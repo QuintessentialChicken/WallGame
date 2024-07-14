@@ -58,7 +58,8 @@ namespace Wall
         private float _spawnTimer;
 
         // audio
-        private EventInstance playerGasping;
+        private EventInstance playerGaspingLow;
+        private EventInstance playerGaspingHi;
 
         private void Awake()
         {
@@ -93,7 +94,8 @@ namespace Wall
 
             postProcessing.maxDestruction = loseThreshold;
             // InvokeRepeating(nameof(DamageRandomSegment), 0f, 2f);
-            playerGasping = AudioManager.instance.CreateInstance(FMODEvents.instance.walltherGasp);
+            playerGaspingLow = AudioManager.instance.CreateInstance(FMODEvents.instance.walltherGaspLow);
+            playerGaspingHi = AudioManager.instance.CreateInstance(FMODEvents.instance.walltherGaspHi);
         }
 
         public void Update()
@@ -391,21 +393,32 @@ namespace Wall
 
         private void UpdateGaspingSound(float wallHealthPercentage)
         {
+            PLAYBACK_STATE lowGaspingplaybackState;
+            PLAYBACK_STATE highGaspingplaybackState;
             if (wallHealthPercentage <= loseThreshold + 0.3f)
             {
-                // get the playback state
-                PLAYBACK_STATE playbackState;
-                playerGasping.getPlaybackState(out playbackState);
-                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
-                {
-                    playerGasping.start();
-                    AudioManager.instance.FadeForGasping();
+                if (wallHealthPercentage <= loseThreshold + 0.1f) {
+                   playerGaspingHi.getPlaybackState(out highGaspingplaybackState);
+                    if (highGaspingplaybackState.Equals(PLAYBACK_STATE.STOPPED))
+                    {
+                        playerGaspingHi.start();
+                        playerGaspingLow.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                        AudioManager.instance.FadeForGasping();
+                    }
+                } else {
+                    playerGaspingHi.getPlaybackState(out lowGaspingplaybackState);
+                    if (lowGaspingplaybackState.Equals(PLAYBACK_STATE.STOPPED))
+                    {
+                        playerGaspingLow.start();
+                        playerGaspingHi.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                        AudioManager.instance.FadeForGasping();
+                    }
                 }
             }
-            // otherwise, stop the footsteps event
             else 
             {
-                playerGasping.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                playerGaspingLow.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                playerGaspingHi.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 AudioManager.instance.IncreaseAfterGasping();
             }
         }

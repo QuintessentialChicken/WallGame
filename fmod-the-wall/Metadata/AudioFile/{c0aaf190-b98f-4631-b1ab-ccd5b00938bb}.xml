@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c0aaf190-b98f-4631-b1ab-ccd5b00938bb}">
+		<property name="assetPath">
+			<value>panic-heartbeat-breath-hi.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>10.699999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>
+		</relationship>
+	</object>
+</objects>
