@@ -8,8 +8,6 @@ public class FloatingTextManager : MonoBehaviour
 
     [SerializeField] GameObject player;
 
-    private Canvas canvas;
-
     private void Awake()
     {
         instance = this;
@@ -21,8 +19,6 @@ public class FloatingTextManager : MonoBehaviour
         EventManager.OnReplenishStone += ReplenishStone;
         EventManager.OnEnterCatapult += EnterCatapult;
         EventManager.OnCatapultFire += GetLaunched;
-
-        canvas = gameObject.transform.parent.GetComponent<Canvas>();
     }
 
     private void OnDestroy()
@@ -58,7 +54,7 @@ public class FloatingTextManager : MonoBehaviour
         Vector3 offset = new Vector3(-80, 70, 0);
 
         GameObject duplicatedGameObject = Instantiate(gameObject.transform.GetChild(0).gameObject, transform);
-        //Destroy(duplicate, cloneDeathTimer);
+        Destroy(duplicatedGameObject, cloneDeathTimer);
 
         //duplicate.transform.parent = gameObject.transform;
         duplicatedGameObject.SetActive(true);

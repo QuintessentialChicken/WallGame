@@ -379,6 +379,7 @@ namespace Wall
             if (percentage <= loseThreshold)
             {
                 RatingSystem.Instance.SetEndCriticalTime(true);
+                RatingSystem.Instance.SetEndTime();
                 EventManager.RaiseGameOver();
             }
             if (percentage <= criticalThreshold)

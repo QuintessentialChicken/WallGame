@@ -15,6 +15,14 @@ public class RatingUI : MonoBehaviour
         }
 
         DisplayRating();
+
+        Test();
+    }
+    
+    private void Test()
+    {
+        Debug.Log(RatingSystem.Instance.GetRatingTimeStamps());
+        Debug.Log(RatingSystem.Instance.GetTotalRatingTimeStamps());
     }
 
     private void DisplayRating()
