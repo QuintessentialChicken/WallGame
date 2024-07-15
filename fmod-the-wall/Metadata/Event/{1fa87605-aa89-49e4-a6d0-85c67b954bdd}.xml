@@ -61,7 +61,7 @@
 			<value>0</value>
 		</property>
 		<property name="maximumDistance">
-			<value>90</value>
+			<value>70</value>
 		</property>
 	</object>
 	<object class="MarkerTrack" id="{3feaa3c1-791b-496f-9e3e-0811df38b184}" />
@@ -138,8 +138,8 @@
 		<relationship name="effects">
 			<destination>{9202faeb-efb3-4daa-95e0-692f0f2abe51}</destination>
 			<destination>{4083f106-0d84-40c9-842e-c6326b4a948b}</destination>
-			<destination>{fe917d84-c844-4684-b253-01a0e336e194}</destination>
 			<destination>{67fa4acf-f6f4-4d3a-8987-8b146d37658c}</destination>
+			<destination>{59c04089-f97f-458c-9f47-48b2ef86824b}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{32953c4e-1e56-4fe5-98a4-8d449a393178}" />
@@ -152,17 +152,17 @@
 	<object class="MixerBusPanner" id="{103be4eb-9ce5-4a11-91ff-c22c22b0cf50}" />
 	<object class="MixerBusFader" id="{9202faeb-efb3-4daa-95e0-692f0f2abe51}" />
 	<object class="SFXReverbEffect" id="{4083f106-0d84-40c9-842e-c6326b4a948b}" />
-	<object class="ObjectSpatialiserEffect" id="{fe917d84-c844-4684-b253-01a0e336e194}">
+	<object class="PannerEffect" id="{67fa4acf-f6f4-4d3a-8987-8b146d37658c}">
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+	</object>
+	<object class="ObjectSpatialiserEffect" id="{59c04089-f97f-458c-9f47-48b2ef86824b}">
 		<property name="extentMode">
 			<value>1</value>
 		</property>
 		<property name="soundSize">
-			<value>5</value>
-		</property>
-	</object>
-	<object class="PannerEffect" id="{67fa4acf-f6f4-4d3a-8987-8b146d37658c}">
-		<property name="overridingOutputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{851289aa-da38-457b-a71c-4dba75322760}" />

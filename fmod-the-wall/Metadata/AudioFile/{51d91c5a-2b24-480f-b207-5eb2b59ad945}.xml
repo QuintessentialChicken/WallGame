@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{51d91c5a-2b24-480f-b207-5eb2b59ad945}">
+		<property name="assetPath">
+			<value>wall-hammering.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>19.946124999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{883ae8d9-bcde-445e-8819-b83c8cf57f68}</destination>
+		</relationship>
+	</object>
+</objects>

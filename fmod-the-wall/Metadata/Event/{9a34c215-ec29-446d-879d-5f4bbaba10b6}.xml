@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{9a34c215-ec29-446d-879d-5f4bbaba10b6}">
 		<property name="name">
-			<value>WallFix</value>
+			<value>MenuSound</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>
@@ -88,11 +88,11 @@
 	</object>
 	<object class="MultiSound" id="{b7179e98-f38d-4682-8516-dc7739bc185b}" />
 	<object class="SingleSound" id="{a328e797-3fff-4b06-8f67-1b0c37498f52}">
-		<property name="length">
-			<value>2</value>
-		</property>
 		<property name="startOffset">
 			<value>29.5</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>0.26000000000000001</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{915684ef-8427-4b45-adce-efeb6890c95f}</destination>

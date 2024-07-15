@@ -97,7 +97,6 @@
 	<object class="MixerBusPanner" id="{c05ae4fb-bef5-4366-a004-0367633761c6}" />
 	<object class="MixerBusEffectChain" id="{760de9fc-fbc0-48e8-a2f9-4eacfee6cc91}">
 		<relationship name="effects">
-			<destination>{33b0de5c-3fb7-4c6a-a17c-cfb72899bba5}</destination>
 			<destination>{d6f5da3c-01d6-4aa2-aefc-34f0fce114a3}</destination>
 			<destination>{06c365de-4792-4bc1-ae4d-f0ac1f30ba06}</destination>
 			<destination>{058d24bc-4b25-48ba-b197-bcf667c9567e}</destination>
@@ -106,10 +105,13 @@
 	</object>
 	<object class="MixerBusPanner" id="{698dd492-34ed-49de-8269-eb76da8cedf0}" />
 	<object class="MixerBusFader" id="{761a86b8-9db5-4de7-9011-92c371cc122d}" />
-	<object class="DelayEffect" id="{33b0de5c-3fb7-4c6a-a17c-cfb72899bba5}" />
 	<object class="MixerBusFader" id="{d6f5da3c-01d6-4aa2-aefc-34f0fce114a3}" />
 	<object class="SFXReverbEffect" id="{06c365de-4792-4bc1-ae4d-f0ac1f30ba06}" />
-	<object class="PannerEffect" id="{058d24bc-4b25-48ba-b197-bcf667c9567e}" />
+	<object class="PannerEffect" id="{058d24bc-4b25-48ba-b197-bcf667c9567e}">
+		<property name="overridingOutputFormat">
+			<value>1</value>
+		</property>
+	</object>
 	<object class="ObjectSpatialiserEffect" id="{7952b5b0-f528-454f-bd0e-ff84cfb71a7a}">
 		<property name="maximumDistance">
 			<value>40</value>
