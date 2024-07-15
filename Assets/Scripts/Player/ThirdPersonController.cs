@@ -88,6 +88,7 @@ namespace Player
         private readonly float _terminalVelocity = 53.0f;
         private InputActionMap _actionMapCatapult;
         private InputActionMap _actionMapNormal;
+        private InputActionMap _actionMapNighttime;
         private float _airTime;
         private float _animationBlend;
 
@@ -134,6 +135,13 @@ namespace Player
 
         public bool inCatapult = false;
 
+        public enum ActionMap
+        {
+            Normal,
+            Catapult,
+            Nighttime
+        }
+
         private void Awake()
         {
             // get a reference to our main camera
@@ -159,6 +167,7 @@ namespace Player
             _playerInput = GetComponent<PlayerInput>();
             _actionMapNormal = _playerInput.actions.FindActionMap("Normal", true);
             _actionMapCatapult = _playerInput.actions.FindActionMap("Catapult", true);
+            _actionMapNighttime = _playerInput.actions.FindActionMap("Nighttime", true);
 
             AssignActionMapIDs();
 
@@ -553,6 +562,23 @@ namespace Player
             bodyRenderer.material = cleanFeetMaterial;
             tarpitSpeedMod = 1;
             tarpitJumpMod = 1;
+        }
+
+        public void SwitchActionMap(ActionMap map)
+        {
+            _playerInput.currentActionMap.Disable();
+            switch (map)
+            {
+                case ActionMap.Normal:
+                    _actionMapNormal.Enable();
+                    break;
+                case ActionMap.Catapult:
+                    _actionMapCatapult.Enable();
+                    break;
+                case ActionMap.Nighttime:
+                    _actionMapNighttime.Enable();
+                    break;
+            }
         }
 
 

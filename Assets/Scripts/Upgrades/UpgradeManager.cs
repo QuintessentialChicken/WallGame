@@ -20,6 +20,7 @@ namespace Upgrades
         private int lastSelected = 0;
         void Start()
         {
+            // player.SwitchActionMap(ThirdPersonController.ActionMap.Nighttime);
             Inputs.Select += ChangeSelection;
             Inputs.Confirm += ConfirmCard;
             EventManager.OnShowUpgrades += PresentUpgrades;

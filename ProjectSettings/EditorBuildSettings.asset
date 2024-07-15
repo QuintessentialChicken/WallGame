@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Towsif.unity
     guid: e89b08e781af97d4693164066b491840
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: d20b03585defae34abf6a1c57c916633
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
