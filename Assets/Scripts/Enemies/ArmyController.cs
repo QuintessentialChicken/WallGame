@@ -19,7 +19,7 @@ namespace Enemies
         // Start is called before the first frame update
         [Header("_______________ Gameplay Relevant _______________")] [SerializeField]
         
-        public int day = 1;
+        public static int day = 0;
         public DifficultySettings currentDifficulty;
         [Space]
         public DifficultySettings difficultyDay1;
@@ -110,8 +110,14 @@ namespace Enemies
             currentDifficulty = GetDifficulty(day);
         }
 
+        private void OnApplicationQuit()
+        {
+            day = 0;
+        }
+
         private void Start()
         {
+            day++;
             _columns = WallManager.instance.wallColumns;
             /*if (_trebuchets.projectile.flightTime >= _trebuchetCooldown)
             {
@@ -119,6 +125,7 @@ namespace Enemies
                 _trebuchets.projectile.flightTime = _trebuchetCooldown + 0.1f;
             }*/
             currentDifficulty = GetDifficulty(day);
+            Debug.LogWarning("BarrelCooldown: " + currentDifficulty.barrelCooldown);
             CreateEmptyParents();
             SpawnArmy();
             SpawnTrebuchets();
@@ -457,7 +464,7 @@ namespace Enemies
                 Mathf.LerpUnclamped(difficultyDay1.trebuchetCooldown, difficultyDay7.trebuchetCooldown, lerpValue),
                 Mathf.LerpUnclamped(difficultyDay1.fireArrowsCooldown, difficultyDay7.fireArrowsCooldown, lerpValue),
                 Mathf.LerpUnclamped(difficultyDay1.fireArrowsDestruction, difficultyDay7.fireArrowsDestruction, lerpValue),
-                day <= tarBarrelsFromDay? 0 : Mathf.LerpUnclamped(difficultyDay1.barrelCooldown, difficultyDay7.barrelCooldown, lerpValue)
+                Mathf.LerpUnclamped(difficultyDay1.barrelCooldown, difficultyDay7.barrelCooldown, lerpValue)
                 );
         }
 

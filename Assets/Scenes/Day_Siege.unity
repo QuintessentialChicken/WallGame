@@ -10434,17 +10434,17 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: difficultyDay1.barrelCooldown
-      value: 7
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: difficultyDay7.barrelCooldown
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: currentDifficulty.enemySoldiers
-      value: 110
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10459,7 +10459,7 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: currentDifficulty.barrelCooldown
-      value: 15
+      value: 21.666666
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10569,12 +10569,12 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: currentDifficulty.trebuchetCooldown
-      value: 2.5
+      value: 4.25
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: currentDifficulty.fireArrowsCooldown
-      value: 8
+      value: 12.666667
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10629,7 +10629,7 @@ PrefabInstance:
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
       propertyPath: currentDifficulty.fireArrowsDestruction
-      value: 0.8
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
