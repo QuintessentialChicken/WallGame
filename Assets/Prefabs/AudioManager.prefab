@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterVolume: 1
+  ambienceVolume: 0
   musicVolume: 1
   SFXVolume: 1
 --- !u!1 &3009799074272528458
@@ -92,13 +93,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9af35457cea4611adb4660719f09e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <music>k__BackingField:
+  <drumStartMusic>k__BackingField:
     Guid:
-      Data1: 531133957
-      Data2: 1239722633
-      Data3: -964308826
-      Data4: -582249093
-    Path: event:/Music/Drums
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <nightAmbientMusic>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <battleAmbience>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <walltherFootSteps>k__BackingField:
     Guid:
       Data1: -33900934
@@ -113,13 +128,20 @@ MonoBehaviour:
       Data3: 154808251
       Data4: -321216652
     Path: event:/SFX/WalltherLanding
-  <walltherGasp>k__BackingField:
+  <walltherGaspLow>k__BackingField:
     Guid:
-      Data1: 1550890342
-      Data2: 1269411675
-      Data3: -1191501436
-      Data4: 1695735829
-    Path: event:/SFX/WalltherGasp
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  <walltherGaspHi>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <walltherGrunt>k__BackingField:
     Guid:
       Data1: 955558673
@@ -197,6 +219,13 @@ MonoBehaviour:
       Data3: 1095967913
       Data4: 464545506
     Path: event:/SFX/BowAimShoot
+  <barrelBreaking>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <damageWall>k__BackingField:
     Guid:
       Data1: -10476069
@@ -211,6 +240,13 @@ MonoBehaviour:
       Data3: -1976337228
       Data4: 1827557673
     Path: event:/SFX/FireErupt
+  <enemyArrowWhoosh>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <crossbowmanDie>k__BackingField:
     Guid:
       Data1: -1422849468
