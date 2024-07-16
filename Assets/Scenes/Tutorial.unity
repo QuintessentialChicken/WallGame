@@ -10466,6 +10466,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: difficultyDay1.enemySoldiers
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay7.enemySoldiers
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: _bowmen.spawnAreaUpperRight.x
       value: 50.5
       objectReference: {fileID: 0}
@@ -10481,6 +10491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: currentDifficulty.enemySoldiers
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: _trebuchets.spawnAreaLowerLeft.x
       value: -50
       objectReference: {fileID: 0}
@@ -10488,6 +10503,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _trebuchets.spawnAreaLowerLeft.y
       value: 27.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay1.trebuchetCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay7.trebuchetCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10508,6 +10533,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _trebuchets.spawnAreaUpperRight.y
       value: 47.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay1.fireArrowsCooldown
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay7.fireArrowsCooldown
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10551,6 +10586,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: currentDifficulty.trebuchetCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: currentDifficulty.fireArrowsCooldown
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay1.fireArrowsDestruction
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay7.fireArrowsDestruction
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: difficultySettings.trebuchetCooldown
       value: 2
       objectReference: {fileID: 0}
@@ -10573,6 +10628,11 @@ PrefabInstance:
         type: 3}
       propertyPath: trebuchetSettings.spawnAreaLowerLeft.y
       value: -43.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: currentDifficulty.fireArrowsDestruction
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
