@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterVolume: 1
-  ambienceVolume: 0
+  ambienceVolume: 1
   musicVolume: 1
   SFXVolume: 1
 --- !u!1 &3009799074272528458
@@ -205,6 +205,13 @@ MonoBehaviour:
       Data3: 138090168
       Data4: 781090896
     Path: event:/SFX/CatapultRelease
+  <menuSound>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   <shootTrebuchet>k__BackingField:
     Guid:
       Data1: -375256225

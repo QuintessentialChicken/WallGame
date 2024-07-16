@@ -1043,10 +1043,10 @@ GameObject:
   m_Component:
   - component: {fileID: 490379806}
   - component: {fileID: 490379805}
-  - component: {fileID: 490379804}
   - component: {fileID: 490379807}
   - component: {fileID: 490379809}
   - component: {fileID: 490379808}
+  - component: {fileID: 490379810}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -1054,14 +1054,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &490379804
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490379802}
-  m_Enabled: 1
 --- !u!20 &490379805
 Camera:
   m_ObjectHideFlags: 0
@@ -1250,6 +1242,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d3a8b126-0283-434b-8b03-706623726302
     m_ActionName: MainMenu/Select
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 13bba05f-e7c5-4d1a-962b-5614d2608d10
+    m_ActionName: Nighttime/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b25b7e89-837b-4350-bae4-d777f1c6006d
+    m_ActionName: Nighttime/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 82a9f56e-093e-475f-87ce-8aa15f230999
+    m_ActionName: Nighttime/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5f3b094f-e0d5-4a02-99a8-32af2e2fd915
+    m_ActionName: Nighttime/Confirm[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d9e2255b-93de-40d8-a485-3d9d6546eae6
+    m_ActionName: Nighttime/UpgradeWood[/Keyboard/comma]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f60cf6fa-ff9f-4133-9088-949f804b6fc9
+    m_ActionName: Nighttime/UpgradeStone[/Keyboard/period]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 61eb255f-de89-4b74-94ed-3dbd3820115f
+    m_ActionName: Nighttime/YPressed[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 26e1c977-dd42-4ec4-b1c3-8a7657cdcb72
+    m_ActionName: Nighttime/Select[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: MainMenu
@@ -1277,6 +1301,19 @@ MonoBehaviour:
   schild3quit: {fileID: 120757932}
   crossbow: {fileID: 1380136592}
   bopParent: {fileID: 656966173}
+--- !u!114 &490379810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490379802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 4167225150278189478}
 --- !u!1001 &505240552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8634,6 +8671,295 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1830679808
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 431892308865349491, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Path
+      value: event:/SFX/MenuSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Path
+      value: event:/SFX/BarrelBreaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Path
+      value: event:/Ambience/BattleAmbience
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Path
+      value: event:/Music/Drums
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <fixStone>k__BackingField.Guid.Data1
+      value: -252684594
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <fixStone>k__BackingField.Guid.Data2
+      value: 1184535023
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <fixStone>k__BackingField.Guid.Data3
+      value: -2017865539
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <fixStone>k__BackingField.Guid.Data4
+      value: 1294786920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Path
+      value: event:/SFX/WalltherGaspHi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data1
+      value: -1707818475
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data2
+      value: 1148054569
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data3
+      value: 1264557447
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data4
+      value: -1240417606
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Path
+      value: event:/SFX/WalltherGaspLo
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Path
+      value: event:/SFX/EnemyArrowWhoosh
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Path
+      value: event:/Music/NightHangout
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data1
+      value: 1313345107
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data2
+      value: 1287220832
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data3
+      value: 2023412360
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <barrelBreaking>k__BackingField.Guid.Data4
+      value: -2146483633
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data1
+      value: 231777932
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data2
+      value: 1231750342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data3
+      value: 172402052
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <battleAmbience>k__BackingField.Guid.Data4
+      value: 955956420
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data1
+      value: 531133957
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data2
+      value: 1239722633
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data3
+      value: -964308826
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <drumStartMusic>k__BackingField.Guid.Data4
+      value: -582249093
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data1
+      value: 1896605936
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data2
+      value: 1316241617
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data3
+      value: 680711857
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspHi>k__BackingField.Guid.Data4
+      value: -896904525
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data1
+      value: 1550890342
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data2
+      value: 1269411675
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data3
+      value: -1191501436
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <walltherGaspLow>k__BackingField.Guid.Data4
+      value: 1695735829
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data1
+      value: -30304041
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data2
+      value: 1238418047
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data3
+      value: -2056448362
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <enemyArrowWhoosh>k__BackingField.Guid.Data4
+      value: 1350682923
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data1
+      value: 535839300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data2
+      value: 1230386050
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data3
+      value: -583384440
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <nightAmbientMusic>k__BackingField.Guid.Data4
+      value: -1266050084
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 13.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4438f56d9bd0c48e99700a3cb0b91215, type: 3}
 --- !u!4 &1843548917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7002197068491689976, guid: 197417fc520c3f24786b2e91e111f49a,
@@ -9783,22 +10109,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0.0625
+      value: 6.614325e-36
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 2
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: -2.489832e+31
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: NaN
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -10181,6 +10507,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5571536d24a233a49a1eb223e7387627, type: 3}
+--- !u!1 &4167225150278189478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4167225149275532001, guid: 5571536d24a233a49a1eb223e7387627,
+    type: 3}
+  m_PrefabInstance: {fileID: 4167225150278189477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5797501903103094517
 GameObject:
   m_ObjectHideFlags: 0

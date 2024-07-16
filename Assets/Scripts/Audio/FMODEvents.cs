@@ -31,6 +31,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference pickWood { get; private set; }
     [field: SerializeField] public EventReference mountCatapult { get; private set; }
     [field: SerializeField] public EventReference exitCatapult { get; private set; }
+    [field: SerializeField] public EventReference menuSound { get; private set; }
 
     // Enemy
     [field: SerializeField] public EventReference shootTrebuchet { get; private set; }

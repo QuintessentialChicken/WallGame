@@ -63,6 +63,7 @@ public class MainMenuCrossbow : MonoBehaviour
         }
 
         StartCoroutine(nameof(Reloading));
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.menuSound, crossbow.transform.position);
     }
 
     public IEnumerator DelayedQuit()

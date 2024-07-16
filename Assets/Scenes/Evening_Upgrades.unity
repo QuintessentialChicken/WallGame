@@ -2639,6 +2639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
+      propertyPath: <menuSound>k__BackingField.Path
+      value: event:/SFX/MenuSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
       propertyPath: <barrelBreaking>k__BackingField.Path
       value: event:/SFX/BarrelBreaking
       objectReference: {fileID: 0}
@@ -2676,6 +2681,26 @@ PrefabInstance:
         type: 3}
       propertyPath: <walltherGaspHi>k__BackingField.Path
       value: event:/SFX/WalltherGaspHi
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data1
+      value: -1707818475
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data2
+      value: 1148054569
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data3
+      value: 1264557447
+      objectReference: {fileID: 0}
+    - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
+        type: 3}
+      propertyPath: <menuSound>k__BackingField.Guid.Data4
+      value: -1240417606
       objectReference: {fileID: 0}
     - target: {fileID: 3009799074272528452, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -2840,17 +2865,17 @@ PrefabInstance:
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.53326
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5387115
+      value: -83.7
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 134.34358
+      value: 112.8
       objectReference: {fileID: 0}
     - target: {fileID: 3090317913931108339, guid: 4438f56d9bd0c48e99700a3cb0b91215,
         type: 3}
@@ -5697,7 +5722,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 5.6e-44, z: 0, w: 1.6114932e-38}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
