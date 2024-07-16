@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f2abd53f7a6c419285dc0d4324a61, type: 3}
   m_Name: Horseshoe
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 5188509644976950320, guid: a824c07dda7688548b9805cf80044444,
+  upgradePrefab: {fileID: 5934875108807521305, guid: a824c07dda7688548b9805cf80044444,
     type: 3}
   id: 1
   title: Lucky Horseshoe

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f2abd53f7a6c419285dc0d4324a61, type: 3}
   m_Name: ScafReinforcement
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: -5640361478842853772, guid: 753290e5396e64e4a817ef1f8d50fd9f,
+  upgradePrefab: {fileID: 8279598611459229808, guid: 753290e5396e64e4a817ef1f8d50fd9f,
     type: 3}
   id: 2
   title: Reinforced Scaffolding

@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
     public delegate void FloatEvent(float value);
 
     public delegate void IntEvent(int value);
+    public delegate void StringEvent(string message);
 
     public delegate void NoParamsEvent();
 
@@ -24,9 +25,12 @@ public class EventManager : MonoBehaviour
 
     public static event NoParamsEvent OnRepairedWood;
     public static event NoParamsEvent OnRepairedStone;
+    public static event NoParamsEvent OnShowUpgrades;
 
     public static event IntEvent OnWallPieceHit;
     public static event IntEvent OnScaffoldingHit;
+
+    public static event StringEvent OnUpgradeFailed;
 
 
     public static event NoParamsEvent OnGameOver;
@@ -80,6 +84,19 @@ public class EventManager : MonoBehaviour
     public static void RaiseOnRepairedStone()
     {
         OnRepairedStone?.Invoke();
+    }
+
+    
+    // Use this to display error feedback to the player
+    public static void RaiseOnUpgradeFailed(string message)
+    {
+        OnUpgradeFailed?.Invoke(message);
+    }
+
+    // Use this to present the upgrade cards
+    public static void RaiseOnShowUpgrades()
+    {
+        OnShowUpgrades?.Invoke();
     }
 
     public static void RaiseGameOver()

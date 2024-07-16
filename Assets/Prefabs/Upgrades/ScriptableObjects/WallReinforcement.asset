@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f2abd53f7a6c419285dc0d4324a61, type: 3}
   m_Name: WallReinforcement
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: -8160716695821794361, guid: ab8efa0bc84db9b40abe4ed6b593c96c,
+  upgradePrefab: {fileID: 7045412038322121100, guid: ab8efa0bc84db9b40abe4ed6b593c96c,
     type: 3}
   id: 3
   title: Reinforced Wall

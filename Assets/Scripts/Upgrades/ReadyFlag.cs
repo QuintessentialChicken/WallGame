@@ -1,41 +1,45 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class ReadyFlag : MonoBehaviour
+namespace Upgrades
 {
-    private Animator anim;
+    [RequireComponent(typeof(Animator))]
+    public class ReadyFlag : MonoBehaviour
+    {
+        private Animator anim;
 
-    public bool DEBUG_SwitchToRed;
-    public bool DEBUG_SwitchToGreen;
+        public bool DEBUG_SwitchToRed;
+        public bool DEBUG_SwitchToGreen;
 
 #if UNITY_EDITOR
-    public void Update()
-    {
-        if (DEBUG_SwitchToGreen)
+        public void Update()
         {
-            SwitchToGreen();
-            DEBUG_SwitchToGreen = false;
-        }  
-        if (DEBUG_SwitchToRed)
-        {
-            SwitchToRed();
-            DEBUG_SwitchToRed = false;
+            if (DEBUG_SwitchToGreen)
+            {
+                SwitchToGreen();
+                DEBUG_SwitchToGreen = false;
+            }
+
+            if (DEBUG_SwitchToRed)
+            {
+                SwitchToRed();
+                DEBUG_SwitchToRed = false;
+            }
         }
-    }
 #endif
 
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-    }
+        private void Awake()
+        {
+            anim = GetComponent<Animator>();
+        }
 
-    public void SwitchToGreen()
-    {
-        anim.SetTrigger("Green");
-    }
+        public void SwitchToGreen()
+        {
+            anim.SetTrigger("Green");
+        }
 
-    public void SwitchToRed()
-    {
-        anim.SetTrigger("Red");
+        public void SwitchToRed()
+        {
+            anim.SetTrigger("Red");
+        }
     }
 }

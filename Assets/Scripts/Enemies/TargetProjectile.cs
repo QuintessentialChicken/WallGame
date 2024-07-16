@@ -103,6 +103,11 @@ namespace Enemies
             _arrivalTime += time;
         }
 
+        public void Fire()
+        {
+            StartFlightTimer();
+        }
+
         public void SetUp(ProjectileSettings newSettings)
         {
             this.settings = newSettings;

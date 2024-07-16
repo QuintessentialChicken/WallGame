@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Upgrades;
 
 namespace Wall
 {
@@ -9,6 +13,10 @@ namespace Wall
         [Header("__________ Upgrades __________")]
         [Tooltip(">1 --> increased chance to be hit\n=1 --> normal chance to be hit\n<1 --> decreased chance to be hit")]
         public float probabilityModifier = 1.0f;
+
+        public int freeSlots = 2;
+
+        private HashSet<Upgrade> _upgrades;
 
         [Header("__________ Wall __________")]
         public int wallMaxHealth = 3;
@@ -52,7 +60,7 @@ namespace Wall
 
         private readonly GUIStyle _style = new();
         private Material _wallMaterial;
-
+        public int index;
 
         public readonly WallSegmentNotCriticalEvent OnWallNotSegmentCritical = new();
 
@@ -67,8 +75,10 @@ namespace Wall
             normalWall = _wallMeshFilter.mesh;
             scaffoldingHealth = scaffoldingMaxHealth;
             wallHealth = wallMaxHealth;
+            _upgrades = new HashSet<Upgrade>();
             // UpdateSoldierState();
         }
+
 
         //public void Update()
         //{
@@ -202,10 +212,15 @@ namespace Wall
             return true;
         }
 
-        public void DamageWall()
+        public bool DamageWall()
         {
+            foreach (var lsdUpgrade in _upgrades.Select(upgrade => upgrade as LeviatedSpringDefense).Where(lsdUpgrade => lsdUpgrade))
+            {
+                lsdUpgrade.Activate();
+                return false;
+            }
             wallHealth -= 1;
-            if (wallHealth < 0) return;
+            if (wallHealth < 0) return false;
 
             AudioManager.instance.PlayOneShot(FMODEvents.instance.damageWall, this.transform.position);
             ChangeWallState(wallHealth);
@@ -216,6 +231,7 @@ namespace Wall
             }
 
             if (wallHealth == 0) OnWallSegmentCritical.Invoke(this);
+            return true;
         }
 
         public bool RepairWall()
@@ -237,7 +253,7 @@ namespace Wall
 
         private void RequestSoldier()
         {
-            if (wallHealth == wallMaxHealth && scaffoldingHealth == scaffoldingMaxHealth && !soldierRequested)
+            if (wallHealth == wallMaxHealth && scaffoldingHealth == scaffoldingMaxHealth && !soldierRequested && !isSoldierPresent)
                 WallManager.instance.RequestSoldier(this);
         }
 
@@ -251,6 +267,31 @@ namespace Wall
         public bool IsIntact()
         {
             return isScaffoldingIntact && wallHealth == wallMaxHealth;
+        }
+
+        
+        
+        public bool AddUpgrade(Upgrade upgrade)
+        {
+            if (freeSlots <= 0)
+            {
+                EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
+                return false;
+            }
+            var spawnedUpgrade = Instantiate(upgrade.gameObject, transform);
+            var upgradeScript = spawnedUpgrade.GetComponent<Upgrade>();
+            upgradeScript.ParentSegment = this;
+            spawnedUpgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
+            if (freeSlots == 1)
+            {
+                var newScale = spawnedUpgrade.transform.localScale;
+                newScale.x *= -1;
+                spawnedUpgrade.transform.localScale = newScale;
+            }
+
+            _upgrades.Add(upgradeScript);
+            freeSlots -= 1;
+            return true;
         }
     }
 }

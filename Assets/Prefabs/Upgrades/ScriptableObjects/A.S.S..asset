@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4f2abd53f7a6c419285dc0d4324a61, type: 3}
   m_Name: A.S.S.
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 385791796, guid: 0d9cd706a51f9254d938672d1ed1f087, type: 3}
+  upgradePrefab: {fileID: 758393063656991191, guid: 0d9cd706a51f9254d938672d1ed1f087,
+    type: 3}
   id: 11
   title: A.S.S.
   subtitle: Automated Self Sevice
