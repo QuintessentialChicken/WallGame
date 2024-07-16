@@ -10331,6 +10331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: tarBarrelsFromDay
+      value: 69
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: trebuchetCooldown
       value: 1
       objectReference: {fileID: 0}
@@ -10353,6 +10358,11 @@ PrefabInstance:
         type: 3}
       propertyPath: flourBarrelCooldown
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: flourBarrelsFromDay
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10496,8 +10506,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
+      propertyPath: difficultyDay1.barrelCooldown
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: difficultyDay7.barrelCooldown
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
       propertyPath: currentDifficulty.enemySoldiers
-      value: 300
+      value: 290
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
@@ -10508,6 +10528,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _trebuchets.spawnAreaLowerLeft.y
       value: 27.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
+        type: 3}
+      propertyPath: currentDifficulty.barrelCooldown
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7494733541712630487, guid: 9d3d102869b4ce34bb2e17848722d2c3,
         type: 3}
