@@ -196,32 +196,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeOfDay: 0
   day:
-    timeSpecificProps: {fileID: 3205418180241466145}
     skyMaterial: {fileID: 2100000, guid: f7cca015462cb6344b6c4b419f062e5a, type: 2}
     dirLightIntensity: 3
     dirLightColor: {r: 1, g: 0.9529412, b: 0.81960785, a: 1}
     dirRotation: {x: 54, y: -60, z: 31}
   evening:
-    timeSpecificProps: {fileID: 3205418181955337021}
     skyMaterial: {fileID: 2100000, guid: 7501adfbac4c59848962873396d14356, type: 2}
     dirLightIntensity: 1.5
     dirLightColor: {r: 0.9716981, g: 0.5478238, b: 0.050418302, a: 1}
     dirRotation: {x: -196.96, y: -17.26, z: 0.15}
   night:
-    timeSpecificProps: {fileID: 3205418181857823307}
     skyMaterial: {fileID: 2100000, guid: e19efc254499aa54895d56391e78be14, type: 2}
     dirLightIntensity: 0.1
     dirLightColor: {r: 0.97647065, g: 0.95, b: 0.95, a: 1}
     dirRotation: {x: 28.6, y: 40.38, z: -7.92}
   dirLight: {fileID: 3205418180442503098}
   fadeScreen: {fileID: 0}
-  ambientMusic:
-    Guid:
-      Data1: 535839300
-      Data2: 1230386050
-      Data3: -583384440
-      Data4: -1266050084
-    Path: event:/Music/NightHangout
 --- !u!1 &3205418181857823307
 GameObject:
   m_ObjectHideFlags: 0

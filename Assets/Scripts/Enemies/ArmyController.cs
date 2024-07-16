@@ -199,8 +199,8 @@ namespace Enemies
 
             // Restart cooldown
             //Invoke(nameof(LaunchTarBarrel), currentDifficulty.barrelCooldown);
-            // StartCoroutine(InvokeAfterDelay(3, LaunchTrebuchetSound, target));
-            // StartCoroutine(InvokeAfterDelay(4.8f, LaunchBarrelBreakingSound, target));
+            StartCoroutine(InvokeAfterDelay(3, LaunchTrebuchetSound, target));
+            StartCoroutine(InvokeAfterDelay(3.8f, LaunchBarrelBreakingSound, target));
         }
 
         private void LaunchFlourBarrel()
@@ -216,8 +216,8 @@ namespace Enemies
 
             // Restart cooldown
             //Invoke(nameof(LaunchFlourBarrel), currentDifficulty.flourBarrelCooldown);
-            // StartCoroutine(InvokeAfterDelay(3, LaunchTrebuchetSound, target));
-            // StartCoroutine(InvokeAfterDelay(4.8f, LaunchBarrelBreakingSound, target));
+            StartCoroutine(InvokeAfterDelay(3, LaunchTrebuchetSound, target));
+            StartCoroutine(InvokeAfterDelay(3.8f, LaunchBarrelBreakingSound, target));
         }
 
         private void LaunchTrebuchet()
@@ -308,18 +308,6 @@ namespace Enemies
             }
 
             Invoke(nameof(LaunchFireArrows), currentDifficulty.fireArrowsCooldown);
-        }
-
-        private void LaunchFireArrowsSound(Vector3 arrowDestination)
-        {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.enemyArrowWhoosh, arrowDestination);
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.burnScaffolding, arrowDestination);
-
-        }
-
-        private void LaunchBarrelBreakingSound(Vector3 arrowDestination)
-        {
-            AudioManager.instance.PlayOneShot(FMODEvents.instance.barrelBreaking, arrowDestination);
         }
 
         private void LaunchFireArrowsSound(Vector3 arrowDestination)
