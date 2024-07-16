@@ -8,7 +8,7 @@ namespace Upgrades
         public override bool Activate()
         {
             ParentSegment.wallMaxHealth += 1;
-            ParentSegment.RepairWall();
+            ParentSegment.wallHealth += 1;
             return true;
         }
     }
