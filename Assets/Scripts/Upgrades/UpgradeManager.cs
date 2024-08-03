@@ -12,6 +12,10 @@ namespace Upgrades
         public List<UpgradeCard> cards;
         public List<UpgradeInfo> upgrades;
         public ThirdPersonController player;
+        public GameObject arrow;
+
+        private RectTransform _arrowTransform;
+        private List<float> _cardPositions;
 
         public bool DEBUG_Present;
         // Start is called before the first frame update
@@ -24,6 +28,12 @@ namespace Upgrades
             Inputs.Select += ChangeSelection;
             Inputs.Confirm += ConfirmCard;
             EventManager.OnShowUpgrades += PresentUpgrades;
+            _arrowTransform = arrow.GetComponent<RectTransform>();
+            _cardPositions = new List<float>();
+            foreach (var card in cards)
+            {
+                _cardPositions.Add(card.GetComponent<RectTransform>().anchoredPosition.x);
+            }
             Invoke(nameof(PresentUpgrades), 3f);
         }
 
@@ -38,6 +48,7 @@ namespace Upgrades
         {
             if (input.x != 0) _selected = Mathf.Clamp(_selected + (int) input.x, 0, cards.Count - 1);
             print(_selected);
+            _arrowTransform.anchoredPosition = new Vector2(_cardPositions[_selected], 350);
             // Indicate which is selected
             // _selected.SetSelected(true);
             // upgrades[lastSelected].SetSelected(false);
