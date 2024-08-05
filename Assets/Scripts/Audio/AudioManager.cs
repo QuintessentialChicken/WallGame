@@ -54,7 +54,7 @@ public class AudioManager : MonoBehaviour
 
         // Retrieve the scene name and build index
         string sceneName = currentScene.name;
-        if (sceneName.Contains("Day")) {
+        if (!sceneName.Contains("Evening")) {
             InitializeSound(FMODEvents.instance.drumStartMusic, true);
             InitializeSound(FMODEvents.instance.battleAmbience, true);
         } else {
