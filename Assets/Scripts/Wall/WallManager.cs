@@ -182,6 +182,11 @@ namespace Wall
                 _wallHealth += segment.wallMaxHealth;
                 if (segment != null) wallSegments.Add(segment);
                 segment.index = index++;
+                var upgrades = UpgradesStore.instance.GetSegmentUpgrades(segment.index);
+                foreach (var upgrade in upgrades)
+                {
+                    segment.SpawnUpgrade(upgrade);
+                }
             }
 
             _maxWallHealth = _wallHealth;

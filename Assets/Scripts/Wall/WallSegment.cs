@@ -269,15 +269,8 @@ namespace Wall
             return isScaffoldingIntact && wallHealth == wallMaxHealth;
         }
 
-        
-        
-        public bool AddUpgrade(Upgrade upgrade)
+        public void SpawnUpgrade(Upgrade upgrade)
         {
-            if (freeSlots <= 0)
-            {
-                EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
-                return false;
-            }
             var spawnedUpgrade = Instantiate(upgrade.gameObject, transform);
             var upgradeScript = spawnedUpgrade.GetComponent<Upgrade>();
             upgradeScript.ParentSegment = this;
@@ -288,9 +281,19 @@ namespace Wall
                 newScale.x *= -1;
                 spawnedUpgrade.transform.localScale = newScale;
             }
-
-            _upgrades.Add(upgradeScript);
             freeSlots -= 1;
+            _upgrades.Add(upgradeScript);
+        }
+        
+        public bool AddUpgrade(Upgrade upgrade)
+        {
+            if (freeSlots <= 0)
+            {
+                EventManager.RaiseOnUpgradeFailed("Segment has no free slots");
+                return false;
+            }
+            SpawnUpgrade(upgrade);
+            UpgradesStore.instance.SaveSegmentUpgrade(index, upgrade);
             return true;
         }
     }
