@@ -1,10 +1,18 @@
+using Enemies;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RatingUI : MonoBehaviour
 {
     [SerializeField] private GameObject[] stars = new GameObject[3];
+
+    [SerializeField] private TextMeshProUGUI dayNR;
+
+    [SerializeField] private TextMeshProUGUI timeTotal;
+
+    [SerializeField] private TextMeshProUGUI timeCritical;
 
     // Start is called before the first frame update
     private void Start()
@@ -40,5 +48,10 @@ public class RatingUI : MonoBehaviour
         {
             stars[j].SetActive(false);
         }
+
+        dayNR.text = "" + ArmyController.day;
+
+        timeTotal.text = RatingSystem.Instance.GetTotalRatingTimeStamps().Item1;
+        timeCritical.text = RatingSystem.Instance.GetTotalRatingTimeStamps().Item2;
     }
 }

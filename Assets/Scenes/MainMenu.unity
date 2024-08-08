@@ -10081,6 +10081,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3165960777251110675, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165960778591892847, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165960779031052931, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3205418180241466145, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_IsActive
@@ -10109,22 +10124,22 @@ PrefabInstance:
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 6.614325e-36
+      value: 8.173393e-39
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 3e-45
+      value: 2.75506e-40
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -2.489832e+31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503098, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 3e-45
+      value: 1.0758124e-34
       objectReference: {fileID: 0}
     - target: {fileID: 3205418180442503100, guid: a538c6e213a1fb042a155e06a45a4992,
         type: 3}
@@ -10250,6 +10265,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009093435579352653, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009093436011983265, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009093436920564785, guid: a538c6e213a1fb042a155e06a45a4992,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a538c6e213a1fb042a155e06a45a4992, type: 3}
