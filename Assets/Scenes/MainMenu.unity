@@ -1275,7 +1275,7 @@ MonoBehaviour:
     m_ActionId: 26e1c977-dd42-4ec4-b1c3-8a7657cdcb72
     m_ActionName: Nighttime/Select[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: KeyboardMouse
   m_DefaultActionMap: MainMenu
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

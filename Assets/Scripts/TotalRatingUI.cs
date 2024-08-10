@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RatingUI : MonoBehaviour
+public class TotalRatingUI : MonoBehaviour
 {
     [SerializeField] private GameObject[] stars = new GameObject[3];
     [SerializeField] private GameObject timeTake;
@@ -21,7 +21,7 @@ public class RatingUI : MonoBehaviour
 
         Test();
     }
-    
+
     private void Test()
     {
         Debug.Log(RatingSystem.Instance.GetRatingTimeStamps());
@@ -30,7 +30,7 @@ public class RatingUI : MonoBehaviour
 
     private void DisplayRating()
     {
-        (string, string) timeStamps = RatingSystem.Instance.GetRatingTimeStamps();
+        (string, string) timeStamps = RatingSystem.Instance.GetTotalRatingTimeStamps();
 
         //Debug.Log(timeTake);
         //Debug.Log(timeTake.GetComponent<TextMeshProUGUI>());
@@ -40,7 +40,7 @@ public class RatingUI : MonoBehaviour
         timeTake.GetComponent<TextMeshProUGUI>().text = timeStamps.Item1;
         criticalTime.GetComponent<TextMeshProUGUI>().text = timeStamps.Item2;
 
-        int i = 4 - RatingSystem.Instance.GetRating();
+        int i = 4 - RatingSystem.Instance.GetTotalRating();
         //int i = RatingSystem.Instance.GetTotalRating();
         int j = 0;
 

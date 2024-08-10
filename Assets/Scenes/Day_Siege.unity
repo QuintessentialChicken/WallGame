@@ -9019,10 +9019,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1239650631}
     m_Modifications:
+    - target: {fileID: 269176800, guid: 1e418c3a7fdee3a49b99e7f856da80f0, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 701039868, guid: 1e418c3a7fdee3a49b99e7f856da80f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 701039870, guid: 1e418c3a7fdee3a49b99e7f856da80f0, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1554911}
+    - target: {fileID: 701039870, guid: 1e418c3a7fdee3a49b99e7f856da80f0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1537326881, guid: 1e418c3a7fdee3a49b99e7f856da80f0, type: 3}
       propertyPath: m_IsActive
       value: 0
