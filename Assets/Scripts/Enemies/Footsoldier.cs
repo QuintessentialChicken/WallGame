@@ -30,7 +30,8 @@ namespace Enemies
         {
             if (!_dead)
                 transform.position = _startPosition + new Vector3(_drift * 3,
-                    vibing + vibing * Mathf.Sin(ecstasy * (_offsetMove + Time.time)), -Time.time * moveSpeed * 3);
+                    vibing + vibing * Mathf.Sin(ecstasy * (_offsetMove + Time.time)), 
+                    -Time.timeSinceLevelLoad * moveSpeed * 3);
         }
 
         public void SetUp(float vibing, float ecstasy, float moveSpeed)
