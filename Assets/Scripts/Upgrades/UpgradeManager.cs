@@ -80,7 +80,9 @@ namespace Upgrades
         {
             var result = new HashSet<int>();
             while (result.Count < amount) {
-                 result.Add(Random.Range(0, upgrades.Count));
+                 // result.Add(Random.Range(0, upgrades.Count));
+                 result.Add(3);
+                 result.Add(1);
             }
             return new List<int>(result);
         }

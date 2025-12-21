@@ -20,8 +20,8 @@ namespace Upgrades
 
         public override bool Engage()
         {
-            TargetProjectile projectile =
-                Instantiate(trebuchetRound, projectileSpawnPoint.position, Quaternion.identity);
+            TargetProjectile projectile = Instantiate(trebuchetRound, projectileSpawnPoint.position, Quaternion.identity);
+            projectile.damageWallPieceOnHit = false;
             projectile.SetDestination(ArmyController.instance.GetFootsoldierPosition());
             ArmyController.instance.Invoke(nameof(ArmyController.BombArrives), projectileFlightTime);
             projectile.SetUp(ArmyController.instance.trebuchetStoneSettings);
