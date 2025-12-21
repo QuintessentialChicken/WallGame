@@ -34,7 +34,7 @@ namespace Upgrades
             {
                 _cardPositions.Add(card.GetComponent<RectTransform>().anchoredPosition.x);
             }
-            Invoke(nameof(PresentUpgrades), 3f);
+            Invoke(nameof(PresentUpgrades), 1f);
         }
 
         private void OnDestroy()
@@ -62,18 +62,18 @@ namespace Upgrades
             {
                 card.gameObject.SetActive(false);
             }
+            arrow.SetActive(false);
         }
         
         public void PresentUpgrades()
         {
-            
             var indices = DrawRandomUpgrade(2);
             for (var i = 0; i < cards.Count; i++)
             {
                 cards[i].SetUpgradeInfo(upgrades[indices[i]]);
                 cards[i].gameObject.SetActive(true);
             }
-
+            arrow.SetActive(true);
         }
 
         private List<int> DrawRandomUpgrade(int amount)

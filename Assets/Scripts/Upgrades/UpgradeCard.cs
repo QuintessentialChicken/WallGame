@@ -47,9 +47,9 @@ namespace Upgrades
 
         private void FullSetupIfAssigned()
         {
-            if (scriptableObject == null)
+            if (!scriptableObject)
             {
-                Debug.LogWarning("No ScriptableObject assigned!");
+                print("No ScriptableObject assigned!");
                 return;
             }
 
