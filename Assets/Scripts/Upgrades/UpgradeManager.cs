@@ -82,7 +82,7 @@ namespace Upgrades
             while (result.Count < amount) {
                  // result.Add(Random.Range(0, upgrades.Count));
                  result.Add(3);
-                 result.Add(1);
+                 result.Add(7);
             }
             return new List<int>(result);
         }

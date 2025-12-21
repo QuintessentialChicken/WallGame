@@ -4,12 +4,12 @@ using Wall;
 
 namespace Upgrades
 {
-    
-    
     public abstract class Upgrade : MonoBehaviour
     {
+        
+        public Vector3 positionOffset = Vector3.zero;
         public WallSegment ParentSegment { get; set; }
-
+        
         public enum UpgradeType
         {
             None = 0,

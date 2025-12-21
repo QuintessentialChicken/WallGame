@@ -18,6 +18,11 @@ namespace Upgrades
 
         public override UpgradeType Type => UpgradeType.LSD;
 
+        private void Start()
+        {
+            positionOffset = new Vector3(0.213f, 0.335f, 0.5f);
+        }
+
         public override bool Engage()
         {
             TargetProjectile projectile = Instantiate(trebuchetRound, projectileSpawnPoint.position, Quaternion.identity);

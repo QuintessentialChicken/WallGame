@@ -274,7 +274,7 @@ namespace Wall
             var spawnedUpgrade = Instantiate(upgrade.gameObject, transform);
             var upgradeScript = spawnedUpgrade.GetComponent<Upgrade>();
             upgradeScript.ParentSegment = this;
-            spawnedUpgrade.transform.localPosition += new Vector3(0, 0, 0.385f);
+            spawnedUpgrade.transform.localPosition = upgrade.positionOffset;
             if (freeSlots == 1)
             {
                 var newScale = spawnedUpgrade.transform.localScale;
